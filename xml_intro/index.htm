@@ -1,0 +1,36 @@
+<HTML>
+<HEAD>
+<TITLE>XML_Intro9</TITLE>
+</HEAD>
+<BODY bgcolor="#330033">
+<SCRIPT LANGUAGE=JavaScript>
+<!--
+var InternetExplorer = navigator.appName.indexOf("Microsoft") != -1;
+// Handle all the the FSCommand messages in a Flash movie
+function XML_Intro9_DoFSCommand(command, args) {
+  var XML_Intro9Obj = InternetExplorer ? XML_Intro9 : document.XML_Intro9;
+  //
+  // Place your code here...
+  //
+}
+// Hook for Internet Explorer 
+if (navigator.appName && navigator.appName.indexOf("Microsoft") != -1 && 
+	  navigator.userAgent.indexOf("Windows") != -1 && navigator.userAgent.indexOf("Windows 3.1") == -1) {
+	document.write('<SCRIPT LANGUAGE=VBScript\> \n');
+	document.write('on error resume next \n');
+	document.write('Sub XML_Intro9_FSCommand(ByVal command, ByVal args)\n');
+	document.write('  call XML_Intro9_DoFSCommand(command, args)\n');
+	document.write('end sub\n');
+	document.write('</SCRIPT\> \n');
+}
+//-->
+</SCRIPT>
+<!-- URL's used in the movie-->
+<!-- text used in the movie-->
+<!--JDOM JAXP SAX XML * eXtensible Markup Language. * Based on SGML, without the  seldom-used features,  modified for the Internet. * It's a syntax for defining grammars;  a language for defining languages. * Languages based on XML are  referred to as XML  applications . * Examples of XML applications are  XHTML, WML, and SVG. * XML must be  well-formed  and  optionally  valid . * Being well-formed means that  the syntax must be precise. For example,   tags must be nested properly and all tags  must be in pairs or defined as empty  elements. * Being valid means that the order  and nesting of the elements complies  with a DTD (Document Type Definition). * XML elements are case-sensitive. * Though XML is simple in concept,  it is very powerful. * XML is used in either a data-centric,  in a document-centric, or in a  message-centric manner. * It is referred to as "Portable Data",  which complements Java's "Portable  Code" status. * XML can be used to decouple enterprise systems. * XML information is self-describing. * XML is heirarchical in structure. * Likewise, presentation and processing  logic can also be isolated from each other. * With XML, the data is separated  from presentation or processing  details. * XML allows for easier parsing and  validating of data, more meaningful  data, easier interchange of data, and  more document flexibility. * The number of ways in which XML  is being used is growing every day. * It is an enabling technology. * In short, XML Rocks !!! * XML is a W3C standard with  widespread industry support. * XML is  not  'a flash in the pan.' * Simple API for XML. * It's an event-based way of accessing the data in an XML document. * It is fast and has a small memory  footprint since the pieces of XML are address by an event handler, then  discarded. * The pieces of XML are referred to  as  nodes . * Examples of events are  startElement  and  endElement . * Because it is event-driven, access  to the XML data is sequential;  random access is not possible within strict SAX use. * Grew out of the work of David  Megginson and the readers of the  xml-dev mailing list. * It is an API for XML that is not  specific to Java; it is language- independent, though Java seems to be the most common implementation. * You write your SAX application  as a  handler  for events. The XML  parser (implementing SAX) will  invoke your handler methods as  each event occurs. * . --><OBJECT classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+ codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=5,0,0,0"
+ ID=XML_Intro9 WIDTH=100% HEIGHT=100%>
+ <PARAM NAME=movie VALUE="XML_Intro9.swf"> <PARAM NAME=quality VALUE=high> <PARAM NAME=bgcolor VALUE=#330033> <EMBED src="XML_Intro9.swf" quality=high bgcolor=#330033  WIDTH=100% HEIGHT=100%	swLiveConnect=true NAME=XML_Intro9 TYPE="application/x-shockwave-flash" PLUGINSPAGE="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"></EMBED>
+</OBJECT>
+</BODY>
+</HTML>

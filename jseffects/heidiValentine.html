@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Draggable Love Poetry</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Draggable Love Poetry" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="A Dynamic Valentine's Day Poem for Heidi." />
+  <meta name="keywords" content="Valentine, poem, JavaScript, DHTML, Walter Zorn" />
+  <meta name="robots" content="all" />
+  <!--Note: This script can be included here, in the head.-->
+  <script type="text/javascript" src="../js/wz_jsgraphics.js"></script>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Draw Heart Shape. */
+    var myHeart = new jsGraphics();
+    myHeart.setPrintable(true);
+    //TODO: Address this - This prints okay here, but the draggables are to the right of their screen position in print preview...
+    myHeart.setColor("red");
+    myHeart.setStroke(3);
+    var xPts = new Array(250, 100,  98, 100, 105, 110, 120, 148, 175, 190, 200, 230, 250, 270, 300, 310, 325, 352, 380, 390, 395, 400, 402, 400);
+    var yPts = new Array(500, 215, 205, 190, 175, 165, 160, 158, 160, 170, 175, 200, 225, 200, 175, 170, 160, 158, 160, 165, 175, 190, 205, 215);
+    myHeart.drawPolygon(xPts, yPts);
+    myHeart.paint();
+    // ]]> -->
+  </script>
+  <style type="text/css">
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      text-transform: lowercase;
+      background-color: pink;
+      font-weight: bold;
+    }
+    .word {
+      border-style: solid;
+      border-width: 0.1mm;
+      /*cursor: move;*/
+      width: 12mm;
+      padding: 1mm;
+      margin: 1mm;
+      position: relative;
+      text-align: center;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This links from this page require that JavaScript be enabled.</h3></noscript>
+<!--NOTE: This script MUST be AFTER the opening of the body tag.-->
+<script type="text/javascript" src="../js/wz_dragdrop.js"></script>
+<h1>A Draggable Valentine Poem for Heidi</h1>
+<span id="i1" class="word" style="width: 3mm;">I</span>
+<span id="love" class="word">LOVE</span>
+<span id="you1" class="word">YOU</span>
+<span id="exclamation" class="word" style="width: 3mm;">!</span>
+<span id="i2" class="word" style="width: 3mm;">I</span>
+<span id="think" class="word">THINK</span>
+<span id="are" class="word">ARE</span>
+<span id="so" class="word">SO</span>
+<span id="special" class="word" style="width: 18mm;">SPECIAL</span>
+<span id="to" class="word">TO</span>
+<span id="me1" class="word">ME</span>
+<span id="me2" class="word">ME</span>
+<span id="kiss" class="word">KISS</span>
+<span id="smooch" class="word">SMOOCH</span>
+<span id="kevin" class="word">KEVIN</span>
+<span id="loves" class="word">LOVES</span>
+<span id="heidi" class="word">HEIDI</span>
+<span id="is" class="word">IS</span>
+<span id="hot" class="word">HOT</span>
+<span id="pretty" class="word" style="width: 15mm;">PRETTY</span>
+<span id="sexy" class="word">SEXY</span>
+<span id="the" class="word">THE</span>
+<span id="beautiful" class="word" style="width: 18mm;">BEAUTIFUL</span>
+<span id="everything" class="word" style="width: 22mm;">EVERYTHING</span>
+<span id="make" class="word">MAKE</span>
+<span id="wonderful" class="word">WONDERFUL</span>
+<span id="a1" class="word" style="width: 3mm;">A</span>
+<span id="wife" class="word">WIFE</span>
+<span id="will" class="word">WILL</span>
+<span id="you2" class="word">YOU</span>
+<span id="be" class="word">BE</span>
+<span id="my" class="word">MY</span>
+<span id="mine" class="word">MINE</span>
+<span id="valentine" class="word" style="width: 20mm;">VALENTINE</span>
+<span id="question" class="word" style="width: 3mm;">?</span>
+<span id="have" class="word">HAVE</span>
+<span id="a2" class="word" style="width: 3mm;">A</span>
+<span id="happy" class="word" style="width: 15mm;">HAPPY</span>
+<span id="day" class="word">DAY</span>
+<br />
+<!--NOTE: This script MUST be AFTER all draggables are defined.-->
+<script type="text/javascript">
+<!-- // <![CDATA[
+  SET_DHTML(CURSOR_MOVE, RESIZABLE, "i1", "i2", "you1", "you2", "think", "are", "so", "special", "to", "me1", "me2", "will", "be", "mine", "my", "valentine", "have", "a1", "a2", "happy", "day", "make", "exclamation", "question", "hot", "sexy", "beautiful", "pretty", "everything", "wonderful", "wife", "the", "heidi", "is", "kevin", "loves", "kiss", "smooch");
+// ]]> -->
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

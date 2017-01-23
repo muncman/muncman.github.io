@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>THIS IS ON NATIONWIDE'S SIDE</title>
+    <!-- Based on http://ajaxpatterns.org/On-Demand_Javascript -->
+    <!-- TODO: switch to Struts tags, etc, when convert back to JSP...
+               move size/styling to CSS... -->
+    <script type="text/javascript" src="remoteIFrame.js"></script><!-- Just for buildQueryString function at this point. -->
+    <script type="text/javascript">
+      <!-- // <![CDATA[
+      //TODO: More exception handling!
+      /* Message counter - just for fun. */
+      var messageCount = 0;
+      /*
+       * Add a message to the output section.
+       * This function and all references to it
+       * must be removed after prototyping.
+       */
+      function addMessage(message) {
+        messageCount++;
+        span = document.createElement('span');
+        span.id = messageCount;
+        span.innerHTML = messageCount + ': ' + message + '<br />';
+        var output = document.getElementById('output');
+        output.appendChild(span);
+      }
+      //TODO: Make all of this generic - reusable for different partners.
+      /* Get the HTML Form for the page. */
+      function loadForm() {
+        loadFormFromMerrill();
+        insertFormMarkup();
+        return false;
+      }
+      /* Load the Merrill HTML Form markup script, only once. */
+      function loadFormFromMerrill() {
+        if (self.getMerrillForm) { // Already exists
+          addMessage('merrillForm.js was already loaded.');
+          return false;
+        }
+        var head = document.getElementsByTagName('head')[0];
+        script = document.createElement('script');
+        script.id = 'loadedScript';
+        script.type = 'text/javascript';
+        //Cross-domain _and_ over SSL.
+        script.src = 'merrillForm.js';
+        head.appendChild(script)
+        addMessage('merrillForm.js is now loaded (or being loaded).');
+        // Note that we cannot invoke functions in merrillForm.js yet,
+        // without checking again, as below.
+        // (A timeout might help, too.)
+        return false; //to avoid getting "#" on URL.
+      }
+      var errorMessage = '<h1 style="color: red; text-align: center;">TODO: Nice Error Message Here</h1>';
+      var formAttempts = 0;
+      /* Add the HTML Form markup to the page. */
+      function insertFormMarkup() {
+        if (self.getMerrillForm) {
+          addMessage('getMerrillForm() is available. Proceeding with insertion.');
+          var formTarget = document.getElementById('formResult');
+          var preFormContentDiv = document.getElementById('preFormContent');
+          var preFormContent = preFormContentDiv.innerHTML.replace('<!--', '');
+          preFormContent = preFormContent.replace('-->', '');
+          var formContent = getMerrillForm();
+          var postFormContentDiv = document.getElementById('postFormContent');
+          var postFormContent = postFormContentDiv.innerHTML.replace('<!--', '');
+          postFormContent = postFormContent.replace('-->', '');
+          formTarget.innerHTML = preFormContent + formContent + postFormContent;
+        } else {
+          addMessage('getMerrillForm() not yet available. Attempt #' + formAttempts + ' Will try again.');
+          if (formAttempts < 20) { //retry for up to 2 seconds... TODO: revisit
+            formAttempts++;
+            setTimeout("insertFormMarkup()", 10);
+          } else {
+            formTarget.innerHTML = errorMessage;
+          }
+        }
+        return false;
+      }
+      /*
+       * Get the PDF link markup for the page.
+       * Requires the query string from the form to
+       */
+      function loadLinks(queryString) {
+        loadLinksFromMerrill(queryString);
+        insertLinksMarkup();
+        return false;
+      }
+      /* Load the Merrill PDF form script, only once. */
+      function loadLinksFromMerrill(queryString) {
+        if (self.getMerrillLinks) { // Already exists
+          addMessage('merrillLinks.js was already loaded.');
+          return false;
+        }
+        var head = document.getElementsByTagName('head')[0];
+        script = document.createElement('script');
+        script.id = 'loadedScript';
+        script.type = 'text/javascript';
+        //Can be cross-domain _and_ over SSL.
+        //TODO: make it POST...
+        script.src = 'merrillLinks.js' + queryString;
+        head.appendChild(script)
+        addMessage('merrillLinks.js is now loaded (or being loaded).');
+        addMessage('merrillLinks.js requested with ' + queryString);
+        // Note that we cannot invoke functions in merrillLinks.js yet,
+        // without checking again, as below.
+        // (A timeout might help, too.)
+        //TODO: timout in try/catch or if/loop for waiting for function(s).
+        return false; //to avoid getting "#" on URL.
+      }
+      var linksAttempts = 0;
+      /* Add the PDF links markup to the page. */
+      function insertLinksMarkup() {
+        if (self.getMerrillLinks) {
+          addMessage('getMerrillLinks() is available. Proceeding with insertion.');
+          var linksTarget = document.getElementById('submitResult');
+          var preLinksContentDiv = document.getElementById('preLinksContent');
+          var preLinksContent = preLinksContentDiv.innerHTML.replace('<!--', '');
+          preLinksContent = preLinksContent.replace('-->', '');
+          var linksContent = getMerrillLinks();
+          var postLinksContentDiv = document.getElementById('postLinksContent');
+          var postLinksContent = postLinksContentDiv.innerHTML.replace('<!--', '');
+          postLinksContent = postLinksContent.replace('-->', '');
+          linksTarget.innerHTML = preLinksContent + linksContent + postLinksContent;
+        } else {
+          addMessage('getMerrillLinks() not yet available. Attempt #' + linksAttempts + ' Will try again.');
+          //TODO: sleep, try again, with counter, eventual failure message... !
+          if (linksAttempts < 20) { //retry for up to 2 seconds... TODO: revisit
+            linksAttempts++;
+            setTimeout("insertLinksMarkup()", 10);
+          } else {
+            linksTarget.innerHTML = errorMessage;
+          }
+        }
+        return false;
+      }
+      /* Invoke loadLinks relevant URL parameters. */
+      function callToServerForLinks(theFormName) {
+        loadLinks(buildQueryString(theFormName));
+        return false;
+        //TODO: could do with less 'return false' lines...
+      }
+      // ]]> -->
+    </script>
+    <link rel="stylesheet" type="text/css" href="NFMain.css" />
+  </head>
+  <body>
+    <p>
+      This is in the SSC. We've got all of the chrome and whatnot here, like normal.
+    </p>
+    <a onclick="return loadForm();" href="#">Select a product...</a>
+    <p>
+      ...more Nationwide-controlled content...
+    </p>
+    <div id="preFormContent" style="display: none;">
+      <!--
+        <form name="describableMapForm" method="post" action="#" onsubmit="return callToServerForLinks(this.name);">
+      -->
+    </div>
+    <!--action="/iApp/ssc/form/displayForward.do"-->
+    <div id="formResult"></div>
+    <div id="postFormContent" style="display: none;">
+      <!--
+          <table width="584" border="0" align="center" cellpadding="3" cellspacing="0">
+            <tr align="left" valign="middle" class="centobjBody">
+              <td width="100">
+                Product:
+              </td>
+              <td width="335">
+                <strong>The Best of America<sup>
+                    &#174;
+                  </sup> America&#39;s INCOME Annuity<sup>
+                    &#174;
+                  </sup></strong>
+                  <em>
+                    (not from Merrill)
+                  </em>
+              </td>
+            </tr>
+            <tr align="right" valign="middle" class="centobjBody">
+              <td align="right" colspan="2" width="100%">
+                <input type="submit" value="Select" class="fButtonPos" />
+              </td>
+            </tr>
+          </table>
+        </form>
+      -->
+    </div>
+    <p>
+      ...more Nationwide-controlled content...
+    </p>
+    <div id="preLinksContent" style="display: none;">
+      <!--
+      <table width="584" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="6" width="584">
+            <img src="/media/images/x.gif" width="584" height="8" />
+          </td>
+        </tr>
+        <tr>
+          <td align="left" colspan="2" width="100%" class="ActionHead2">
+            The Best of America<sup>&#174;</sup> IV <em>(not from Merrill)</em>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="readBody">
+      -->
+    </div>
+    <div id="submitResult"></div>
+    <div id="postLinksContent" style="display: none;">
+      <!--
+          </td>
+        </tr>
+      </table>
+      -->
+    </div>
+    <p>
+      ...more Nationwide-controlled content...
+    </p>
+    <div id="output"></div>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      <!-- //
+      _uacct = "UA-352416-1";
+      urchinTracker();
+      // -->
+    </script>
+  </body>
+</html>

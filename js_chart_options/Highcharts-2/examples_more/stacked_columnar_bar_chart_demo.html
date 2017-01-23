@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "xhtml11.dtd">
+
+<html debug="true">
+<head>
+<title>Highcharts Demo Gallery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!--  meta http-equiv="X-UA-Compatible" content="chrome=1" -->
+
+<link rel="shortcut icon" href="../favicon.ico"/>
+
+
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+</script>
+
+<script type="text/javascript" src="/js/highcharts.js"></script>
+<script type="text/javascript" src="/js/modules/exporting.js"></script>
+
+
+<!-- Highslide code -->
+<script type="text/javascript" src="/highslide/highslide-full.min.js"></script>
+<script type="text/javascript" src="/highslide/highslide.config.js" charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="/highslide/highslide.css" />
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="/highslide/highslide-ie6.css" />
+<![endif]-->
+<!-- End Highslide code -->
+
+<script type="text/javascript">
+var example = 'column-stacked-percent',
+	theme = 'default';
+</script>
+
+<script type="text/javascript" src="scripts.js"></script>
+
+<script type="text/javascript">
+	Highcharts.theme = { colors: ['#4572A7'] };// prevent errors in default theme
+	var highchartsOptions = Highcharts.getOptions(); 
+</script>
+
+<link rel="stylesheet" href="/templates/yoo_symphony/css/template.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_symphony/css/variations/brown.css" type="text/css" />
+<link href="demo.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+
+		var chart;
+		jQuery(document).ready(function() {
+			chart = new Highcharts.Chart({
+				chart: {
+					renderTo: 'container',
+					defaultSeriesType: 'column'
+				},
+				title: {
+					text: 'Stacked column chart'
+				},
+				xAxis: {
+					categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+				},
+				yAxis: {
+					min: 0,
+					title: {
+						text: 'Total fruit consumption'
+					}
+				},
+				tooltip: {
+					formatter: function() {
+						return ''+
+							 this.series.name +': '+ this.y +' ('+ Math.round(this.percentage) +'%)';
+					}
+				},
+				plotOptions: {
+					column: {
+						stacking: 'percent'
+					}
+				},
+			        series: [{
+					name: 'John',
+					data: [5, 3, 4, 7, 2]
+				}, {
+					name: 'Jane',
+					data: [2, 2, 3, 2, 1]
+				}, {
+					name: 'Joe',
+					data: [3, 4, 4, 2, 5]
+				}]
+			});
+			
+			
+		});
+	</script>
+
+</head>
+<body>
+
+
+
+<div id="demo-header">
+	<h1>Highcharts Demo Gallery</h1>
+	<a href="/">&laquo; Go to the Highcharts home page</a>
+	<p>Pick an example on the left and combine it with a preset theme in the top menu. Click 
+	"View options" to inspect the code.</p>
+</div>
+
+<div id="demo-menu">
+		<h4>Line and scatter charts</h4>
+	<ul>
+				<li><a href="?example=line-basic&amp;theme=default">
+			Basic line</a></li>
+				<li><a href="?example=line-ajax&amp;theme=default">
+			Ajax loaded data, clickable points</a></li>
+				<li><a href="?example=line-labels&amp;theme=default">
+			With data labels</a></li>
+				<li><a href="?example=line-time-series&amp;theme=default">
+			Time series, zoomable</a></li>
+				<li><a href="?example=spline-inverted&amp;theme=default">
+			Spline with inverted axes</a></li>
+				<li><a href="?example=spline-symbols&amp;theme=default">
+			Spline with symbols</a></li>
+				<li><a href="?example=spline-plot-bands&amp;theme=default">
+			Spline with plot bands</a></li>
+				<li><a href="?example=scatter&amp;theme=default">
+			Scatter plot</a></li>
+			</ul>
+		<h4>Area charts</h4>
+	<ul>
+				<li><a href="?example=area-basic&amp;theme=default">
+			Basic area</a></li>
+				<li><a href="?example=area-negative&amp;theme=default">
+			Area with negative values</a></li>
+				<li><a href="?example=area-stacked&amp;theme=default">
+			Stacked area</a></li>
+				<li><a href="?example=area-stacked-percent&amp;theme=default">
+			Percentage area</a></li>
+				<li><a href="?example=area-missing&amp;theme=default">
+			Area with missing points</a></li>
+				<li><a href="?example=area-inverted&amp;theme=default">
+			Inverted axes</a></li>
+				<li><a href="?example=areaspline&amp;theme=default">
+			Area-spline</a></li>
+			</ul>
+		<h4>Column and bar charts</h4>
+	<ul>
+				<li><a href="?example=bar-basic&amp;theme=default">
+			Basic bar</a></li>
+				<li><a href="?example=bar-stacked&amp;theme=default">
+			Stacked bar</a></li>
+				<li><a href="?example=bar-negative-stack&amp;theme=default">
+			Bar with negative stack</a></li>
+				<li><a href="?example=column-basic&amp;theme=default">
+			Basic column</a></li>
+				<li><a href="?example=column-negative&amp;theme=default">
+			Column with negative values</a></li>
+				<li><a href="?example=column-stacked&amp;theme=default">
+			Stacked column</a></li>
+				<li><a href="?example=column-stacked-and-grouped&amp;theme=default">
+			Stacked and grouped column</a></li>
+				<li><a href="?example=column-stacked-percent&amp;theme=default">
+			Stacked percentage column</a></li>
+				<li><a href="?example=column-rotated-labels&amp;theme=default">
+			Column with rotated labels</a></li>
+				<li><a href="?example=column-parsed&amp;theme=default">
+			Data defined in a HTML table</a></li>
+			</ul>
+		<h4>Pie charts</h4>
+	<ul>
+				<li><a href="?example=pie-basic&amp;theme=default">
+			Pie chart</a></li>
+				<li><a href="?example=pie-donut&amp;theme=default">
+			Donut chart</a></li>
+				<li><a href="?example=pie-legend&amp;theme=default">
+			Pie with legend</a></li>
+			</ul>
+		<h4>Dynamic charts</h4>
+	<ul>
+				<li><a href="?example=dynamic-update&amp;theme=default">
+			Spline updating each second</a></li>
+				<li><a href="?example=dynamic-click-to-add&amp;theme=default">
+			Click to add a point</a></li>
+				<li><a href="?example=dynamic-master-detail&amp;theme=default">
+			Master-detail chart</a></li>
+			</ul>
+		<h4>Combinations</h4>
+	<ul>
+				<li><a href="?example=combo&amp;theme=default">
+			Column, line and pie</a></li>
+				<li><a href="?example=combo-dual-axes&amp;theme=default">
+			Dual axes, line and column</a></li>
+				<li><a href="?example=combo-multi-axes&amp;theme=default">
+			Multiple axes</a></li>
+				<li><a href="?example=combo-regression&amp;theme=default">
+			Scatter with regression line</a></li>
+			</ul>
+	</div>
+
+<div id="demo-content">
+	
+	<div id="styleswitcher">
+		<ul>
+			<li><a href="?example=column-stacked-percent&amp;theme=default">Default</a></li>
+			<li><a href="?example=column-stacked-percent&amp;theme=grid">Grid</a></li>
+			<li><a href="?example=column-stacked-percent&amp;theme=skies">Skies</a></li>
+			<li><a href="?example=column-stacked-percent&amp;theme=gray">Gray</a></li>
+			<li><a href="?example=column-stacked-percent&amp;theme=dark-blue">Dark blue</a></li>
+			<li><a href="?example=column-stacked-percent&amp;theme=dark-green">Dark green</a></li>
+		</ul>
+	</div>
+	<br/>
+	<br/>
+	<br/>
+	<div id="container" class="highcharts-container" style="height:410px; margin: 0 2em; clear:both; min-width: 600px">
+	</div>
+
+	<div style="margin: 1em">
+	
+			
+		<div class="buttons">
+			<a href="javascript:" 
+				onclick="hs.htmlExpand(this, { width: 800,
+					headingText: 'Highcharts Configuration Preview', 
+					wrapperClassName: 'draggable-header' })">
+				View options</a>
+			<div class="highslide-maincontent">
+				<pre>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'container',
+         defaultSeriesType: 'column'
+      },
+      title: {
+         text: 'Stacked column chart'
+      },
+      xAxis: {
+         categories: ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Total fruit consumption'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+                this.series.name +': '+ this.y +' ('+ Math.round(this.percentage) +'%)';
+         }
+      },
+      plotOptions: {
+         column: {
+            stacking: 'percent'
+         }
+      },
+           series: [{
+         name: 'John',
+         data: [5, 3, 4, 7, 2]
+      }, {
+         name: 'Jane',
+         data: [2, 2, 3, 2, 1]
+      }, {
+         name: 'Joe',
+         data: [3, 4, 4, 2, 5]
+      }]
+   });
+   
+   
+});
+   </pre>
+			</div>
+			
+						
+						<a id="previous-example" title="Previous (arrow left)" 
+				href="?example=column-stacked-and-grouped&amp;theme=default">&laquo; Previous</a>
+						
+						<a id="next-example"  title="Next (arrow right)"
+				href="?example=column-rotated-labels&amp;theme=default">Next &raquo;</a>
+					</div>
+		
+		
+	</div>
+	
+
+</div>
+
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-2995052-3");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+</body>
+
+</html>
+

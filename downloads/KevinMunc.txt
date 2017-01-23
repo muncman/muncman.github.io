@@ -1,0 +1,34 @@
+Kevin Munc
+
+Summary of Qualifications
+  kevin@munc.com
+  www.munc.com
+  614.486.0502
+  2041 Fairfax Rd
+  Upper Arlington OH 43221
+
+Education
+  The Ohio State University, Columbus
+  Bachelor of Arts, June 1995
+  Major: Philosophy
+  Minor: History
+  GPA: 3.2/4.0
+
+Professional Highlights
+  Senior Technical Lead
+  February, 1997 - Present
+  Nationwide Financial
+  Columbus, OH
+    Lead a successful multi-year redesign and J2EE migration of a web application for investment professionals. This brought the site's Dalbar ranking up from #22 to #8.
+    Designed a J2EE-based framework as part of architecture team. Areas of focus included a Struts-based presentation layer, menu framework, and JAAS-based authentication & authorization.
+    Performed production support for all external Nationwide Financial sites, contributing to >99% uptime for several years running.
+    Designed, implemented and evolved the security model for a financial services site.
+    Lead a multi-site password security effort.
+    Contributed to various strategic and standards bodies inside Nationwide.
+    Duties include requirements analysis, documenting decisions and risks, assessing and evaluating products and technologies, designing solutions, planning iterations, implementation and deployment, mentoring team members, design reviews, code reviews, educating peers and management about new technologies, maturing development and operational processes, consulting on difficult design problems, promoting best practices, and ensuring stability, scalability, performance and maintainability for applications department-wide.
+
+Primary Technical Skills
+  Languages:  Java (J2SE & J2EE), JavaScript, HTML & CSS, XML, XSLT, SQL
+  Operating Systems:  Windows XP, Mac OS X, Solaris
+  Other:  WebSphere, Oracle, Tomcat, Struts, JUnit, Eclipse, Macromedia Flash
+

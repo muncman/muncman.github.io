@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Messing around with Behaviour</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with Behaviour" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with the Behaviour JavaScript library." />
+  <meta name="keywords" content="JavaScript, Behaviour" />
+  <meta name="robots" content="all" />
+  <!--Prototype - http://prototype.conio.net/-->
+  <script type="text/javascript" src="../js/script.aculo.us/prototype.js"></script>
+  <!--Behaviour - http://bennolan.com/behaviour/-->
+  <script type="text/javascript" src="../js/behaviour.js"></script>
+  <script type="text/javascript" src="../js/behaviour-test.js"></script>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Write given message to given element. */
+    function output(message, targetId) {
+      var target = $(targetId);
+      target.innerHTML += message + '<br />';
+    }
+    // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+      font-variant: small-caps;
+      color: red;
+    }
+    .alt-light {
+      background-color: #6699FF;
+    }
+    .alt-dark {
+      background-color: #0033CC;
+      color: white;
+    }
+    .text-for-light {
+      color: black;
+    }
+    .text-for-dark {
+      color: white;
+    }
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    .added {
+      font-size: larger;
+    }
+    .spacer {
+      height: 2cm;
+    }
+    .focusSection {
+      background-color: #666600;
+      width: 80%;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 5%;
+      width: 75%;
+      /*background-color: black;*/
+    }
+    a {
+      text-decoration: none;
+    }
+    div {
+      padding: 1mm 1mm 1mm 5mm;
+      margin: 1mm 1mm 1mm 1mm;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires that JavaScript be enabled to function properly.</h3></noscript>
+
+<div id="header" class="alternate">
+  <h1>Behaviour</h1>
+  <p><a href="http://bennolan.com/behaviour/">http://bennolan.com/behaviour/</a></p>
+  <p>Note: Behaviour <strong>requires</strong> prototype.js, <em>version 1.4.0 or greater.</em></p>
+  <!--TODO: more!-->
+</div>
+
+<div id="deleteMe" class="alternate">
+  <p>(Not currently working in IE - working on why.)</p>
+  <ul id="behaviour-example">
+    <li style="list-style-type: none;">These use Behaviour:</li>
+    <li><a href="javascript:void(0);">Click me to delete me 1</a></li>
+    <li><a href="javascript:void(0);">Click me to delete me 2</a></li>
+    <li><a href="javascript:void(0);">Click me to delete me 3</a></li>
+    <li><a href="javascript:void(0);">Click me to delete me 4</a></li>
+    <li><a href="javascript:void(0);">Click me to delete me 5</a></li>
+    <li><a href="javascript:void(0);">Click me to delete me 6</a></li>
+  </ul>
+  <ul>
+    <li style="list-style-type: none;">These <em>don't</em> use Behaviour:</li>
+    <li onclick="this.parentNode.removeChild(this)"><a href="javascript:void(0);">Click me to delete me 1</a></li>
+    <li onclick="this.parentNode.removeChild(this)"><a href="javascript:void(0);">Click me to delete me 2</a></li>
+    <li onclick="this.parentNode.removeChild(this)"><a href="javascript:void(0);">Click me to delete me 3</a></li>
+  </ul>
+</div>
+
+<br />
+<script type="text/javascript">
+  <!-- // <![CDATA[
+  /*  Add styles to DIVs alternately. */
+  var divs = document.getElementsByClassName('alternate');
+  for (i=0; i<divs.length; i++) {
+    if ((i % 2) == 0) {
+      Element.addClassName(divs[i], 'alt-light');
+      changeStyleOfContainedLinks(divs[i], 'light');
+    } else {
+      Element.addClassName(divs[i], 'alt-dark');
+      changeStyleOfContainedLinks(divs[i], 'dark');
+    }
+  }
+  function changeStyleOfContainedLinks(section, styling) {
+    var links = section.getElementsByTagName('a');
+    for (j=0; j<links.length; j++) {
+      if ('dark' == styling) {
+        Element.addClassName(links[j], 'text-for-dark');
+      } else {
+        Element.addClassName(links[j], 'text-for-light');
+      }
+    }
+  }
+  // ]]> -->
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

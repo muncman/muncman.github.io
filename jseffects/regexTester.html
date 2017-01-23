@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>JavaScript Regex Tester</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <meta name="author" content="Kevin Munc" />
+  <!--Modified from copyrighted example at http://centricle.com/tools/regex-preview/-->
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    /* Display output. */
+    function display(message) {
+      document.getElementById("output").innerHTML = message;
+    }
+    /* Process the given inputs to create the output. */
+    function showMatches() {
+      try {
+        var pattern = document.forms["regexForm"].elements["pattern"].value;
+        var text = document.forms["regexForm"].elements["searchText"].value;
+        var regex = eval("/(" + pattern + ")/g");
+        var replace = "<span class=\"match\">$1</span>";
+        var result = text.replace(regex, replace);
+        display(result);
+      } catch(err) {
+        display("<h1 style=\"color: red;\">Caught: " + err + "</span>");
+      }
+    }
+//TODO: What about ^ and $ ?
+  // ]]> -->
+  </script>
+  <link rel="stylesheet" type="text/css" href="../css/jseffects.css" />
+  <style type="text/css">
+    .match {
+        background-color: yellow;
+    }
+    li {
+      font-size: 3mm;
+    }
+  </style>
+</head><body onload="showMatches();">
+  <noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+  <h1>JavaScript Regular Expression Tester</h1>
+  <form name="regexForm" method="get" action="javascript:showMatches();">
+    <p class="instruction">Enter regular expression here:
+      <input type="text" name="pattern" size="40" value="[Cc]o+l" onkeyup="javascript:showMatches();" />
+    </p>
+    <p class="instruction">Enter the text to search against here:</p>
+    <p>
+      <textarea name="searchText" rows="8" cols="72" onkeyup="javascript:showMatches();">
+This is some friggin cool sample text. Oh, yeah! Coooooool, man! COOL!
+I'm not joking around about how coolio the text in this set of columns and rows is!
+      </textarea>
+    </p>
+    <!--p><input type="submit" name="search" value="Search" /></p-->
+  </form>
+  <p class="instruction">Result:</p>
+  <div id="output" style="width: 60%;"></div>
+  <p>
+    <span style="font-size: 3mm; text-decoration: underline;">Key statements:</span>
+    <ol>
+      <li>regex = eval(&quot;/(&quot; + pattern + &quot;)/g&quot;);</li>
+      <li>replace = &quot;<span class=\&quot;match\&quot;>$1</span>&quot;;</li>
+      <li>result = text.replace(regex, replace);</li>
+    </ol>
+  </p>
+  <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    <!-- //
+    _uacct = "UA-352416-1";
+    urchinTracker();
+    // -->
+  </script>
+</body></html>

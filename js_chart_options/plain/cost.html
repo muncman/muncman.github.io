@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>First Pass</title>
+    <style type="text/css">
+      * { margin: 0; padding: 0; border: none; outline: none; }
+      body { font-family: Helvetica, Arial, san-serif; padding: 100px; }
+      h2 { color: #C9A86F; }
+      #outer { border: 1px #999 solid; width: 500px; height: 190px; padding: 20px; }
+      #inner { border-bottom: 1px #999 solid; height: 150px; }
+      .vertColumn { width: 101px; height: 148px; float: left; background-repeat: no-repeat; position: relative; top: 2px /* TODO: why need this? */; }
+      .vertColumn, label { width: 101px; margin: 0 25px; }
+      #variance { width: 101px; height: 148px; float: left; margin: 0 25px; position: relative; }
+      #difference { position: absolute; top: 1px; right: -151px; background-color: #DAE6DC; color: #ccc; text-align: center; 
+        width: 101px; height: /* match background-position difference - what if higher?!? */ 36px; }
+      label { float: left; text-align: center; }
+      #yourAvg { background-image: url('yourcolumn.png'); background-position: /*example*/ 50% 35px; }
+      #p3Avg { background-image: url('p3column.png'); }
+    </style>
+  </head>
+  <body>
+    <h2>Cost Per Claim</h2>
+    <div id="outer">
+      <div id="inner">
+        <div id="variance">
+          <div id="difference">arrow <br />image</div>
+          <p>Adjust background-position Y-axis to set heights.</p>
+        </div>
+        <div id="yourAvg" class="vertColumn">
+          <!--TODO: position value in heavily rounded div on top of the image-->
+        </div>
+        <div id="p3Avg" class="vertColumn">
+          <!--TODO: position value in heavily rounded div on top of the image-->
+        </div>
+      </div>
+      <label id="varianceLabel" for="variance">&nbsp;</label>
+      <label id="yourLabel" for="yourAvg">Your <br />Average</label>
+      <label id="p3Label" for="p3Avg">PinPointPRO <br />Average</label>
+    </div>
+    <script type="text/javascript">
+    </script>
+  </body>
+</html>

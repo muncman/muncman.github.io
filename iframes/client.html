@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+    <title>THIS IS ON NATIONWIDE'S SIDE</title>
+    <!-- Based heavily on http://developer.apple.com/internet/webcontent/iframe.html -->
+    <!-- TODO: switch to Struts tags, etc, when convert back to JSP...
+               move size/styling to CSS... -->
+    <script type="text/javascript" src="remoteIFrame.js"></script>
+    <script type="text/javascript">
+      <!-- // <![CDATA[
+      //TODO: More exception handling!
+      /* Callback handler for the HTML form page being loaded. */
+      function handleFormResponse(content) {
+        try {
+          //alert('this function is called from serverForm.html: ' + content);
+        } catch (exception) {
+          //alert(exception);
+        }
+        var formTarget = document.getElementById('formResult');
+        var preFormContentDiv = document.getElementById('preFormContent');
+        var preFormContent = preFormContentDiv.innerHTML.replace('<!--', '');
+        preFormContent = preFormContent.replace('-->', '');
+        var postFormContentDiv = document.getElementById('postFormContent');
+        var postFormContent = postFormContentDiv.innerHTML.replace('<!--', '');
+        postFormContent = postFormContent.replace('-->', '');
+        formTarget.innerHTML = preFormContent + content + postFormContent;
+      }
+      /* Callback handler for the PDF form links page being loaded. */
+      function handleSubmitResponse(content) {
+        try {
+          //alert('this function is called from serverLinks.html: ' + content);
+        } catch (exception) {
+          //alert(exception);
+        }
+        var linksTarget = document.getElementById('submitResult');
+        var preLinksContentDiv = document.getElementById('preLinksContent');
+        var preLinksContent = preLinksContentDiv.innerHTML.replace('<!--', '');
+        preLinksContent = preLinksContent.replace('-->', '');
+        var postLinksContentDiv = document.getElementById('postLinksContent');
+        var postLinksContent = postLinksContentDiv.innerHTML.replace('<!--', '');
+        postLinksContent = postLinksContent.replace('-->', '');
+        linksTarget.innerHTML = preLinksContent + content + postLinksContent;
+      }
+      /* Invoke callToServer from remoteIFrame.js with relevant URL. */
+      function callToServerForForm() {
+        callToServer("serverForm.html");
+        //return callToServer("http://www.munc.com/iframes/serverForm.html");
+        //return callToServer("http://localhost/iframes/serverForm.html");
+        return false;
+      }
+      /* Invoke callToServer from remoteIFrame.js with relevant URL. */
+      function callToServerForLinks(theFormName) {
+        var callWith = "serverLinks.html" + buildQueryString(theFormName);
+        //var callWith = "http://www.munc.com/iframes/serverLinks.html" + buildQueryString(theFormName);
+        //var callWith = "http://127.0.0.1/iframes/serverLinks.html" + buildQueryString(theFormName);
+        callToServer(callWith);
+        return false;
+        //TODO: clean up 'return to false' statements.
+      }
+      // ]]> -->
+    </script>
+    <link rel="stylesheet" type="text/css" href="NFMain.css" />
+  </head>
+  <body>
+    <p>
+      This is in the SSC. We've got all of the chrome and whatnot here, like normal.
+    </p>
+    <a onclick="return callToServerForForm();" href="#">Select a product...</a>
+    <p>
+      ...more Nationwide-controlled content...
+    </p>
+    <div id="preFormContent" style="display: none;">
+      <!--
+        <form name="describableMapForm" method="post" action="server2.html" target="RSIFrame" onsubmit="return callToServerForLinks(this.name);">
+          <input type="hidden" name="org.apache.struts.taglib.html.TOKEN" value="919cda3b23347115cab4480baf3755ec" />
+      -->
+    </div>
+    <!--action="/iApp/ssc/form/displayForward.do"-->
+    <div id="formResult"></div>
+    <div id="postFormContent" style="display: none;">
+      <!--
+          <table width="584" border="0" align="center" cellpadding="3" cellspacing="0">
+            <tr align="left" valign="middle" class="centobjBody">
+              <td width="100">
+                Product:
+              </td>
+              <td width="335">
+                <strong>The Best of America<sup>
+                    &#174;
+                  </sup> America&#39;s INCOME Annuity<sup>
+                    &#174;
+                  </sup></strong>
+                  <em>
+                    (not from Merrill)
+                  </em>
+              </td>
+            </tr>
+            <tr align="right" valign="middle" class="centobjBody">
+              <td align="right" colspan="2" width="100%">
+                <input type="submit" value="Select" class="fButtonPos" />
+              </td>
+            </tr>
+          </table>
+        </form>
+      -->
+    </div>
+    <p>
+      ...more Nationwide-controlled content...
+    </p>
+    <div id="preLinksContent" style="display: none;">
+      <!--
+      <table width="584" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+          <td colspan="6" width="584">
+            <img src="/media/images/x.gif" width="584" height="8" />
+          </td>
+        </tr>
+        <tr>
+          <td align="left" colspan="2" width="100%" class="ActionHead2">
+            The Best of America<sup>&#174;</sup> IV <em>(not from Merrill)</em>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="readBody">
+      -->
+    </div>
+    <div id="submitResult"></div>
+    <div id="postLinksContent" style="display: none;">
+      <!--
+          </td>
+        </tr>
+      </table>
+      -->
+    </div>
+    <p>
+      ...more Nationwide-controlled content...
+    </p>
+  </body>
+</html>

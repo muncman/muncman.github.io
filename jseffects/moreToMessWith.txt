@@ -1,0 +1,12 @@
+http://www.earthcode.com/alpha/tools/jslog/
+  or just mention by fvlogger?
+  http://log4ajax.sourceforge.net/
+http://24ways.org/advent/introduction-to-scriptaculous-effects
+http://ajaxian.com/archives/2005/12/scriptaculous_1_2.html
+
+http://alistapart.com/articles/slidingdoors/
+  for my multi-lib page(s)
+
+
+Update resume.html with my new found knowledge, too!
+

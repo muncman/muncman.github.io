@@ -1,0 +1,23 @@
+/*//////////
+// Copyright Kevin Munc (kevin at munc dot com)
+// License:  http://creativecommons.org/licenses/by/2.5/
+//////////*/
+
+body { font-family: Times, Garamond, Courier, Serif; background-color: #000; color: #fff; }
+p { margin: 0; padding: 0; }
+a { text-decoration: none; color: #fff; }
+a:hover { color: #999999; }
+#logo { position: absolute; top: 35%; display: block; }
+#kevin { text-align: left; left: 5%; } 
+#heidi { text-align: right; right: 5%; }
+.centered { width: 30%; left: 35%; text-align: center; }
+.link { position: absolute; bottom: 5%; display: inline; }
+
+@media print {
+  body { background-color: #fff; color: #000; }
+  a { color: #000; }
+  .link { top: 100px; }
+  #logo { top: 300px; background-color: #000; padding: 10px 0 5px; }
+  #kevin { left: 12%; }
+  #heidi { right: 12%; }
+}

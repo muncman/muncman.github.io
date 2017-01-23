@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>On-Demand JavaScript - Cross-Domain Test</title>
+<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+<meta name="title" content="Experimentation with on-demand JavaScript loading across domains." />
+<meta name="author" content="Kevin Munc" />
+<meta name="description" content="Experimentation with non-AJAX on-demand JavaScript loading using DOM manipulation, across domains, without a proxy." />
+<meta name="keywords" content="JavaScript, DHTML, DOM, appendChild, script, on-demand, load, cross-domain" />
+<meta name="robots" content="all" />
+<script><!-- // <![CDATA[
+  /* Message counter - just for fun. */
+  var messageCount = 0;
+  /* Add a message to the output section. */
+  function addMessage(message) {
+    messageCount++;
+    span = document.createElement('span');
+    span.id = messageCount;
+    span.innerHTML = messageCount + ": " + message + "<br />";
+    var output = document.getElementById("output");
+    output.appendChild(span);
+  }
+  /* Load the additional script, only once. */
+  function ensureLoadedScript() {
+    //Mispelling is present in target script.
+    if (self.isSubmited) { // Already exists
+      addMessage("formUtils.js was already loaded.");
+      return;
+    }
+    var head = document.getElementsByTagName("head")[0];
+    script = document.createElement('script');
+    script.id = 'loadedScript';
+    script.type = 'text/javascript';
+    //Cross-domain _and_ over SSL.
+    script.src = "https://ssc.nwservicecenter.com/media/js/formUtils.js";
+    //script.src = "http://discoverhongkong.com/eng/incjs/hp_func.js";
+    head.appendChild(script)
+    addMessage("formUtils.js is now loaded (or being loaded).");
+    // Note that we cannot invoke functions in formUtils.js yet,
+    // without checking again, as below.
+    // (A timeout might help, too.)
+  }
+  /* Use a function from the additional script, if available. */
+  function triggerLoadedFunction() {
+    if (self.isSubmited) { // Available
+    //if (self.parseStringInsideQuotes) { // Available
+      var madeUpElem = new Object();
+      madeUpElem.submited = true;
+      result = isSubmited(madeUpElem);
+      //var quotedString = '\'this is spinal tap\'';
+      //result = parseStringInsideQuotes(quotedString);
+      addMessage("isSubmited returned: " + result);
+    } else { // Not available
+      addMessage("isSubmited is not yet available.");
+    }
+  }
+  /* From https://ssc.nwservicecenter.com/media/js/formUtils.js:
+  function isSubmited(form) {
+    if (form.submited != true) {
+      form.submited = true;
+      return false;
+    } else {
+      return true;
+    }
+  }
+  */
+  /* From http://discoverhongkong.com/eng/incjs/hp_func.js:
+  function parseStringInsideQuotes(inString) {
+      var outString = "";
+      var testChar;
+      for (var i = 0; i < inString.length; i++) {
+          testChar = inString.charAt(i);
+          if (testChar == "\\")
+              outString += "\\\\";
+          else if (testChar == "\"")
+              outString += "\\\"";
+          else if (testChar == "'")
+              outString += "\\'";
+          else
+              outString += testChar;
+      }
+      return outString;
+  }
+  */
+// ]]> --></script>
+</head><body>
+  <h1>On-Demand JavaScript</h1>
+  <p>
+    Example of pattern used in <a href="onDemandJs.html">the pattern</a> which loads a JavaScript file <strong>across domains</strong> (and over SSL).
+  </p>
+  <p>Note that this maintains integrity even if the remote script is slow to download to the client.</p>
+  <ol>
+    <li><a href="javascript:triggerLoadedFunction();">Click here to use a function</a> from the additional script.<br />Try it before clicking the link below.</li>
+    <li><a href="javascript:ensureLoadedScript();">Click here to pull in JavaScript file
+    (<a href="https://ssc.nwservicecenter.com/iApp/ssc/login.do">Nationwide Financial's Sales &amp; Service Center</a>'s formUtils.js)</a> which was not included initially.
+    <br /><strong>Note: This can take a while to load...</strong>
+    <br />Try clicking it more than once (after it has loaded).
+    <li>Now try step &#35;1 again. It works!</li>
+    <li>Now try step &#35;2 again. It can tell it doesn't need to load the script again!</li>
+  </ol>
+  <p><a href="http://ajaxpatterns.org/On-Demand_Javascript">See the On-Demand JavaScript page</a> at AjaxPatterns.org for a more thorough treatment of this approach.</p>
+  <p><a href="http://ajaxian.com/archives/2005/12/dynodes_crossdo_1.html">See this Dynodes library discussion for more info.</a></p>
+  <div id="output"></div>
+  <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    <!-- //
+    _uacct = "UA-352416-1";
+    urchinTracker();
+    // -->
+  </script>
+</body></html>

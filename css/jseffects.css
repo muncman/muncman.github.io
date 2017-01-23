@@ -1,0 +1,32 @@
+/*//////////
+// Copyright Kevin Munc (kevin at munc dot com)
+// License:  http://creativecommons.org/licenses/by/2.5/
+//////////*/
+
+/* General styles for more than one page under the jseffects directory. */
+
+#output {
+    font-variant: normal;
+    font-weight: bold;
+}
+.footnote {
+    font-size: 3mm;
+    text-align: center;
+}
+.instruction {
+    font-variant: small-caps;
+}
+.no-js {
+    font-variant: small-caps;
+    color: red;
+}
+body {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+}
+h1 {
+    font-size: 8mm;
+    text-align: center;
+}
+
+
+/* TODO: Update more of the HTML files to use this. */

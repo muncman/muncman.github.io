@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--Note: With the above DOCTYPE, pixel dimensions must have 'px'. Not required without it.-->
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>VT100</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="A very incomplete emulation of a command window." />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Goofy experiment with no purpose. Not meant to be robust." />
+  <meta name="keywords" content="JavaScript, DHTML, CSS" />
+  <meta name="robots" content="all" />
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    /* Make the cursor underscore appear to blink, OLD SCHOOL! */
+    function blinkCursor() {
+      cursor = document.getElementById("underscore");
+      if (cursor.style.visibility == "visible") {
+        cursor.style.visibility = "hidden";
+      } else {
+        cursor.style.visibility = "visible";
+      }
+      setTimeout("blinkCursor()", 600);
+    }
+    setTimeout("blinkCursor()", 600);
+  //TODO: Remove duplication with keypress.js!
+     var spaceBarCode = 32;
+     var enterKeyCode = 13;
+     var lessThanCode = 60;
+     var backspaceCode = 8;
+     var questionMarkCode = 63;
+     //var deleteKeyCode =
+    /* Give feedback on what keys were pressed. */
+    function whatWasPressed(e) {
+      keyCode = document.all ? window.event.keyCode : e.which;
+      keyChar = String.fromCharCode(keyCode);
+      //TODO: case/switch?
+      //if (keyCode == spaceBarCode) {
+        //TODO:
+      //}
+      if (keyCode == enterKeyCode) {
+        keyChar = "<br />&gt;";
+      }
+      if (keyCode == lessThanCode) {
+        keyChar = "&lt;";
+      }
+      if (keyCode == questionMarkCode) {
+        keyChar = "?";
+        //TODO: Still not enough for repeated question marks - Firefox only.
+      }
+      if (keyCode == backspaceCode) {
+        removeFromScreen();
+        return false;
+      }
+      addToScreen(keyChar);
+    }
+    /* Add user input to screen. */
+    function addToScreen(typed) {
+      var typing = document.getElementById("typing");
+//*** MUST USE A "var" FOR THE ELEMENT FOR IE TO WORK PROPERLY! ***
+      //if (!typing) {
+        //alert("must be using IE!");
+        //typing = document.all["typing"];
+      //}
+      previous = typing.innerHTML;
+      typing.innerHTML = previous + typed;
+      //return false;
+    }
+    /* Remove the most recent character from the screen. */
+    function removeFromScreen() {
+      var typing = document.getElementById("typing");
+      previous = typing.innerHTML;
+      newValue = previous.substr(0, previous.length - 1);
+      typing.innerHTML = newValue;
+    }
+    /* Registration to capture keystrokes. */
+    function registerHandler() {
+      document.onkeypress = whatWasPressed;
+      //For old Netscape.
+      if (document.layers) {
+        document.captureEvents(Event.KEYPRESS);
+      }
+    }
+    registerHandler();
+  // ]]> -->
+  </script>
+  <style type="text/css">
+    #prompt {
+      width: 700px;
+      height: 400px;
+      min-width: 700px;
+      min-height: 400px;
+      border-style: outset;
+      border-width: 1.5mm;
+      border-color: grey;
+      background-color: black;
+      color: white;
+      padding: 3mm 3mm 3mm 3mm;
+    }
+    .footnote {
+      font-size: 75%;
+      font-weight: light;
+    }
+    /* Why isn't ".footnote em" working either?!
+    em {
+      font-style: normal;
+      font-variant: small-caps;
+    }
+    body {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 4mm;
+      font-weight: bold;
+    }
+  </style>
+</head><body>
+<div id="prompt">
+<p>Production Server - Access is Restricted to Authorized Individuals</p>
+<span id="typing">&gt;</span><span id="underscore">_</span>
+</div>
+<div class="footnote">
+  <p>Disclaimer: This is an incomplete and buggy experiment. It is not intended to be impressive!</p>
+  <p>Note that <em>Backspace</em> gets intercepted by Internet Explorer before JavaScript sees it.</p>
+  <p>See <a href="http://www.webreference.com/js/column11/codes.html">http://www.webreference.com/js/column11/codes.html</a> for this and other details.</p>
+</div>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

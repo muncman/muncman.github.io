@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts (Multi-)Line Chart Example</title>
+
+    <link type="text/css" rel="stylesheet" href="reset.css" />		
+    <link type="text/css" rel="stylesheet" href="p3.css" />		
+    <style type="text/css">
+      #p3hover {
+        /* TODO: add bg image for the shape! */
+        width: 100px; 
+        height: 50px; 
+        border: 2px solid #999 /* temporary */;
+        background-color: #fff;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: none;
+      }
+    </style>
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/highcharts.js"></script>
+		
+		<!-- 1a) Optional: add a theme file -->
+		<!--
+			<script type="text/javascript" src="../js/themes/gray.js"></script>
+		-->
+		
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="../js/modules/exporting.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+    <script type="text/javascript">
+      var chart = null; 
+          /* mposx = 0, */
+          /* mposy = 0; */
+
+			$(document).ready(function() {
+
+          /* $(document).mousemove(function(e, forced) { */
+            ///* e = jQuery.event.fix(e); */
+          /*   if (forced) { */
+          /*     console.log(e.pageX); */
+          /*   } */
+          /*   mposx = e.pageX; */
+          /*   mposy = e.pageY; */
+          /* }); */
+
+        var previousYear = 'Previous Year';
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container',
+						defaultSeriesType: 'line', /* TODO: try with separate pointStart values (year on year) 'column', */
+            spacingBottom: 50,
+            spacingLeft: 50
+						/* marginRight: 130, */
+						/* marginBottom: 25 */
+					},
+					title: {
+						text: 'Decisions & Opportunity',
+            x: -20, //center
+            style: {
+              color: '#CD9B5D'
+            }
+					},
+					/* subtitle: { */
+					/* 	text: '', */
+					/* 	x: -20 */
+					/* }, */
+					xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { 
+              /* month: '%b' */
+              month: '%b<br/>%Y'
+            }
+            /* title: { */
+            /*   text: '2010' */
+            /* } */
+						/* categories: ['Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'] */
+						/* plotLines: [{ */
+						/* 	value: 0, */
+						/* 	width: 1, */
+						/* 	color: '#808080' */
+						/* }] */
+					},
+					yAxis: {
+            tickInterval: 2500,
+						title: {
+							text: ''
+						},
+            labels: {
+              align: 'left',
+              x: -50,
+              y: 4,
+              formatter: function() {
+                return '$' + Highcharts.numberFormat(this.value, 0, ',');
+              }
+            },
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					tooltip: {
+            style: {
+              padding: 10
+            },
+            formatter: function() {
+                         //$('#container').mousemove(); // force coord update
+                         /* $('#p3hover').show(). */
+                         /*   css('position', 'absolute'). */
+                         /*   css('top', parseInt(mposy)-60). */
+                         /*   css('left', parseInt(mposx)-51). */
+                         /*   html('X: ' + parseInt(mposx)-51 + '<br />Y: ' + parseInt(mposy)-60); */
+                         /* var $tip = $('#p3hover'); */
+                         /* $tip.show(); */
+                         /* $('#container').mousemove(function(e) { */
+                         /*        var mousex = e.pageX + 20; //Get X coodrinates */
+                         /*        var mousey = e.pageY + 20; //Get Y coordinates */
+                         /*        var tipWidth = $tip.width(); //Find width of tooltip */
+                         /*        var tipHeight = $tip.height(); //Find height of tooltip */
+
+                         /*        //Distance of element from the right edge of viewport */
+                         /*        var tipVisX = $(window).width() - (mousex + tipWidth); */
+                         /*        //Distance of element from the bottom of viewport */
+                         /*        var tipVisY = $(window).height() - (mousey + tipHeight); */
+
+                         /*        if ( tipVisX < 20 ) { //If tooltip exceeds the X coordinate of viewport */
+                         /*            mousex = e.pageX - tipWidth - 20; */
+                         /*        } if ( tipVisY < 20 ) { //If tooltip exceeds the Y coordinate of viewport */
+                         /*            mousey = e.pageY - tipHeight - 20; */
+                         /*        } */
+                         /*        //Absolute position the tooltip according to mouse position */
+                         /*        $tip.css({  top: mousey, left: mousex }); */
+                         /*    }); */
+                         /* return false; */
+                         ///* return '<b>Year</b>: <b>'+ this.series.name +'</b><br/>'+ */
+                         return '<b>Year</b>: <b>'+ Highcharts.dateFormat('%Y', this.x) +'</b><br/>'+
+                           'Total Cost : <b>$'+ Highcharts.numberFormat(this.y, 0, ',')+'</b><br/>'+
+                           'Total Judgements : <b>'+ 9 +'</b><br/>';
+                         // TODO: judgements[this.x] = Once using the monthly pointInterval as below, key off that instead
+                      }
+						/* formatter: function() { */
+				      /* return '<b>'+ this.series.name +'</b><br/>'+ */
+						/* 		'X: '+ this.x +'   Y: '+ this.y; */
+						/* } */
+            /* formatter: function() { */
+            /*             chart.renderer.path(['M', 0, 0, 'L', 100, 100, 200, 50, 300, 100]) */
+            /*               .attr({ */
+            /*                   'stroke-width': 2, */
+            /*                   stroke: 'red' */
+            /*               }); */
+            /*            } */
+					},
+					legend: {
+						align: 'right',
+						x: -30,
+						verticalAlign: 'bottom',
+						y: 30,
+						floating: true,
+						backgroundColor: '#FFF',
+						borderColor: '#CCC',
+						borderWidth: 0,
+						shadow: false
+					},
+					series: [{
+						name: previousYear,
+            color: '#cacaca',
+            marker: {
+              symbol: 'circle'
+            },
+            /* pointInterval: 1000*60*60*24*30, */
+            /* pointStart: Date.UTC(2009, 10, 1, 0, 0, 0), */
+            data: [
+                [Date.UTC(2008, 10, 1, 0, 0, 0), 5010],
+                [Date.UTC(2008, 11, 1, 0, 0, 0), 3300],
+                [Date.UTC(2008, 12, 1, 0, 0, 0), 2200],
+                [Date.UTC(2009, 1, 1, 0, 0, 0), 1700],
+                [Date.UTC(2009, 2, 1, 0, 0, 0), 3500],
+                [Date.UTC(2009, 3, 1, 0, 0, 0), 2400],
+                [Date.UTC(2009, 4, 1, 0, 0, 0), 2323],
+                [Date.UTC(2009, 5, 1, 0, 0, 0), 2211],
+                [Date.UTC(2009, 6, 1, 0, 0, 0), 4678],
+                [Date.UTC(2009, 7, 1, 0, 0, 0), 1234],
+                [Date.UTC(2009, 8, 1, 0, 0, 0), 750],
+                [Date.UTC(2009, 9, 1, 0, 0, 0), 2999]
+              ]
+          }, {
+						name: 'Your Trend',
+            color: '#738598',
+            /* pointInterval: 1000*60*60*24*30, */
+            /* pointStart: Date.UTC(2009, 10, 1, 0, 0, 0), */
+            data: [
+                [Date.UTC(2009, 10, 1, 0, 0, 0), 2500],
+                [Date.UTC(2009, 11, 1, 0, 0, 0), 4050],
+                [Date.UTC(2009, 12, 1, 0, 0, 0), 7550],
+                [Date.UTC(2010, 1, 1, 0, 0, 0), 4000],
+                [Date.UTC(2010, 2, 1, 0, 0, 0), 4500],
+                [Date.UTC(2010, 3, 1, 0, 0, 0), 3455],
+                [Date.UTC(2010, 4, 1, 0, 0, 0), 2532],
+                [Date.UTC(2010, 5, 1, 0, 0, 0), 4122],
+                [Date.UTC(2010, 6, 1, 0, 0, 0), 3765],
+                [Date.UTC(2010, 7, 1, 0, 0, 0), 5534],
+                [Date.UTC(2010, 8, 1, 0, 0, 0), 3552],
+                [Date.UTC(2010, 9, 1, 0, 0, 0), 5995]
+              ]
+					}]
+				});
+	
+			});
+				
+		</script>
+		
+	</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 900px; height: 250px; margin: 50px auto;"></div>
+    <div id="p3hover"></div>
+		
+				
+	</body>
+</html>

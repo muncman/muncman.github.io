@@ -1,0 +1,478 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Messing with Effects</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with some JavaScript libraries" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with various JavaScript libraries." />
+  <meta name="keywords" content="JavaScript, DHTML, effects, Tooltip, MODI, Solvent, sDumper, tree, hover, sortable, lightbox, drop shadow" />
+  <meta name="robots" content="all" />
+  <!--fvlogger - http://www.alistapart.com/articles/jslogging/-->
+    <!--Put this in first, so the rest can use it, if needed.-->
+    <link rel="stylesheet" href="../fvlogger/logger.css" type="text/css" />
+    <script type="text/javascript" src="../fvlogger/logger.js"></script>
+    <!--script type="text/javascript" src="../js/jkl-floating.js"></script-->
+  <!--Nice Title - http://www.kryogenix.org/code/browser/nicetitle/-->
+    <link rel="stylesheet" href="../css/nicetitle.css" type="text/css" />
+    <script type="text/javascript" src="../js/nicetitle.js"></script>
+  <!--SilverStripe Tree Control - http://www.silverstripe.com/downloads/tree/-->
+    <link rel="stylesheet" href="../css/tree.css" type="text/css" media="all" />
+    <script type="text/javascript" src="../js/tree.js"></script>
+  <!--The next js file is a custom one since tree.js does not load properly on its own, at least in this context.-->
+    <script type="text/javascript" src="../js/tree-loader.js"></script>
+  <!--SortableTable - http://webfx.eae.net/dhtml/sortabletable/sortabletable.html and
+                      http://webfx.eae.net/dhtml/sortabletable/customsorttypedemo.html-->
+    <link rel="stylesheet" href="../css/sortabletable.css" type="text/css" />
+    <script type="text/javascript" src="../js/sortabletable.js"></script>
+    <script type="text/javascript" src="../js/numberksorttype.js"></script>
+    <script type="text/javascript" src="../js/uscurrencysorttype.js"></script>
+  <!--sorttable - http://www.kryogenix.org/code/browser/sorttable/-->
+    <link rel="stylesheet" href="../css/sorttable.css" type="text/css" />
+    <script type="text/javascript" src="../js/sorttable.js"></script>
+  <!--Solvent: sDumper - https://sourceforge.net/projects/solvent-->
+    <script type="text/javascript" src="../js/sDumper.js"></script>
+  <!--Tooltip - http://tooltip.crtx.org/-->
+    <!--Requires prototype and script.aculo.us libraries.-->
+    <script type="text/javascript" src="../js/script.aculo.us/prototype.js"></script>
+    <script type="text/javascript" src="../js/scriptaculous.js"></script>
+    <script type="text/javascript" src="../js/Tooltip.js"></script>
+    <link rel="stylesheet" href="../css/tooltip.css" type="text/css" />
+  <!--Onion Skinned Drop Shadows - http://www.ploughdeep.com/onionskin/ -->
+    <link rel="stylesheet" href="../css/dropShadow.css" type="text/css" />
+  <!--Lightbox Image Overlay - http://www.huddletogether.com/projects/lightbox/-->
+    <script type="text/javascript" src="../js/lightbox.js"></script>
+    <link rel="stylesheet" href="../css/lightbox.css" type="text/css" />
+  <!--Show|Hide toggling function.-->
+    <link rel="stylesheet" href="../css/toggle.css" type="text/css" media="screen,print" />
+    <script type="text/javascript" src="../js/toggle.js"></script>
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    /* Set things up to execute after page has loaded. */
+    window.onload = function() {
+      info("Running onload statements...");
+      info("Done running onload statements...");
+    }
+    var allShown = false;
+    /* Turns on visibility for all sections. */
+    function toggleAllSections() {
+      var sections = document.getElementsByTagName("div");
+      if (allShown) {
+        //Hide all.
+        for (var i=0; i<sections.length; ++i) {
+          if (sections[i].className == "section-show") {
+            //If already section-hide, no need to do anything.
+            sections[i].className = "section-hide";
+            //TODO: sections[i].style.display = "";
+          }
+        }
+        allShown = false;
+      } else {
+        //Show all.
+        for (var i=0; i<sections.length; ++i) {
+          if (sections[i].className == "section-hide") {
+            //If already section-show, no need to do anything.
+            sections[i].className = "section-show";
+            //TODO: sections[i].style.display = "list";
+          }
+        }
+        allShown = true;
+      }
+    }
+  // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+        font-variant: small-caps;
+        color: red;
+    }
+    .topnav {
+        font-family: Arial, Helvetica, Verdana, sans-serif;
+        font-size: 12pt;
+        margin-top: 5mm;
+    }
+    .topnav li {
+        display: inline;
+        padding-left: 2mm;
+        padding-right: 2mm;
+    }
+    .topnav li a {
+        border-style: double;
+        border-color: #333333;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 0.5mm;
+        background-color: #3333CC;
+        color: #FFFFFF;
+    }
+    .topnav li a:hover {
+        color: #cccccc;
+        background-color: #333333;
+        border-color: #3333CC;
+        /*text-transform: uppercase;*/
+    }
+    .linkLike {
+       border-bottom: thin dotted black;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires JavaScript to be enabled to function properly.</h3></noscript>
+<br />
+<div id="toc">
+  <ul class="topnav">
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('tooltip-container'); changeSectionClass('tooltip-container','toggle');">Tooltip</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('tree-container'); changeSectionClass('tree-container','toggle');">Tree Nav</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('hover-container'); changeSectionClass('hover-container','toggle');">Link Titles</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('sort-container'); changeSectionClass('sort-container','toggle');">Sortable Tables</a></li>
+    <!--Mouseover DOM Inspector (MODI) - http://slayeroffice.com/tools/modi/v2.0/modi_help.html-->
+    <li><a href="javascript:prefFile='../js/modi_prefs.js';void(z=document.body.appendChild(document.createElement('script')));void(z.language='javascript');void(z.type='text/javascript');void(z.src='../js/modi_v2.0.js');void(z.id='modi');" style="border-style: dotted;">DOM</a></li>
+  </ul>
+  <ul class="topnav">
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('log-container'); changeSectionClass('log-container','toggle');">Logger</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('dropShadow-container'); changeSectionClass('dropShadow-container','toggle');">Drop Shadows</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('imageOverlay-container'); changeSectionClass('imageOverlay-container','toggle');">Image Overlay</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('dumper-container'); changeSectionClass('dumper-container','toggle');">Dumper</a></li>
+    <!--TODO: li><a href="javascript:void(0);" onclick="toggleAllSections();">ALL</a></li-->
+  </ul>
+</div>
+
+<div id="tooltip-container" class="section-hide">
+  <h3>Tooltip.js</h3>
+  <p><a href="http://tooltip.crtx.org/">http://tooltip.crtx.org/</a></p>
+  <p id="tooltipTrigger"><span class="linkLike">Click this to show a tooltip (click again to hide it).</span></p>
+  <div id="tooltipDef" class="tooltip" style="display: none;">
+    <h1>Header</h1>
+    <p>Contents</p>
+  </div>
+  <p>
+    There are several options available for this library. See the site for details.
+    Note, also, that it requires Prototype version 1.4, as well as Script.aculo.us.
+  </p>
+</div>
+
+<div id="tree-container" class="section-hide">
+  <h3>SilverStripe Tree Control: Tree effect for Unordered Lists</h3>
+  <p><a href="http://www.silverstripe.com/downloads/tree/">http://www.silverstripe.com/downloads/tree/</a></p>
+  <p>
+    Note that I did not have to do <em>anything</em> special to these links for this effect.
+    All I did was give the &lt;ul&gt; a class of &quot;tree&quot;,
+    include the &quot;tree&quot; controller css and js references in the page,
+    and invoke autoInit_trees() after loading (last step moved into custom tree-loader.js).
+    Oh, and the images have to be present, as well.
+    Still, it is <strong>simple and unobtrusive!</strong>
+  </p>
+  <p>This works with unordered lists, not ordered lists.</p>
+  <ul id="tree-example" class="tree">
+    <li class="closed"><a href="javascript:void(0);">First</a>
+      <ul>
+        <li><a href="javascript:void(0);">A</a></li>
+        <li><a href="javascript:void(0);">B</a></li>
+        <li><a href="javascript:void(0);">C</a></li>
+        <li><a href="javascript:void(0);">D</a></li>
+        <li>No Link (no href) and auto-open<!--class is NOT closed-->
+          <ul>
+            <li><a href="javascript:void(0);">sub 1</a></li>
+            <li><a href="javascript:void(0);">sub 2</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="closed"><a href="javascript:void(0);">Second</a>
+      <ul>
+        <li><a href="javascript:void(0);">a</a></li>
+        <li class="closed"><a href="javascript:void(0);">b</a>
+          <ul>
+            <!--With hash anchor links-->
+            <li><a href="#">b.1</a></li>
+            <li><a href="#">b.2</a></li>
+          </ul>
+        </li>
+        <li><a href="javascript:void(0);">c</a></li>
+      </ul>
+    </li>
+    <li class="closed"><a href="#">Third</a>
+      <ul>
+        <li><a href="javascript:void(0);">1</a></li>
+        <li><a href="javascript:void(0);">2</a></li>
+        <li><a href="javascript:void(0);">3</a></li>
+        <li class="closed"><a href="javascript:void(0);">4</a>
+          <ul>
+            <li><a href="javascript:void(0);">4.1</a></li>
+            <li><a href="javascript:void(0);">4.2</a></li>
+            <li class="closed"><a href="javascript:void(0)';">4.3</a>
+              <ul>
+                <li><a href="javascript:void(0);">4.3.1</a></li>
+                <li><a href="javascript:void(0);">4.3.2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="javascript:void(0);">Good DHTML Web Sites</a><!--Note: Open on load-->
+      <ul>
+        <li><a href="http://alistapart.com/">http://alistapart.com/</a></li>
+        <li><a href="http://www.quirksmode.org/">http://www.quirksmode.org/</a></li><!--Needs the www. on the front!-->
+        <li><a href="http://www.crockford.com/javascript/">http://www.crockford.com/javascript/</a></li>
+        <li><a href="http://www.w3schools.com/">http://www.w3schools.com/</a></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div id="hover-container" class="section-hide">
+  <h3>Nice Titles: Hover over these links, please.</h3>
+  <p><a href="http://www.kryogenix.org/code/browser/nicetitle/" title="Nice Titles">http://www.kryogenix.org/code/browser/nicetitle/</a></p>
+  <p>
+    Note that I did not have to do <em>anything</em> special to these links for this effect.
+    All I did was give them &quot;title&quot; attributes, per good HTML practice,
+    and include the &quot;nicetitle&quot; css and js references in the page.
+    <strong>Simple and Unobtrusive!</strong>
+  </p>
+  <p>Downside: All other links in the page which don't have title attributes, come up plainly as &quot;undefined&quot;.</p><!--TODO: Is this overrideable?-->
+  <ul id="hoverlinks">
+    <li><a href="javascript:void(0);" title="First Link">O N E</a></li>
+    <li><a href="javascript:void(0);" title="How's this look?">T W O</a></li>
+    <li><a href="javascript:void(0);" title="Something descriptive and helpful should go here">T H R E E</a></li>
+    <li><a href="javascript:void(0);">no title attribute = no effect</a></li>
+  </ul>
+  <!--h3>Mouseover DOM Inspector</h3-->
+  <!--Mouseover DOM Inspector (MODI) - http://slayeroffice.com/tools/modi/v2.0/modi_help.html-->
+  <!--p><a href="javascript:prefFile='../js/modi_prefs.js';void(z=document.body.appendChild(document.createElement('script')));void(z.language='javascript');void(z.type='text/javascript');void(z.src='../js/modi_v2.0.js');void(z.id='modi');">Activate Mouseover DOM Inspector</a></p-->
+</div>
+
+<div id="sort-container" class="section-hide">
+  <h3>In-page Sortable Table Columns</h3>
+  <h5>Two Methods</h5>
+  <p><a href="http://webfx.eae.net/dhtml/sortabletable/sortabletable.html">WebFX Method</a></p>
+  <table class="sort-table" id="table-1" cellspacing="0">
+    <thead>
+      <tr>
+        <td>Amount</td>
+        <td>Brand</td>
+        <td>Born On</td>
+        <td>Cost</td>
+        <td>Goodness</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>42127</td>
+        <td>Miller</td>
+        <td>2003-08-25</td>
+        <td>$5,123,123.99</td>
+        <td>bah</td>
+      </tr>
+      <tr>
+        <td>242.22K</td>
+        <td>Guinness</td>
+        <td>2003-11-01</td>
+        <td>$8000.88</td>
+        <td>awesome</td>
+      </tr>
+      <tr>
+        <td>1.25M</td>
+        <td>Cadillac Mountain Stout</td>
+        <td>2001-08-28</td>
+        <td>$69</td>
+        <td>unbelievable</td>
+      </tr>
+      <tr>
+        <td>40G</td>
+        <td>Budvar</td>
+        <td>2004-09-22</td>
+        <td>$0</td>
+        <td>darn tootin'</td>
+      </tr>
+    </tbody>
+  </table>
+  <script type="text/javascript">
+    <!-- //  <![CDATA[
+    var sortTarget = new SortableTable(document.getElementById("table-1"), ["NumberK", "String", "Date", "UsCurrency", "String"]);
+    sortTarget.sort(1);
+    // ]]> -->
+  </script>
+  <br /><div style="border: solid; border-width: 0.1mm;"></div>
+  <p>
+    <a href="http://www.kryogenix.org/code/browser/sorttable/">Stuart Langridge's Method (Kryogenix)</a>
+    <br />Note that his version is free for commercial use, <em>and</em> it is &quot;Unobtrusive&quot;
+  </p>
+  <table class="sortable" id="table-2">
+    <thead>
+      <tr>
+        <td>Amount</td>
+        <td>Brand</td>
+        <td>Born On</td>
+        <td>Cost</td>
+        <td>Goodness</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>42127</td>
+        <td>Miller</td>
+        <td>2003-08-25</td>
+        <td>$5,123,123.99</td>
+        <td>bah</td>
+      </tr>
+      <tr>
+        <td>242.22K</td>
+        <td>Guinness</td>
+        <td>2003-11-01</td>
+        <td>$8000.88</td>
+        <td>awesome</td>
+      </tr>
+      <tr>
+        <td>1.25M</td>
+        <td>Cadillac Mountain Stout</td>
+        <td>2001-08-28</td>
+        <td>$69</td>
+        <td>unbelievable</td>
+      </tr>
+      <tr>
+        <td>40G</td>
+        <td>Budvar</td>
+        <td>2004-09-22</td>
+        <td>$0</td>
+        <td>darn tootin'</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>
+    Note: This approach does not require in-page scripting, nor images, as the above solution does.
+    <br />However, it does not support custom types, as the above example does. This is illustrated by the &quot;Amount&quot; column.
+  </p>
+  <br />
+</div>
+
+<div id="log-container" class="section-hide">
+  <h3>fvlogger: JavaScript Logging</h3>
+  <p><a href="http://www.alistapart.com/articles/jslogging/">http://www.alistapart.com/articles/jslogging/</a></p>
+  <ul id="loglinks">
+    <li style="list-style-type: none;">Click these to trigger JavaScript log statements below:</li>
+    <li><a href="javascript:void(0);debug('This is a debug statement...');">D E B U G</a></li>
+    <li><a href="javascript:void(0);info('you did not have to click (Cannot win with spaces here: either malformed URL or see it in the statement output. apostrophes are very troublesome, as well.)');">I N F O</a></li>
+    <li><a href="javascript:void(0);warn('you+really%20did+not%20have+to%20click');">W A R N</a></li>
+    <li><a href="javascript:void(0);error('NO CLICKING (caps lost)');">E R R O R</a></li>
+    <li><a href="javascript:void(0);fatal('INTENTIONAL ERROR: fatal is __NOT__ defined');">F A T A L</a></li>
+  </ul>
+  <p>Note that this captures problems before they get to the JavaScript console.</p>
+  <div id="fvlogger">
+    <dl>
+      <dt id="fvlogger_header">fvlogger</dt>
+      <dd class="all"><a href="javascript:void(0);" onclick="showAll();" id="abcdef">all</a></dd><!--title="show all"-->
+      <dd class="debug"><a href="javascript:void(0);" onclick="showDebug();" id="showDebug">debug</a></dd><!--title="show debug"-->
+      <dd class="info"><a href="javascript:void(0);" onclick="showInfo();" id="showInfo">info</a></dd><!--title="show info"-->
+      <dd class="warn"><a href="javascript:void(0);" onclick="showWarn();" id="showWarn">warn</a></dd><!--title="show warnings"-->
+      <dd class="error"><a href="javascript:void(0);" onclick="showError();" id="showError">error</a></dd><!--title="show errors"-->
+      <dd class="fatal"><a href="javascript:void(0);" onclick="showFatal();" id="showFatal">fatal</a></dd><!--title="show fatals"-->
+      <dd><a href="javascript:void(0);" onclick="eraseLog(true);">erase</a></dd><!--title="erase"-->
+    </dl>
+  </div>
+</div>
+
+<div id="dropShadow-container" class="section-hide">
+  <h3>Onion Skinned Drop Shadows</h3>
+  <p><a href="http://www.ploughdeep.com/onionskin/">http://www.ploughdeep.com/onionskin/</a></p>
+  <p>See the site for more detail and more variations.</p>
+  <div>
+    <div class="wrap1">
+      <div class="wrap2">
+        <div class="wrap3">
+          <img src="../img/lynxpaw.gif" width="88" height="31" />
+        </div>
+      </div>
+    </div>
+    <div class="wrap1">
+      <div class="wrap2">
+        <div class="wrap3" style="padding:0 18px 18px 0;">
+          <img src="../img/b-wpbcv.gif" width="88" height="31" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="imageOverlay-container" class="section-hide">
+  <h3>Lightbox JS</h3>
+  <p><a href="http://www.huddletogether.com/projects/lightbox/">http://www.huddletogether.com/projects/lightbox/</a></p>
+<!--TODO: Get a better image with better size(s) - and not so LARGE of a file!-->
+  <p>Click on the image/link below for the effect.</p>
+  <p><a href="../img/NorwesterHouse.jpg" rel="lightbox"><!--title="An old pic of my house!"-->
+      <img src="../img/NorwesterHouse.jpg" border="0" width="84" height="128" />
+    </a>
+  </p>
+  <script type="text/javascript">
+    <!-- // <[CDATA[
+    /*
+     * This is usually handled automatically,
+     * but this page has so many onload events going on,
+     * I'm going to make it explicit here.
+     */
+     initLightbox();
+    // ]]> -->
+  </script>
+</div>
+
+<!--TODO: http://jquery.com/  _AND_ http://www.fckeditor.net/ _AND_ http://www.easy-designs.net/code/jsTrace/ -->
+
+<div id="dumper-container" class="section-hide">
+  <h3>The Solvent's sDumper</h3>
+  <p><a href="https://sourceforge.net/projects/solvent">https://sourceforge.net/projects/solvent</a></p>
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    var sDumped = false;
+    /* Trigger sDumper within the behavior constraints of the page. */
+    function sDump() {
+      if (sDumped) {
+        debug("Preventing repeat sDumping.");
+        return;
+      } else {
+        //Toggle off the text of the Dumper tab.
+        changeSectionClass('dumper-container','toggle');
+        //Trigger the dump.
+        sDumper(document);
+        sDumped = true;
+      }
+    }
+    /* Visibility toggler specifically for the dumpOff div. */
+    function toggleDumpDiv() {
+      var dumpDiv = document.getElementById("dumpOff");
+      if (dumpDiv.style.display == "none") {
+        dumpDiv.style.display = "inline";
+      } else { //display: inline or block
+        dumpDiv.style.display = "none";
+      }
+    }
+    /* Remove the sDumper output from the page. */
+    function dumpOff() {
+      var dumped = document.getElementById("sDumperHolder");
+      if (dumped != null) {
+        bigDaddy = dumped.parentNode;
+        bigDaddy.removeChild(dumped);
+        sDumped = false;
+      } else {
+        alert("sDumper output div not found.");
+      }
+    }
+  // ]]> -->
+  </script>
+  <p>Everything produced below <a href="javascript:sDump(); toggleDumpDiv();">by clicking this link</a> is from <code>sDumper(document);</code>! <strong>That's it!</strong></p>
+  <p><strong>Warning:</strong> Internet Explorer has a <em>really hard time</em> with this script. Only recommended for Firefox.</p>
+</div>
+<div id="dumpOff" style="display: none; position: absolute; top: 7mm; right: 9mm; background-color: orange; padding-left: 5mm; padding-right: 5mm; border: medium outset black; text-align: center;">
+  <a href="javascript:dumpOff(); toggleDumpDiv();" style="color: black; font-family: Arial, Helvetica, Verdana, sans-serif; text-decoration: none;">
+    Click to remove sDumper's output. <br /><span style="font-size: smaller;">It cannot be regenerated without reloading the page.</span>
+  </a>
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

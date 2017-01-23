@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Stacked Column Vertical Bar Chart Example</title>
+
+    <link type="text/css" rel="stylesheet" href="reset.css" />		
+    <link type="text/css" rel="stylesheet" href="p3.css" />		
+
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/highcharts.src.js"></script>
+
+		<!-- 1a) Optional: add a theme file -->
+    <script type="text/javascript" src="pmi-theme.js"></script>
+
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="../js/modules/exporting.js"></script>
+
+
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+
+      var $report = $('#report');
+
+      var dateLabels = {
+        'Jan': 'January 2010', 'Feb': 'February 2010', 'Mar': 'March 2010', 'Apr': 'April 2010', 'May': 'May 2010', 'Jun': 'June 2010',
+        'Jul': 'July 2010', 'Aug': 'August 2009', 'Sep': 'September 2009', 'Oct': 'October 2009', 'Nov': 'November', 'Dec': 'December 2009'
+      };
+
+			var chart;
+			$(document).ready(function() {
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container',
+            defaultSeriesType: 'column',
+            spacingBottom: 50,
+            spacingLeft: 50,
+            events: { 
+              selection: function(event) {
+                  if (event.xAxis) {
+                      $report.html('min: '+ event.xAxis[0].min +', max: '+ event.xAxis[0].max);
+                  } else {
+                      $report.html ('Selection reset');
+                  }
+              }
+            }
+            /* zoomType: 'x' */
+					},
+					title: {
+            text: 'Decisions & Opportunity',  /* TODO: test with Fangs - SVG and a11y? (and SEO?) vs. chart export completeness */
+            style: {
+              /* align: 'left',  */
+              color: '#CD9B5D'
+            }
+					},
+					xAxis: {
+            /* categories: ['September 2009', 'October 2009', 'November 2009', 'December 2009', 'January 2010', 'February 2010', 'March 2010', 'April 2010', 'May 2010', 'June 2010', 'July 2010', 'August 2010'], */
+            /* labels: { */
+            /*    rotation: -45, */
+            /*    align: 'right', */
+            /*    style: { */
+            /*        font: 'normal 13px Verdana, sans-serif' */
+            /*    } */
+            /* }, */
+            categories: ['Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            /* categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], */
+            /* 'Jan<br/>2010' */
+            title: {
+              text: '2010' /* TODO: will probably have to do as chart.renderer.text to get proper placement for cross-years. */
+            }
+					},
+					yAxis: {
+						min: 0,
+            tickInterval: 2500,
+						title: {
+							text: ''
+						},
+            labels: {
+              align: 'left',
+              x: -50,
+              y: 4,
+              formatter: function() {
+                return '$' + Highcharts.numberFormat(this.value, 0, ',');
+              }
+            }
+					},
+					legend: {
+						align: 'right',
+						x: 20,
+						verticalAlign: 'bottom',
+						y: 50,
+						floating: true,
+						backgroundColor: '#FFF',
+						borderColor: '#CCC',
+						borderWidth: 0,
+						shadow: false
+					},
+					tooltip: {
+            borderColor: '#000',
+            borderRadius: 0,
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            /* crosshairs: [true, true], */
+						formatter: function() {
+              var s = '<strong>'+dateLabels[this.x]+'</strong>'; // TODO: figure out how to map the year out based on month?
+                $.each(this.points, function(i, point) {
+                    s += '<br/><span style="color:'+point.series.color+'">'+
+                      point.series.name +'</span>: <b>$'+
+                      Highcharts.numberFormat(point.y, 0, ',')+'</b>';
+                });
+                /* console.info('testing formatter callback'); */
+                // TODO: look into underscore.js for set math to do something to the other columns here
+                return s;
+                // TODO: gray out other columns somehow!! ***
+              /* '<b>'+chart.series[0].name+'</b>' */
+              /* this.points[i].percentage */
+							/* return '<b>'+ this.x +'</b><br/>'+ */
+							/* 	 this.series.name +': '+ this.y +'<br/>'+ */
+							/* 	 'Total: '+ this.point.stackTotal; */
+						},
+            shared: true
+            /* NOTE: positioning the tooltip differently will be hard and of dubious value given touch devices. */
+					},
+					plotOptions: {
+						column: {
+							stacking: 'normal'
+						},
+            series: {
+                cursor: 'pointer',
+                events: {
+                  click: function() {
+                      //alert('You just clicked the graph');
+                  }
+                },
+                style: {
+                  border: 'none' /* TODO:  not working... */
+                }
+                /* states: { */
+                /*   hover: { */
+                /*       brightness: 0.2 */
+                /*   } */
+                /* } */
+            }
+					},
+				  series: [{
+						name: 'Appropriate',
+            color: '#108950', /* TODO: for previous year = color: 'rgba(16, 137, 80, 0.3)', */
+            /* dataLabels: { */
+            /*    enabled: true, */
+            /*    formatter: function() { */
+            /*       return this.y; */
+            /*    } */
+            /* },             */
+            data: [2000,2020,3001,1000,2500,3400,3232,1122,1765,1234,3232,999]
+					}, {
+            name: 'Unknown',
+            color: '#F5BA55',
+            data: [5010,3300,2200,1700,3500,2400,2323,2211,4678,1234,750,2999]
+					}, {
+						name: 'Opportunity Lost',
+            color: '#FD0000',
+            data: [2500,4050,7550,4000,4500,3455,2532,4122,3765,5534,3552,5995]
+					}]
+				});
+
+
+			});
+
+		</script>
+
+	</head>
+	<body>
+
+		<!-- 3. Add the container -->
+		<div id="container" style="width: 900px; height: 250px; margin: 50px auto;"></div>
+    <div id="report"></div>
+
+
+	</body>
+</html>

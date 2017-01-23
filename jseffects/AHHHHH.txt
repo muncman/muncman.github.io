@@ -1,0 +1,4 @@
+pull out common CSS and script functions to reuse throughout jseffects
+
+also, remove all href and img-src which have javascript: as Win XP SP2 prevents them!!
+

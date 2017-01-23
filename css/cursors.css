@@ -1,0 +1,69 @@
+/* Cursor Classes */
+
+/* General Task-oriented Cursors */
+.cur-pointer {
+  /*
+    "hand" is a valid value for IE for this.
+    See http://ajaxian.com/archives/2005/12/css_cross_brows.html for some cross-browser details of doing this.
+    Note the good suggestions in the comments for improvements.
+  */
+  cursor: pointer;
+}
+.cur-text {
+  cursor: text;
+}
+.cur-crosshair {
+  cursor: crosshair;
+}
+.cur-wait {
+  cursor: wait;
+}
+.cur-help {
+  cursor: help;
+}
+.cur-move {
+  cursor: move;
+}
+
+/* Resize Cursors */
+.cur-n-resize {
+  cursor: n-resize;
+}
+.cur-e-resize {
+  cursor: e-resize;
+}
+.cur-s-resize {
+  cursor: s-resize;
+}
+.cur-w-resize {
+  cursor: w-resize;
+}
+.cur-ne-resize {
+  cursor: ne-resize;
+}
+.cur-nw-resize {
+  cursor: nw-resize;
+}
+.cur-se-resize {
+  cursor: se-resize;
+}
+.cur-sw-resize {
+  cursor: sw-resize;
+}
+
+/* Other Cursors */
+.cur-custom {
+  cursor: url("../favicon.ico"), pointer;
+}
+.cur-default {
+  cursor: default;
+}
+.cur-auto {
+  cursor: auto;
+}
+
+/* CSS 2.1 Addition */
+.cur-progress {
+  cursor: progress;
+}
+

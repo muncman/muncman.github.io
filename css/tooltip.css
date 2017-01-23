@@ -1,0 +1,33 @@
+/* From http://tooltip.crtx.org/ */
+
+.tooltip {
+  position: absolute;
+  width: 240px;
+  background-color: rgb(255, 255, 234);
+  border: 1px solid black;
+  padding: 2px;
+  font-size: 12px;
+  margin: 1em;
+  /* Put on popup div inline: display: none; */
+}
+
+.tooltip h1 {
+  height: auto;
+  margin-top: 0px;
+  margin-left: 0px;
+  background-color: rgb(106,106,106);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.tooltip p {
+  padding: 2px;
+  margin-top: 0.5em;
+  line-height: 1.2em;
+}
+
+.tooltip a.close {
+  /* Here for example only. Styles the Close link */
+}

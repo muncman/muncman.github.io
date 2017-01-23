@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+    <head>
+        <title>gRaphaël Dynamic Bar Chart</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="author" content="Dmitry Baranovskiy">
+        <meta name="description" content="Charting JavaScript Library">
+        <link rel="stylesheet" href="demo.css" type="text/css" media="screen" charset="utf-8">
+        <link rel="stylesheet" href="demo-print.css" type="text/css" media="print" charset="utf-8">
+        <script src="../../raphael.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../g.raphael.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../g.bar.js" type="text/javascript" charset="utf-8"></script>
+        <script src="g.minitable.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript" charset="utf-8">
+            window.onload = function () {
+                var barColors = ['#FD0000', '#F5BA55', '#108950'], 
+                    barNames = ['Opportunity Lost', 'Unknown', 'Appropriate'],
+                    labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    r = Raphael("holder"),
+                    fin = function () {
+                        this.flag = r.g.popup(this.bar.x, this.bar.y, this.bar.value || "0").insertBefore(this);
+                    },
+                    fout = function () {
+                        this.flag.animate({ opacity: 0 }, 250, function () { this.remove(); });
+                    },
+                    fin2 = function () {
+                        var y = [], res = [];
+                        for (var i = this.bars.length; i--;) {
+                            y.push(this.bars[i].y);
+                            var currentValue = this.bars[i].value || "0";
+                            res.push(barNames[i] + ' = ' + currentValue);
+                        }
+                        this.flag = r.g.miniTable(this.bars[0].x, Math.min.apply(Math, y), res.join('\n')).insertBefore(this);
+                    },
+                    fout2 = function () {
+                        this.flag.animate({ opacity: 0 }, 250, function () { this.remove(); });
+                    };
+                r.g.txtattr.font = "20px 'Fontin Sans', Fontin-Sans, sans-serif"; // TODO: can I parameterize font face?
+                
+                /* r.g.text(160, 10, "Single Series Chart"); */
+                /* r.g.text(480, 10, "Multiline Series Stacked Chart"); */
+                /* r.g.text(160, 250, "Multiple Series Chart"); */
+                /* r.g.text(480, 250, "Multiline Series Stacked Chart\nColumn Hover"); */
+                r.g.text(520, 40, "Multiline Series Stacked Chart\nColumn Hover");
+                r.g.txtattr.font = "14px 'Fontin Sans', Fontin-Sans, sans-serif";
+
+                // TODO: need to figure out how to force the height above the highest value? have a 'zero' index set?
+                // TODO: how make previous year's columns be greyed out/translucent, when interlaced???
+                // TODO: make a custom primitive to replace the hover - MUCH more complex! table-based, if possible(?!)
+                
+                //r.g.barchart(10, 10, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10]]).hover(fin, fout).click(function() { console.log('clicked, baby! ' + this.bar); });
+                //r.g.hbarchart(330, 10, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 55]], {stacked: true, type: 'round'}).hover(fin, fout);
+                //r.g.hbarchart(10, 250, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 55]]).hover(fin, fout);
+                //r.g.hbarchart(10, 250, 300, 220, [[55, 20, 1, 2, 10], [10, 2, 13, 20, 55]], { stacked: true, colors: ['orange', 'purple'] }).hover(fin, fout);
+                //var c = r.g.barchart(330, 250, 300, 220, [[55, 20, 13, 32, 5, 1, 2, 10], [10, 2, 1, 5, 32, 13, 20, 55]], {stacked: true, type: "soft"}).hoverColumn(fin2, fout2);
+                // NOTE: negatives get drawn below, null values default to zero (handled above), missing values to zero (at end of series).
+                var c = r.g.barchart(70, 50, 910, 130, [
+                    [55, 20, 13, 32, 5, 1, 2, 10, 7, 6, 28, 9], 
+                    [10, 2, 1, 5, 32, 13, 20, 55, 44, 33, 14, 9], 
+                    [10, 43, 12, 2, 11, 6, 7, 4, 9, 0, 8, 19]], 
+                    {stacked: true, type: 'subtle', colors: barColors, gutter: '50%'}).hoverColumn(fin2, fout2);
+                c.label(labels);
+                var yLabel = r.g.text(50, 120, 'Dollars');
+                yLabel.rotate(-90);
+                /* var t = r.g.text(20, 75, "$Max"); // TODO: y is CSS height - chart height??? */
+                // TODO: get highest value from all series!
+                // TODO: add a rotated label
+                // c.bars[1].attr({stroke: "#000"});
+            };
+        </script>
+    </head>
+    <body class="raphael" id="g.raphael.dmitry.baranovskiy.com">
+        <div id="holder"></div>
+    </body>
+</html>

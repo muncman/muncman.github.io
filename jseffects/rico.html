@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Messing around with Rico</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with Rico" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with Rico." />
+  <meta name="keywords" content="JavaScript, Rico, OpenRico" />
+  <meta name="robots" content="all" />
+  <!--Prototype - http://prototype.conio.net/-->
+  <script type="text/javascript" src="../js/script.aculo.us/prototype.js"></script>
+  <!--You still need Prototype 1.3.x to avoid "extend is not a function" errors.-->
+  <script type="text/javascript" src="../js/prototype.js"></script>
+  <!--NOTE: Rico REQUIRES prototype.js, version 1.4.0 or greater.-->
+  <!--Rico - http://openrico.org/-->
+  <script type="text/javascript" src="../js/rico.js"></script>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Write given message to given element. */
+    function output(message, targetId) {
+      var target = $(targetId);
+      target.innerHTML += message + '<br />';
+    }
+    // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+      font-variant: small-caps;
+      color: red;
+    }
+    .alt-light {
+      border-style: solid;
+      border-color: #9966CC;
+    }
+    .alt-dark {
+      border-style: solid;
+      border-color: #660066;
+    }
+    /*.text-for-light {
+      color: black;
+    }
+    .text-for-dark {
+      color: white;
+    }*/
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    .added {
+      font-size: larger;
+    }
+    .spacer {
+      height: 2cm;
+    }
+    .focusSection {
+      background-color: #666600;
+      width: 80%;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 5%;
+      width: 75%;
+    }
+    a {
+      text-decoration: none;
+    }
+    div {
+      padding: 1mm 1mm 1mm 5mm;
+      margin: 1mm 1mm 1mm 1mm;
+    }
+    /* Following three classes from http://openrico.org/rico/demos.page?demo=rico_accordion */
+    /*.accordionTabTitleBar {
+      font-size           : 12px;
+      padding             : 4px 6px 4px 6px;
+      border-style        : solid none solid none;
+      border-top-color    : #BDC7E7;
+      border-bottom-color : #182052;
+      border-width        : 1px 0px 1px 0px;
+    }
+    .accordionTabTitleBarHover {
+      font-size        : 11px;
+      background-color : #1f669b;
+      color            : #000000;
+    }
+    .accordionTabContentBox {
+      font-size        : 11px;
+      border           : 1px solid #1f669b;
+      border-top-width : 0px;
+      padding          : 0px 8px 0px 8px;
+    }*/
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires that JavaScript be enabled to function properly.</h3></noscript>
+
+<div id="header" class="alternate">
+  <h1>Rico</h1>
+  <p><a href="http://openrico.org/">http://openrico.org/</a></p>
+  <p>Note: Rico <strong>requires</strong> prototype.js, <em>version 1.4.0 or greater (issue: plus 1.3.x).</em></p>
+  <p style="font-size: smaller;">These examples represent just some of Rico's non-AJAX abilities.</p>
+</div>
+
+<div id="dragDropEffect" class="alternate">
+  <h3>Drag &amp; Drop Effect</h3>
+  <p>Note: This is a simple drag &amp; drop example. More sophisticated scenarios are possible. See the OpenRico demos for examples.</p>
+  <div id="dragonSpace" style="height: 1cm;">
+    <div id="dragon" class="focusSection" style="cursor: move; border: solid; width: 3cm; height: 5mm;">Drag Me</div>
+  </div>
+  <div>
+    <!--TODO: Get these friggin things to be sized _and_ inline in both browsers!-->
+    <div id="dropperOne" style="border: solid; width: 5cm; height: 15mm;">Drop Here</div>
+    <div id="dropperTwo" style="border: solid; width: 5cm; height: 15mm;">Or Here</div>
+  </div>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    var dragMgr = new Rico.DragAndDrop();
+    dragMgr.initializeEventHandlers();
+    //These would normally go at the very bottom of the page, but this proximity is intentional.
+    dragMgr.registerDraggable(new Rico.Draggable('blah', 'dragon'));
+    //DON'T ASK ME WHY 'blah' HAS TO BE THERE FIRST, BUT SOMETHING DOES...!
+    dragMgr.registerDropZone(new Rico.Dropzone('dropperOne'));
+    dragMgr.registerDropZone(new Rico.Dropzone('dropperTwo'));
+    // ]]> -->
+  </script>
+</div>
+
+<div id="accordionEffect" class="alternate">
+  <h3>Accordion Effect</h3>
+  <p>
+    Note: The OpenRico site states that styling should not be on DIVs <em>inside</em> of the content DIVs,
+    not the content DIVs themselves.
+  </p>
+  <div id="accordionDiv"><!-- class="accordionTabTitleBar"-->
+    <div id="panel0">
+      <!--div id="section0"-->
+        <div id="panel0Title"><!-- class="accordionTabTitleBar"-->
+          Overview
+        </div>
+        <div id="panel0Content"><!-- class="accordionTabContentBox"-->
+          ...this is the overview...
+          <br />
+          ...it is really concise...
+        </div>
+      <!--/div-->
+    </div>
+    <div id="panel1">
+      <!--div id="section1"-->
+        <div id="panel1Title"><!-- class="accordionTabTitleBar"-->
+          Section 1
+        </div>
+        <div id="panel1Content"><!-- class="accordionTabContentBox"-->
+          ...content text...
+          <br />
+          ...and it is good content...
+        </div>
+      <!--/div-->
+    </div>
+    <div id="panel2">
+      <!--div id="section2"-->
+        <div id="panel2Title"><!-- class="accordionTabTitleBar"-->
+          Section 2
+        </div>
+        <div id="panel2Content"><!-- class="accordionTabContentBox"-->
+          ...more text...
+          <br />
+          ...boy, this is good stuff!
+        </div>
+      <!--/div-->
+    </div>
+  </div>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    //new Rico.Accordion($('accordionDiv'));
+    //new Rico.Accordion('accordionDiv');
+    //new Rico.Accordion($('accordionDiv'), {panelHeight: 300});
+    //new Rico.Accordion('accordionDiv', {panelHeight: 300});
+    new Rico.Accordion('accordionDiv', {panelHeight: 100});
+    // ]]> -->
+  </script>
+</div>
+
+<div id="roundingEffect" class="alternate">
+  <h3>Corner Rounding Effect</h3>
+  <p>Note: There are many options available for rounding. See OpenRico's site for details.</p>
+  <div id="rounder" class="focusSection">
+    Here is a div with rounded corners.<br />
+    Here is a div with rounded corners.<br />
+    Here is a div with rounded corners.<br />
+    Like it?
+  </div>
+  <br />
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    //Rico.Corner.round('rounder');
+    //Rico.Corner.round($('rounder'));
+    Rico.Corner.round($('rounder'), {color:"transparent"});
+    //Rico.Corner.round($('rounder'), {color: #666600});
+    // ]]> -->
+  </script>
+</div>
+
+
+<br />
+<script type="text/javascript">
+  <!-- // <![CDATA[
+  /*  Add styles to DIVs alternately. */
+  var divs = document.getElementsByClassName('alternate');
+  for (i=0; i<divs.length; i++) {
+    if ((i % 2) == 0) {
+      Element.addClassName(divs[i], 'alt-light');
+      changeStyleOfContainedLinks(divs[i], 'light');
+    } else {
+      Element.addClassName(divs[i], 'alt-dark');
+      changeStyleOfContainedLinks(divs[i], 'dark');
+    }
+  }
+  function changeStyleOfContainedLinks(section, styling) {
+    var links = section.getElementsByTagName('a');
+    for (j=0; j<links.length; j++) {
+      if ('dark' == styling) {
+        Element.addClassName(links[j], 'text-for-dark');
+      } else {
+        Element.addClassName(links[j], 'text-for-light');
+      }
+    }
+  }
+  // ]]> -->
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

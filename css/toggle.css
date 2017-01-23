@@ -1,0 +1,78 @@
+/*//////////
+// Copyright Kevin Munc (kevin at munc dot com)
+// License:  http://creativecommons.org/licenses/by/2.5/
+//////////*/
+
+@media screen {
+  .section-hide {
+    visibility: hidden;
+  }
+  .section-show {
+    visibility: visible;
+  }
+  .section-hide, .section-show {
+    position: absolute;
+    left: 3.2cm;
+    top: 3.2cm;
+  }
+  .disclaimer {
+    color: orange;
+  }
+  body {
+    font-family: Arial, Helvetica, Verdana, sans-serif;
+  }
+} /* end - @media screen */
+
+@media print {
+  #toc, .no-print, noscript {
+    display: none;
+  }
+  /* TODO: Why is first page shifted down in Firefox?!!!? */
+  .section-hide, .section-show {
+    visibility: visible;
+    display: block;
+    top: auto;
+    page-break-after: always;
+  }
+  .disclaimer {
+    color: black;
+  }
+  a.before {
+    content: " ( " counter(linkcounter) " ) ";
+    counter-increment: linkcounter;
+    font-size: 85%;
+  }
+  a:after {
+    content: " ( " attr(href) " ) ";
+    font-size: 85%;
+  }
+  a[href^="/"]:after {
+    content: " ( http://www.munc.com" attr(href) " ) ";
+    font-size: 85%;
+  }
+  /*
+    From http://www.alistapart.com/articles/goingtoprint/ :
+    !IMPORTANT: As mentioned, ^= is a CSS3 selector. The W3C CSS validator can only test for compliance with CSS1 and CSS2. Unable to understand the CSS3 selector, the W3C validator will report it as an error, even though it is perfectly valid per the CSS3 Selectors Candidate Recommendation.
+  */
+  img:before {
+    content: " ( " attr(alt) " ) ";
+    font-size: 85%;
+  }
+  img[src^="/"]:before {
+    content: " ( " attr(alt) " ) ";
+    font-size: 85%;
+  }
+  img:after {
+    content: " ( " attr(src) " ) ";
+    font-size: 85%;
+  }
+  img[src^="/"]:after {
+    content: " ( http://www.munc.com" attr(src) " ) ";
+    font-size: 85%;
+  }
+  body {
+    font-family: Times, Garamond, Courier, serif;
+    margin: 2.5cm 3cm;
+    counter-reset: linkcounter;
+  }
+} /* end - @media print */

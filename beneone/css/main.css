@@ -1,0 +1,117 @@
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+}
+body {
+	background-color: #fff;
+	font: 82% "Lucida Grande", "Trebuchet MS", Verdana, Arial, sans-serif;
+}
+#wrapper {
+	width: 903px;
+	margin: 15px auto 50px auto;
+}
+a {
+	text-decoration: none;
+}
+p, ul {
+	margin-bottom: 22px;
+}
+h2 {
+	font-size: 120%;
+	font-weight: lighter;
+}
+h3 {
+	font-size: 105%;
+}
+h1, h2, h3, h4, h5, h6 {
+	color: #aa472a;
+}
+#header, #content, #footer {
+	clear: both;
+}
+#logo, #footer .nav, .nav li {
+	float: left;
+}
+#header .nav, #copyright {
+	float: right;
+	clear: right;
+}
+.nav li {
+	display: inline;
+}
+#header .nav {
+	margin-top: 39px;
+	width: 478px;
+}
+#header .nav li {
+/* margin-right: 1px; */
+}
+#header .nav li.last {
+	margin-right: 0;
+}
+#footer .nav li {
+	margin: 0 4px;
+}
+#copyright {
+	padding-right: 40px;
+	color: #333;
+}
+#header {
+	height: 91px;
+	background: transparent url('../img/gradient-top.gif') repeat-x scroll bottom left;
+}
+#footer {
+	margin-top: 40px;
+	padding-top: 34px;
+	background: transparent url('../img/gradient-bottom.gif') repeat-x scroll top left;
+	font-size: 80%;
+	font-weight: lighter;
+}
+#about #content, #contact #content, #forms #content, #links #content, #what #content {
+	padding: 0 40px 0 10px;
+}
+img.portrait, .division img {
+	float: left;
+	clear: left;
+}
+img.portrait {
+	margin: 0 30px 60px 0;
+}
+.prelist {
+	margin-bottom: 0;
+}
+.division {
+	clear: left;
+	float: left;
+	margin-bottom: 16px;
+	width: 850px;
+}
+.division h2 {
+	margin-bottom: 8px;
+}
+.division ul {
+	list-style-type: circle;
+	position: relative;
+	left: 16px;
+}
+.division ul li {
+	padding: 0 25px;
+}
+.division div {
+	width: 648px;
+	float: left;
+}
+ul.column  {
+  list-style-type: none;
+  position: relative;
+  left: 5px;
+  float: left;
+  margin-right: 25px;
+  margin-bottom: 40px;
+}
+.imgcopy {
+  /* Used for benefit of screen readers on home page only. */
+  display: none;
+}

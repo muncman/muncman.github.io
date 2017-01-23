@@ -1,0 +1,15 @@
+
+# Alexa Contact info submission
+
+url: munc.com/
+site_owner: Kevin Munc
+address1: 
+address2: 
+city: 
+state: OH
+country: US
+postal_code: 43221
+phone_number: Unlisted
+display_email: 
+site_name: munc.com
+site_description: Munc Family Web Site

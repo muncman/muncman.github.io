@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Messing around with prototype.js</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with prototype.js" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with prototype.js." />
+  <meta name="keywords" content="JavaScript, prototype" />
+  <meta name="robots" content="all" />
+  <!--Prototype - http://prototype.conio.net/-->
+  <script type="text/javascript" src="../js/prototype.js"></script>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Write given message to given element. */
+    function output(message, targetId) {
+      var target = $(targetId);
+      target.innerHTML += message + '<br />';
+    }
+    // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+      font-variant: small-caps;
+      color: red;
+    }
+    .alt-light {
+      background-color: yellow;
+    }
+    .alt-dark {
+      background-color: orange;
+    }
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    .added {
+      font-size: larger;
+    }
+    .smaller {
+      font-size: smaller;
+    }
+    .focusSection {
+      background-color: #666600;
+      color: white;
+      width: 80%;
+      padding: 1mm;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 5%;
+      width: 75%;
+      /*background-color: black;*/
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    a:hover, .linkify {
+      text-decoration: underline overline;
+      padding-top: 0.1mm;
+      padding-bottom: 0.1mm;
+    }
+    div {
+      padding: 1mm 1mm 1mm 5mm;
+      margin: 1mm 1mm 1mm 1mm;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires that JavaScript be enabled to function properly.</h3></noscript>
+<div id="header" class="alternate">
+  <h1>prototype.js</h1>
+  <p><a href="http://prototype.conio.net/">http://prototype.conio.net/</a></p>
+  <p style="font-size: smaller;">These examples represent just some of prototype.js' non-AJAX abilities.</p>
+</div>
+<div id="bindAsEvent" class="alternate">
+  <h3>Binding an event listener outside of the markup.</h3>
+  <h4>Also, using $() and $F() convenience functions!</h4>
+  <p>
+    This checkbox does not have an onclick or any other event handler directly defined.
+    This is instead using prototype's <span class="code">bindAsEventListener</span> function.
+    View the page source to see the details.
+  </p>
+  <form id="myForm" name="myForm" action="#" method="get">
+    <input id="checkbox1" name="firstCheckbox" type="checkbox" value="awesome" />
+    <label for="checkbox1">Click This Box!</label>
+    <input id="mySecret" type="hidden" value="spinal tap" />
+  </form>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Add onclick to checkbox. */
+    var CheckboxWatcher = Class.create();
+    CheckboxWatcher.prototype = {
+      initialize: function(chkBox, message) {
+        this.chkBox = $(chkBox);
+        this.message = message;
+        this.chkBox.onclick = this.showMessage.bindAsEventListener(this);
+      },
+      showMessage: function(evt) {
+        output(this.message  +
+          ' (event type: ' + evt.type + '), value: ' +
+          $F(this.chkBox) + ', selected?: ' +
+          $(this.chkBox).checked,
+          'bindAsEvent-output');
+      }
+    };
+    var watcher = new CheckboxWatcher('checkbox1', 'checkbox1');
+    // ]]> -->
+  </script>
+  <p id="bindAsEvent-output"></p>
+</div>
+<div id="periodic" class="alternate">
+  <h3>Periodic Execution</h3>
+  <p id="visitLength">You just arrived!</p>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    var secondsLoaded = 0;
+    var updateFrequency = 2;
+    new PeriodicalExecuter(updateVisitTimer, updateFrequency);
+    function updateVisitTimer() {
+      secondsLoaded = secondsLoaded + updateFrequency;
+      $('visitLength').innerHTML = "Using <span class=\"code\">PeriodicalExecuter</span>, " +
+        "I can tell that you been at this page for <span style=\"font-weight: bold; text-decoration: underline; font-size: larger;\">" + secondsLoaded + "</span> seconds so far.";
+    }
+    // ]]> -->
+  </script>
+</div>
+<div id="Element" class="alternate">
+  <h3>Element Helper</h3>
+  <p id="addRemove" onclick="addClass('addRemove')">
+    Click on this paragraph to add (then remove, alternately) a CSS class to it!
+    It uses <span class="code">Element.addClassName(id, class)</span>
+    and <span class="code">Element.removeClassName(id, class)</span>.
+  </p>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    function addClass(elemId) {
+      currentClasses = $(elemId).className;
+      if (currentClasses.indexOf('added') != -1) {
+        //Testing against className tokenized with "split(' ') is safer.
+        Element.removeClassName(elemId, 'added');
+        //Note that this works nicely even when the element has more than one name in its class.
+      } else {
+        Element.addClassName(elemId, 'added');
+      }
+    }
+    // ]]> -->
+  </script>
+</div>
+<div id="eventAddition" class="alternate">
+  <h3>Adding a event handler from outside the markup.</h3>
+  <!--Note: See http://www.quirksmode.org/blog/archives/2005/08/addevent_consid.html (#10)
+            and http://dean.edwards.name/weblog/2005/10/add-event/-->
+  <p id="withoutEventHandler">
+    There is no event handler attribute (such as <span class="code">onclick</span>)
+    explicitly on this paragraph. But there's one registered anyway,
+    thanks to <span class="code">Event.observe()</span>!
+  </p>
+  <p id="observations"></p>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    Event.observe('withoutEventHandler', 'click', observeClick, false);
+    function observeClick() {
+      output('You clicked it!', 'observations');
+    }
+    // ]]> -->
+  </script>
+</div>
+<div id="tryThese" class="alternate">
+  <h3>If at first you don't succeed...</h3>
+  <p>
+    <span class="code">Try.these()</span> executes each given statement until one succeeds,
+    allowing for more concise &quot;try/catching&quot; and easier cross-browser support management.
+  </p>
+  <p id="tryMeSuccess" class="linker">Click me to execute with one good 'false' statement and one good 'true' statement.</p>
+  <p id="tryMeFailure" class="linker">Click me to execute two bad 'unsuccessful' statements.</p>
+  <p id="tryMeDefault" class="linker">Click me to execute the 'unsuccessful' statements above, but with a default 'false' option.</p>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Bind methods to 'try' to fields. */
+    var TryWatcherWorks = Class.create();
+    TryWatcherWorks.prototype = {
+      initialize: function(paragraph) {
+        this.para = $(paragraph);
+        this.para.onclick = this.tryStatements.bindAsEventListener(this);
+      },
+      tryStatements: function(evt) {
+        var result = Try.these (
+          function() { return new ActiveXObject('Macrohard.DOES_NOT_EXIST.SGMLTCP'); },
+          function() { return "you betcha!"; }
+        );
+        output(this.para.id +
+          ' was clicked and the result was <strong>&quot;' + result + '&quot;</strong>',
+          'tryThese-output'
+        );
+      }
+    };
+    var watcherGood = new TryWatcherWorks('tryMeSuccess');
+    //This was trickier to get working than I expected.
+    //It has some subtleties I have not grasped yet.
+    var TryWatcherFails = Class.create();
+    TryWatcherFails.prototype = {
+      initialize: function(paragraph) {
+        this.para = $(paragraph);
+        this.para.onclick = this.tryStatements.bindAsEventListener(this);
+      },
+      tryStatements: function(evt) {
+        var result = Try.these (
+          function() { return new ActiveXObject('Macrohard.DOES_NOT_EXIST.SGMLTCP'); },
+          function() { return new SomeNewOrUnsupportedOrMispelledObject(); }
+        );
+        output(this.para.id +
+          ' was clicked and the result was <strong>&quot;' + result + '&quot;</strong>',
+          'tryThese-output'
+        );
+      }
+    };
+    var watcherBad = new TryWatcherFails('tryMeFailure');
+    //Tried passing the statements to 'try', but couldn't get it to work.
+    var TryWatcherDefault = Class.create();
+    TryWatcherDefault.prototype = {
+      initialize: function(paragraph) {
+        this.para = $(paragraph);
+        this.para.onclick = this.tryStatements.bindAsEventListener(this);
+      },
+      tryStatements: function(evt) {
+        var result = Try.these (
+          function() { return new ActiveXObject('Macrohard.DOES_NOT_EXIST.SGMLTCP'); },
+          function() { return new SomeNewOrUnsupportedOrMispelledObject(); }
+        ) || false; //* Notice this! *
+        output(this.para.id +
+          ' was clicked and the result was <strong>&quot;' + result + '&quot;</strong>',
+          'tryThese-output'
+        );
+      }
+    };
+    var watcherDefaul = new TryWatcherDefault('tryMeDefault');
+    // ]]> -->
+  </script>
+  <p id="tryThese-output"></p>
+</div>
+<div id="element" class="alternate">
+  <h3>Element Methods</h3>
+  <p>The paragraph below can be manipulated by the following links. Try it!</p>
+  <p id="elemental" class="focusSection">This is the target paragraph, with id &quot;elemental&quot;</p>
+  <p><a href="javascript:Element.toggle('elemental');" class="code">Click for: Element.toggle('elemental');</a></p>
+  <p><a href="javascript:Element.hide('elemental');" class="code">Click for: Element.hide('elemental');</a></p>
+  <p><a href="javascript:Element.show('elemental');" class="code">Click for: Element.show('elemental');</a></p>
+  <p><a href="javascript:Element.remove('elemental');" class="code">Click for: Element.remove('elemental');</a></p>
+  <p>
+    <span class="smaller">
+      <strong>Note:</strong> <span class="code">remove</span> can only be called <em>once</em> per page load.
+      The links above will result in JavaScript errors if clicked after the element has been removed.
+    </span>
+  </p>
+  <!--"new" not needed here, unlike 'Insertion' below.-->
+</div>
+<div id="insertion" class="alternate">
+  <h3>Insertion Methods</h3>
+  <p>The paragraph below can be manipulated by the following links. Try it!</p>
+  <ol id="insertTarget">
+    <li id="firstLi">This is a list item in an ordered list - &quot;firstLi&quot;</li>
+    <li id="secondLi">This could be a table or paragraphs instead of a list - &quot;secondLi&quot;</li>
+  </ol>
+  <form id="insertionForm" method="get" action="javascript:void(0);">
+    <p><input type="text" size="50" id="insertText" /></p>
+  </form>
+  <p><a href="javascript:insTop()" class="code">new Insertion.Top('insertTarget', getInsertText());</a></p>
+  <p><a href="javascript:insBottom()" class="code">new Insertion.Bottom('insertTarget', getInsertText());</a></p>
+  <p><a href="javascript:insBefore()" class="code">new Insertion.Before('secondLi', getInsertText());</a></p>
+  <p><a href="javascript:insAfter()" class="code">new Insertion.After('firstLi', getInsertText());</a></p>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Access the form's text input value, wrapped in &lt;li&gt;. */
+    function getInsertText() {
+      return '<li>' + document.forms['insertionForm'].insertText.value + '</li>';
+    }
+    /* Insert at top, right after opening of target element. */
+    function insTop() {
+      new Insertion.Top('insertTarget', getInsertText());
+    }
+    /* Insert at bottom, right before closing of target element. */
+    function insBottom() {
+      new Insertion.Bottom('insertTarget', getInsertText());
+    }
+    /* Insert before target element. */
+    function insBefore() {
+      new Insertion.Before('secondLi', getInsertText());
+    }
+    /* Insert after target element. */
+    function insAfter() {
+      new Insertion.After('firstLi', getInsertText());
+    }
+    //DO NOT FORGET THE "new" BEFORE THE CALLS!
+    // ]]> -->
+  </script>
+</div>
+<div id="formConvenience" class="alternate">
+  <h3>Form Methods</h3>
+  <form id="convenientForm" method="get" action="javascript:void(0);">
+    <p>This is my &quot;convenientForm&quot;.</p>
+    <p><input type="text" size="50" id="someInput" name="someInput" /></p>
+    <p>
+      <input id="checkboxx" name="checkboxx" type="checkbox" value="sweet" checked="checked" />
+      <label for="checkboxx">Checked? Unchecked? Does it show up in output?</label>
+    </p>
+    <p><input id="secretTurkey" name="secretTurkey" type="hidden" value="this is spinal tap" /></p>
+  </form>
+  <p><a href="javascript:nonProtoFormElements();" class="code">Without Prototype: document.forms['convenientForm'].elements;</a></p>
+  <p><a href="javascript:protoFormElements();" class="code">With Prototype: Form.getElements('convenientForm');</a></p>
+  <p><a href="javascript:$('formConvenience-output').innerHTML = ''; output(Form.serialize('convenientForm'), 'formConvenience-output');" class="code">More Prototype: Form.serialize('convenientForm');</a></p>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Do it without Prototype.js. */
+    function nonProtoFormElements() {
+      $('formConvenience-output').innerHTML = '';
+      elems = document.forms['convenientForm'].elements;
+      for (i=0; i<elems.length; i++) {
+        output(elems[i].id + ' = ' + elems[i].value, 'formConvenience-output');
+      }
+    }
+    /* Do it with Prototype.js. */
+    function protoFormElements() {
+      $('formConvenience-output').innerHTML = '';
+      elems = Form.getElements('convenientForm');
+      for (i=0; i<elems.length; i++) {
+        output(elems[i].id + ' = ' + elems[i].value, 'formConvenience-output');
+      }
+    }
+    // ]]> -->
+  </script>
+  <p id="formConvenience-output"></p>
+</div>
+<script type="text/javascript">
+  <!-- // <![CDATA[
+  /*  Add styles to DIVs alternately. */
+  var divs = document.getElementsByClassName('alternate');
+  for (i=0; i<divs.length; i++) {
+    if ((i % 2) == 0) {
+      Element.addClassName(divs[i], 'alt-light');
+    } else {
+      Element.addClassName(divs[i], 'alt-dark');
+    }
+  }
+  /*
+    Note: Getting the divs to iterate on could be done nicely,
+    and with more control, with something like this, too:
+    var divs = $("div1", "div2", "div3");
+  */
+  /*
+   * This adds the same styling to paragraphs marked for
+   * onclick behaviour as is assigned to a:hover.
+   */
+  var ParaLinkWatcher = Class.create();
+  ParaLinkWatcher.prototype = {
+    initialize: function(paragraph) {
+      this.para = $(paragraph);
+      this.para.onmouseover = this.hoverStyle.bindAsEventListener(this);
+      this.para.onmouseout = this.unhoverStyle.bindAsEventListener(this);
+    },
+    hoverStyle: function(evt) {
+      Element.addClassName(this.para, 'linkify');
+    },
+    unhoverStyle: function(evt) {
+      Element.removeClassName(this.para, 'linkify');
+    }
+  };
+  var paras = document.getElementsByClassName('linker');
+  for (j=0; j<paras.length; j++) {
+    new ParaLinkWatcher(paras[j]);
+  }
+  // ]]> -->
+</script>
+<!--This page is based on several Prototype tutorials, including:
+    http://particletree.com/features/quick-guide-to-prototype/
+    http://24ways.org/advent/easy-ajax-with-prototype
+    http://www.sergiopereira.com/articles/prototype.js.html
+    Information from Chapter 18, "Web, 2.0",
+      in the 'Agile Web Development with Rails' book was also used.
+-->
+<p><br /></p>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Messing around with script.aculo.us</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with script.aculo.us" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with script.aculo.us." />
+  <meta name="keywords" content="JavaScript, script.aculo.us, scriptaculous, prototype" />
+  <meta name="robots" content="all" />
+  <!--Prototype - http://prototype.conio.net/-->
+  <script type="text/javascript" src="../js/script.aculo.us/prototype.js"></script>
+  <!--NOTE: script.aculo.us REQUIRES prototype.js, version 1.4.0 or greater.-->
+  <!--script.aculo.us - http://script.aculo.us/-->
+  <script type="text/javascript" src="../js/scriptaculous.js"></script>
+  <!--Note: The other individual Scriptaculous JS files don't need to be src'd in.-->
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+//TODO: add in "slide"! (http://wiki.script.aculo.us/scriptaculous/show/Effect.toggle)
+//TODO: IS THIS USED HERE?
+    /* Write given message to given element. */
+    function output(message, targetId) {
+      var target = $(targetId);
+      target.innerHTML += message + '<br />';
+    }
+    // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+      font-variant: small-caps;
+      color: red;
+    }
+    .alt-light {
+      background-color: #CC9900;
+    }
+    .alt-dark {
+      background-color: #663300;
+      color: white;
+    }
+    .text-for-light {
+      color: black;
+    }
+    .text-for-dark {
+      color: white;
+    }
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+      margin-left: 7mm;
+    }
+    .added {
+      font-size: larger;
+    }
+    .spacer {
+      height: 2cm;
+    }
+    .focusSection {
+      background-color: #666600;
+      width: 80%;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 5%;
+      width: 75%;
+      /*background-color: black;*/
+    }
+    a {
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    div {
+      padding: 1mm 1mm 1mm 5mm;
+      margin: 1mm 1mm 1mm 1mm;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires that JavaScript be enabled to function properly.</h3></noscript>
+
+<div id="header" class="alternate">
+  <h1>script.aculo.us</h1>
+  <p><a href="http://script.aculo.us/">http://script.aculo.us/</a></p>
+  <p>Note: script.aculo.us <strong>requires</strong> prototype.js, <em>version 1.4.0 or greater.</em></p>
+  <p style="font-size: smaller;">
+    These examples represent script.aculo.us' &quot;combination&quot; effects <em>only</em>.
+    Other visual effects, controls (such as drag 'n' drop) and utilities are not represented (at least not yet).
+    There's a <strong>lot</strong> more available with this library.
+  </p>
+</div>
+
+<div id="blindUpDownEffects" class="alternate">
+  <h3>BlindDown &amp; BlindUp Effects</h3>
+  <div class="spacer"><div id="blindUpDown" style="display: none;" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <!--Note: Per script.aculo.us' site, the display:none; must be here and NOT in CSS if want it hidden on load.-->
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.BlindDown('blindUpDown');">
+      Click here to trigger the &quot;blind down&quot; effect:
+      <span class="code">Effect.BlindDown('id');</span>
+    </a>
+  </p>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.BlindUp('blindUpDown');">
+      Click here to trigger the &quot;blind up&quot; effect:
+      <span class="code">Effect.BlindUp('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="appearFadeEffects" class="alternate">
+  <h3>Appear &amp; Fade Effects</h3>
+  <div class="spacer"><div id="appearFade" style="display: none;" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Appear('appearFade');">
+      Click here to trigger the &quot;appear&quot; effect:
+      <span class="code">Effect.Appear('id');</span>
+    </a>
+  </p>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Fade('appearFade');">
+      Click here to trigger the &quot;fade&quot; effect:
+      <span class="code">Effect.Fade('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="slideUpDownEffects" class="alternate">
+  <h3>SlideDown &amp; SlideUp Effects</h3>
+  <div class="spacer"><div id="slideUpDown" style="display: none;"><div class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div></div><br /></div>
+  <!--Note: Per script.aculo.us' site, the inner div is required.-->
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.SlideDown('slideUpDown');">
+      Click here to trigger the &quot;slide down&quot; effect:
+      <span class="code">Effect.SlideDown('id');</span>
+    </a>
+  </p>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.SlideUp('slideUpDown');">
+      Click here to trigger the &quot;slide up&quot; effect:
+      <span class="code">Effect.SlideUp('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="growShrinkEffects" class="alternate">
+  <h3>Grow &amp; Shrink Effects</h3>
+  <div class="spacer"><div id="growShrink" style="display: none;" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Grow('growShrink');">
+      Click here to trigger the &quot;grow&quot; effect:
+      <span class="code">Effect.Grow('id');</span>
+    </a>
+  </p>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Shrink('growShrink');">
+      Click here to trigger the &quot;shrink&quot; effect:
+      <span class="code">Effect.Shrink('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="shakePulsateEffects" class="alternate">
+  <h3>Shake &amp; Pulsate Effects</h3>
+  <div class="spacer"><div id="shakePulsate" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Shake('shakePulsate');">
+      Click here to trigger the &quot;shake&quot; effect:
+      <span class="code">Effect.Shake('id');</span>
+    </a>
+  </p>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Pulsate('shakePulsate');">
+      Click here to trigger the &quot;pulsate&quot; effect:
+      <span class="code">Effect.Pulsate('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="puffEffect" class="alternate">
+  <h3>Puff Effect</h3>
+  <div class="spacer"><div id="puff" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Puff('puff');">
+      Click here to trigger the &quot;puff&quot; effect:
+      <span class="code">Effect.Puff('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="dropOutEffect" class="alternate">
+  <h3>DropOut Effect</h3>
+  <div class="spacer"><div id="dropOut" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.DropOut('dropOut');">
+      Click here to trigger the &quot;drop out&quot; effect:
+      <span class="code">Effect.DropOut('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="switchOffEffect" class="alternate">
+  <h3>SwitchOff Effect</h3>
+  <div class="spacer"><div id="switchOff" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.SwitchOff('switchOff');">
+      Click here to trigger the &quot;switch off&quot; effect:
+      <span class="code">Effect.SwitchOff('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="squishEffect" class="alternate">
+  <h3>Squish Effect</h3>
+  <div class="spacer"><div id="squish" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Squish('squish');">
+      Click here to trigger the &quot;squish&quot; effect:
+      <span class="code">Effect.Squish('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="foldEffect" class="alternate">
+  <h3>Fold Effect</h3>
+  <div class="spacer"><div id="fold" class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.Fold('fold');">
+      Click here to trigger the &quot;fold&quot; effect:
+      <span class="code">Effect.Fold('id');</span>
+    </a>
+  </p>
+</div>
+
+<div id="toggleEffect" class="alternate">
+  <h3>Toggle Effect (with 'blind')</h3>
+  <!--Note: If the target element of the toggle
+     (or individual BlindUp/BlindDown effects)
+     is a block element inside of a DIV,
+     the effect is smoother,
+     avoiding the shift down at the beginning and end.
+     Some behavioral variation seems to exist, between DIVs and ULs, etc, however.-->
+  <!--Note: I have seen crashes in IE6 when toggling with 'slide'.-->
+  <div class="spacer"><div id="toggle"><div class="focusSection">Hey! That's snazzy and smooth! Dontcha think?</div></div><br /></div>
+  <p>
+    <a href="javascript:void(0);" onclick="javascript:Effect.toggle('toggle', 'blind');">
+      Click here to trigger the &quot;toggle&quot; effect:
+      <span class="code">Effect.toggle('id', 'blind');</span>
+    </a>
+  </p>
+</div>
+
+<div><br /></div>
+<!--TODO: Here and elsewhere, move this to a separate JS file!!!-->
+<script type="text/javascript">
+  <!-- // <![CDATA[
+  /*  Add styles to DIVs alternately. */
+  var divs = document.getElementsByClassName('alternate');
+  for (i=0; i<divs.length; i++) {
+    if ((i % 2) == 0) {
+      Element.addClassName(divs[i], 'alt-light');
+      changeStyleOfContainedLinks(divs[i], 'light');
+    } else {
+      Element.addClassName(divs[i], 'alt-dark');
+      changeStyleOfContainedLinks(divs[i], 'dark');
+    }
+  }
+  function changeStyleOfContainedLinks(section, styling) {
+    var links = section.getElementsByTagName('a');
+    for (j=0; j<links.length; j++) {
+      if ('dark' == styling) {
+        Element.addClassName(links[j], 'text-for-dark');
+      } else {
+        Element.addClassName(links[j], 'text-for-light');
+      }
+    }
+  }
+  // ]]> -->
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

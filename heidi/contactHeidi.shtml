@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <!--#include virtual="include/head.inc" -->
+  </head>
+  <body>
+    <!--#include virtual="include/header.inc" -->
+    <!--#include virtual="include/nav.inc" -->
+    <div id="content">
+      <noscript>
+        <h4 style="text-align: center; position: relative; top: 3cm;">
+          Since you do not have JavaScript enabled, please see <a href="../downloads/HeidiMunc.pdf">my resume</a> for my contact information.
+        </h4>
+      </noscript>
+      <script type="text/javascript">
+      <!-- // <![CDATA[
+        document.write(getContactMarkup());
+      // ]]> -->
+      </script>
+    </div>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      <!-- //
+      _uacct = "UA-352416-1";
+      urchinTracker();
+      // -->
+    </script>
+  </body>
+</html>

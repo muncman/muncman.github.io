@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" manifest="cache.manifest">
+<head>
+<meta charset="utf-8" />
+<title>Contact Demo</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=480, initial-scale=0.7" />
+<!-- <meta name="viewport" content="width=device-width, initial-scale=0.8" /> -->
+<link rel="apple-touch-icon" href="icon.png" />
+<link rel="apple-touch-startup-image" href="splash.png" />
+
+<style>
+body { background-color: #66cc66; background-color: rgba(102, 204, 102, 0.50); font-family: Helvetica, Arial, sans-serif; }
+#wrapper { margin: 0 20px 50px; }
+article div { margin: 10px 0; }
+label { float: left; display: block; width: 125px; line-height: 32px; }
+input { width: 180px; height: 44px; margin-left: 15px; font-size: 22px; }
+table { margin: 20px 0; }
+table, td { border: 1px dotted #ccc; }
+td { padding: 0 5px; width: 100px; }
+</style>
+</head>
+<body>
+<section id="wrapper">
+  <header>
+    <h1>Henry Ford Health Systems: Physician Contact Info: Storage Demo</h1>
+    <h2>Locally Stored Contacts</h2>
+  </header>
+  
+  <script>
+    // document.writeln(localStorage.length); // TODO: This seems to have strange hundred-even values in apple-mobile-web-app-capable mode.
+    // document.writeln(localStorage.getItem('contactList') ? 'yes' : 'no');
+    // document.writeln(localStorage.getItem('timestamp'));
+  </script>
+	
+	<article>
+    <h3 id="lastRefreshTimestamp"></h3>
+		<input type="button" id="clear" value="Clear" />
+		<input type="button" id="refresh" value="Refresh" />
+		<table id="contacts">
+		</table>
+	</article>
+
+</section>
+
+<script src="json2.js"></script>
+<script src="zepto.js"></script>
+
+<script>
+
+// NOTE: leaving in the ability to use HTML markup on the JSON values.
+
+function showContacts() {
+  var contactList = localStorage.getItem('contactList');
+  if (!contactList) {
+    $('#contacts').html('No contacts loaded. Please hit <strong>Refresh</strong> to pull down the latest.');
+  } else {
+    $('#contacts').html($(contactList));
+  }
+  var timestamp = localStorage.getItem('timestamp');
+  if (timestamp) {
+    var lastRefresh = new Date();
+    lastRefresh.setTime(timestamp);
+    $('#lastRefreshTimestamp').html('Last Refreshed: <br />' + lastRefresh.getHours() + ':' + 
+                                                               lastRefresh.getMinutes() + ':' + 
+                                                               lastRefresh.getSeconds() + ' ' + 
+                                                               lastRefresh.getDate() + '-' + 
+                                                               (lastRefresh.getMonth()+1) + '-' + 
+                                                               lastRefresh.getFullYear());
+  }
+}
+
+// Clear storage, fetch latest JSON, and repopulate the table.
+$('#refresh').bind('click', function(e) {
+  if (!navigator.onLine) {
+    alert("You are not currently online. Try again later.");
+    return;
+  }
+  $('#contacts').html('<em>Loading...</em>');
+  localStorage.clear();
+  var contactList = '';
+  $.getJSON('sscehfmg.json', function(json) { 
+    $.each(json, function (contact) {
+  	  // NOTE: Commenting out since limiting to contactList and timestamp makes a difference for apple-mobile-web-app-capable.
+      // localStorage.setItem(json[contact].Name, JSON.stringify(json[contact]));
+      var cellPhone = json[contact]['Cell Phone'];
+      cellPhone = '<a href="tel:'+cellPhone+'">'+cellPhone+'</a>';
+      var emailAddress = json[contact]['Email Address'];
+      if (emailAddress != 'N/A' && emailAddress != '') {
+        emailAddress = '<a href="mailto:'+emailAddress+'">'+emailAddress+'</a>';
+      }
+      contactList += '<tr><td>'+json[contact].Name+'</td>'+'<td>'+cellPhone+'</td>'+'<td>'+emailAddress+'</td></tr>';
+    });
+    localStorage.setItem('timestamp', (new Date()).getTime());
+    localStorage.setItem('contactList', contactList);
+    showContacts();
+  });
+});
+
+$('#clear').bind('click', function(e) {
+  if (!navigator.onLine) {
+    alert("You are not currently online. Try again later.");
+    return;
+  }
+  localStorage.clear();
+  $('#contacts').html('');
+  $('#lastRefreshTimestamp').html('');
+});
+
+if (!localStorage) { alert('localStorage NOT SUPPORTED?!'); }
+showContacts();
+
+</script>
+
+<script type="text/javascript">
+
+  if (window.applicationCache) {
+      applicationCache.addEventListener('updateready', function() {
+          if (confirm('An update is available. Reload now?')) {
+              window.location.reload();
+          }
+      });
+  }
+   
+  function logEvent(event) {
+      console.log(event.type);
+  }
+   
+  // TODO: for IE 8, test for attachEvent
+  window.applicationCache.addEventListener('checking',logEvent,false);
+  window.applicationCache.addEventListener('noupdate',logEvent,false);
+  window.applicationCache.addEventListener('downloading',logEvent,false);
+  window.applicationCache.addEventListener('cached',logEvent,false);
+  // window.applicationCache.addEventListener('updateready',logEvent,false);
+  window.applicationCache.addEventListener('obsolete',logEvent,false);
+  window.applicationCache.addEventListener('error',logEvent,false);
+  
+  // var cacheStatusValues = [];
+  //  cacheStatusValues[0] = 'uncached';
+  //  cacheStatusValues[1] = 'idle';
+  //  cacheStatusValues[2] = 'checking';
+  //  cacheStatusValues[3] = 'downloading';
+  //  cacheStatusValues[4] = 'updateready';
+  //  cacheStatusValues[5] = 'obsolete';
+  // 
+  //  var cache = window.applicationCache;
+  //  cache.addEventListener('cached', logEvent, false);
+  //  cache.addEventListener('checking', logEvent, false);
+  //  cache.addEventListener('downloading', logEvent, false);
+  //  cache.addEventListener('error', logEvent, false);
+  //  cache.addEventListener('noupdate', logEvent, false);
+  //  cache.addEventListener('obsolete', logEvent, false);
+  //  cache.addEventListener('progress', logEvent, false);
+  //  cache.addEventListener('updateready', logEvent, false);
+  // 
+  //  function logEvent(e) {
+  //      var online, status, type, message;
+  //      online = (navigator.onLine) ? 'yes' : 'no';
+  //      status = cacheStatusValues[cache.status];
+  //      type = e.type;
+  //      message = 'online: ' + online;
+  //      message+= ', event: ' + type;
+  //      message+= ', status: ' + status;
+  //      if (type == 'error' && navigator.onLine) {
+  //          message+= ' (prolly a syntax error in manifest)';
+  //      }
+  //      console.log(message);
+  //  }
+  // 
+  //  window.applicationCache.addEventListener(
+  //      'updateready',
+  //      function(){
+  //          window.applicationCache.swapCache();
+  //          console.log('swap cache has been called');
+  //      },
+  //      false
+  //  );
+  // 
+  //  setInterval(function(){cache.update()}, 10000);
+ 
+</script>
+
+
+</body>
+</html>

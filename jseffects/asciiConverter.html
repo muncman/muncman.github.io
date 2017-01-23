@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>ASCII To-From Converter</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <meta name="author" content="Kevin Munc" />
+  <script type="text/javascript" src="../js/converter.js"></script>
+  <link rel="stylesheet" type="text/css" href="../css/jseffects.css" />
+</head><body>
+  <noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+  <h1>ASCII <em>to/from</em> Base-n Converter</h1>
+  <form name="conversionForm" method="get" action="javascript:convert();">
+    <p class="instruction">Enter the text to convert here:</p>
+    <textarea name="toConvert" rows="8" cols="72"></textarea>
+    <div id="positionRef" style="padding-top: 2mm;">
+      <p class="instruction" style="font-size: 4mm; float: left; width: 30%;">
+        <label for="asciiToHex">ASCII to Hexadecimal:</label> <input type="radio" name="conversionType" value="asciiToHex" id="asciiToHex" checked="checked" />
+        <br />
+        <label for="asciiToOctal">ASCII to Octal:</label> <input type="radio" name="conversionType" value="asciiToOctal" id="asciiToOctal" />
+        <br />
+        <label for="asciiToBin">ASCII to Binary:</label> <input type="radio" name="conversionType" value="asciiToBin" id="asciiToBin" />
+        <br />
+        <label for="asciiToHttp">ASCII to HTTP-ready:</label> <input type="radio" name="conversionType" value="asciiToHttp" id="asciiToHttp" />
+      </p>
+      <p class="instruction" style="font-size: 4mm; float: left; width: 70%;">
+        <label for="hexToAscii">Hexidecimal to ASCII:</label> <input type="radio" name="conversionType" value="hexToAscii" id="hexToAscii" />
+        <br />
+        <label for="octalToAscii">Octal to ASCII:</label> <input type="radio" name="conversionType" value="octalToAscii" id="octalToAscii" />
+        <br />
+        <label for="binToAscii">Binary to ASCII:</label> <input type="radio" name="conversionType" value="binToAscii" id="binToAscii" />
+        <br />
+        <label for="httpToAscii">HTTP-ready to ASCII:</label> <input type="radio" name="conversionType" value="httpToAscii" id="httpToAscii" />
+      </p>
+    </div>
+    <p><input type="submit" name="convert" value="Convert" /></p>
+  </form>
+  <p class="instruction">Result:</p>
+  <div id="output" style="max-width: 60%;"></div>
+  <p class="footnote">
+    <ul>
+      <li class="footnote">The result wraps at every space in the input.</li>
+      <li class="footnote">Trailing spaces are truncated from the result in some operations.</li>
+      <li class="footnote">Line returns are sometimes lost converting to ASCII.</li>
+    </ul>
+  </p>
+  <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    <!-- //
+    _uacct = "UA-352416-1";
+    urchinTracker();
+    // -->
+  </script>
+</body></html>

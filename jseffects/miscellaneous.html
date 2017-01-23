@@ -1,0 +1,251 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Miscellaneous JavaScript and CSS</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with JavaScript and CSS" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with random JavaScript and CSS effects." />
+  <meta name="keywords" content="JavaScript, CSS, DHTML" />
+  <meta name="robots" content="all" />
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    var moused = 0;
+    /* Add an event handler without it appearing in the markup! */
+    function addMouseover() {
+      target = document.getElementById("target1");
+      if (!target) { return; }
+      var paras = target.getElementsByTagName("p");
+      for (var i=0; i<paras.length; i++) {
+        //if (paras[i].className == "fiddle") {
+        if (paras[i].className.indexOf("fiddle") != -1) {
+          //Can do == if sure only one class applied.
+          //Can do indexOf otherwise - and be safer.
+          //TODO: var a = element.className.split(' '); for (var i = 0; i < a.length; i++) {
+          //NOTE: WHY? if body has "position: relative;", IE loses other styling (background-color, border-style) for the para!?!?
+          //      Other styles, such as color and padding, are fine, though...
+          paras[i].onmouseover = rats;
+        }
+      }
+    }
+//TODO: Give each div a separate output.
+    function rats() {
+      moused++;
+      updateMsg(moused + " times: moused");
+    }
+    /* Add another event handler without it appearing in the markup! */
+    function processAttributes() {
+      target = document.getElementById("target2");
+      if (!target) { return; }
+      var paras = target.getElementsByTagName("p");
+      for (var i=0; i<paras.length; i++) {
+        paras[i].onmouseover = alertAttrs; //Note: can't pass args here; using event instead (see below)
+      }
+    }
+    var parad = 0;
+    function alertAttrs(e) {
+      var targ;
+      if (!e) var e = window.event;
+      if (e.target) targ = e.target;
+      else if (e.srcElement) targ = e.srcElement;
+      if (targ.nodeType == 3) { // defeat Safari bug
+        targ = targ.parentNode;
+      }
+      //debugAllAttributes(targ);
+      one = targ.getAttribute("one");
+      two = targ.getAttribute("two");
+      required = targ.getAttribute("required");
+      maxlength = targ.getAttribute("maxlength");
+      undeclared = targ.getAttribute("undeclared"); //intentionally not specified
+      id = targ.id;
+      parad++;
+      updateMsg(parad + " times: paragraph " + id + " has one = " + one + ", two = " + two + ", required = " + required + ", maxlength = " + maxlength + ", and undeclared = " + undeclared);
+    }
+    function updateMsg(message) {
+      var output = document.getElementById("output");
+      output.innerHTML = message;
+    }
+    /*
+     * Note that this outputs explicit attributes in Firefox,
+     * but _all possible_ attributes in IE.
+     */
+    function debugAllAttributes(elem) {
+      var allAttributes = "";
+      for (i=0; i<elem.attributes.length; i++) {
+        if (i > 0) { allAttributes += ", "; }
+        allAttributes += elem.attributes[i].name + " = " + elem.attributes[i].value;
+      }
+      alert(allAttributes);
+    }
+    var testTextLeft = 0;
+//if (document.defaultView && document.defaultView.getComputedStyle) {
+  //done to facilitate reading the effective style of an element
+  //see http://www.dannyg.com/support/update9.html
+//}
+    /* Move test text to the left. */
+    function moveLeftOld(amount) {
+      var txt = document.getElementById("fiddlee");
+      posValue = txt.style.position;
+      if ((posValue != "relative") && (posValue != "absolute")) {
+//TODO: Do I need this?
+        txt.style.position = "relative";
+      }
+      //var prevLoc = txt.style.left;
+      //TODO: prevLoc is always nothing in Firefox...
+      ///*if (!prevLoc) {
+      //  alert("yep");
+      //  prevLoc = 0;
+      //}*/
+      //pxIndex = prevLoc.indexOf("px");
+      //if (pxIndex != -1) {
+      //  prevLoc = prevLoc.substr(0, pxIndex);
+      //}
+      //ensure is a number before addition becomes concatenation.
+      //prevLoc = prevLoc * 1;
+      //newLoc = prevLoc + amount;
+//alert("newLoc: " + newLoc);
+//TODO: Furthermore, Firefox is ignoring this assignment... !!!
+//      txt.style.left = newLoc;
+      testTextLeft += amount;
+//alert(txt.style.left);
+      txt.style.left = testTextLeft; // + "px";
+//alert(txt.style.left);
+    }
+    function getObj(ident) {
+      this.obj = document.getElementById(ident);
+      this.style = document.getElementById(ident).style;
+      return this;
+    }
+    function moveLeft(amount) {
+      var txt = getObj("fiddlee");
+      testTextLeft += amount;
+      txt.style.left = testTextLeft;
+    }
+  // ]]> -->
+  </script>
+  <style type="text/css">
+    .type-one {
+      background-color: yellow;
+    }
+    .type-two {
+      color: blue;
+    }
+    .type-three {
+      padding: 2mm 0mm 2mm 5mm;
+    }
+    .type-two em {
+      font-weight: bold;
+    }
+    .stretch-letters {
+      letter-spacing: 2mm;
+    }
+    .stretch-words {
+      word-spacing: 5mm;
+    }
+    p.special-first:first-line {
+      text-transform: uppercase;
+    }
+    p.special-first:first-letter {
+      font-size: 200%;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      /* position: relative;
+      left: 10%; */
+      position: absolute;
+      left: 3cm;
+      width: 70%;
+    }
+    #zIndexContainer {
+      position: absolute;
+      width: 80%;
+    }
+    .zIndexed {
+      position: absolute;
+      border: solid;
+      border-width: 1mm;
+      padding: 0.5mm;
+    }
+    #zOne {
+      background-color: red;
+      z-index: 1;
+      top: 0mm;
+      left: 0mm;
+    }
+    #zTwo {
+      background-color: blue;
+      z-index: 2;
+      top: 5mm;
+      left: 5mm;
+    }
+    #zThree {
+      background-color: green;
+      z-index: 3;
+      top: 1cm;
+      left: 1cm;
+    }
+  </style>
+</head><body onload="javascript:addMouseover(); processAttributes();">
+<noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+
+<h2>Can an element have multiple CSS classes? <em>Yes!</em></h2>
+  <p class="type-one type-two type-three">This paragraph has <em>three</em> classes attached.</p>
+
+<h2>How about separating behavior from content markup and styling? <em>Yes!</em></h2>
+  <div id="target1">
+    <p class="type-one fiddle" style="background-color: orange; padding: 1mm 1mm 1mm 1mm;"><!--type-one style intentionally in conflict-->
+      Mouseover this paragraph, which does <strong>not</strong> have a mouseover event handling attribute defined.
+      See the text in red below for the result.
+    </p>
+    <p>If your content is clean, but thoroughly labeled, you can add logic and behavior separately!</p>
+  </div>
+  <div id="target2" style="border-style: solid;">
+    <p id="attr-boy" one="1" two="2" required="true" maxlength="255">
+      This is a paragraph with custom attributes. This may be invalid in terms of strict XHTML.
+      <br />Mouse over to see if it works.
+      <br />See the text in red below for the result.
+    </p>
+  </div>
+  <br />
+  <div id="output" style="color: red; font-weight: bold;"></div>
+  <p>See <a href="http://www.alistapart.com/articles/scripttriggers/">A List Apart's &quot;JavaScript Triggers&quot; article</a> for more detail and examples.</p><!--http://www.justattributes.com/-->
+
+<h2>What about treating first letters and lines differently with CSS? <em>Yes!</em></h2>
+  <p class="special-first" style="width: 40%;">
+    What are we doing?
+    Making the first line all uppercase.
+    Making the first letter twice as large.
+  </p>
+<h2>What about fiddling with letter and word spacing? <em>Yes!</em></h2>
+  <p class="stretch-letters">How do these letters look?</p>
+  <p class="stretch-words">How do these words look?</p>
+<h2>Fiddling with Text</h2>
+  <p>Note that this section is almost a complete lift from <a href="http://www.quirksmode.org/js/cross_dhtml.html">QuirksMode</a>.</p>
+  <p id="fiddlee">This is the test text.</p>
+  <ul>
+    <li><a href="javascript:moveLeft(50);">Move it to the left</a></li>
+    <!--TODO: move, and back, all font and text CSS, bgcolor, color, hide and show-->
+  </ul>
+
+
+
+<h2>What about the Z-index?</h2>
+  <div id="zIndexContainer">
+    <div id="zOne" class="zIndexed">This is div 1.</div>
+    <div id="zTwo" class="zIndexed">This is div 2.</div>
+    <div id="zThree" class="zIndexed">This is div 3.</div>
+  </div>
+  <br /><br /><br /><br /><br /><br />
+<!--
+  TODO: Text selection color control.
+  http://www.quirksmode.org/js/selected.html
+  -->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

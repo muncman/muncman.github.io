@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head><title>Good, Better, Best Animated Expand-from-Point - Host Page</title>
+<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+<style type="text/css">
+body {
+  font-family: verdana, arial, sans-serif;
+  padding: 1em 3em;
+  color: #333;
+}
+a {
+  color: #ccc;
+  font-size: 1.25em;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+#container, #progBack, #included {
+  padding: 8px 16px 12px /* deviated from EM units for shrink */;
+}
+#container, #progBack, #skipTo {
+  width: 700px;
+  float: left;
+}
+#container { 
+  background-color: #393;
+}
+#progBack {
+  background-color: #933;
+  margin-bottom: 3em;
+}
+p a {
+  /* To make the entire containing para clickable. */
+  display: block;
+}
+a.normal { 
+  display: inline;
+  font-size: 1.0em;
+}
+#overlay {
+  background-color: #66c;
+  float: left;
+  width: 400px;
+  margin-left: -400px /* to counter width */;
+  /* NOTE: Effect.Grow does NOT work well with absolute positioning! */
+}
+.footnote {
+  font-size: 0.7em;
+}
+#debug { 
+  color: #933;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<!--NOTE: The anchors above need to exist for IE 6 & 7, for each hash state, 
+    to get the location.hash changes into the (back/forward) window.history!
+    BUT, BUT, BUT do NOT do this with RSH!-->
+<!--span><a name="overlayed"></a><a name="init"></a></span-->
+<h1>
+  Using Scriptaculous to Reveal &amp; Animate
+  <br />&amp; Really Simply History (RSH) to Navigate
+</h1>
+<noscript><h2>You need to have JavaScript enabled to see the animation effect.</h2></noscript>
+<div style="height: 1.5em;"><div id="debug"></div></div>
+<div id="container">
+  <h2>Here, we have the content that will be overlayed by the animation.</h2>
+  <p>
+    <a id="trigger" href="page2.html">
+      Click here to trigger the animation (and add a state hash).
+    </a>
+  </p>
+  <p>
+    <a id="reset" href="#">
+      Click here to reset the animation <em>and</em> the URL.
+    </a>
+  </p>
+  <p>This example created for the &quot;Good, Better, Best&quot; AQB page.</p>
+  <ul>
+    <li>This example illustrates several things:
+      <ul>
+        <li>The animation effect, growing vertically and horizontally from a single corner.</li>
+        <li>Graceful degredation when JavaScript is disabled.</li>
+        <li>Handling the back (and forward) button(s) for the overlay state (and bookmarking).</li>
+      </ul>
+    </li>
+  </ul>
+  <h3>Brief Explanation</h3>
+  <p>See the commented source for full details.</p>
+  <p>
+    Place the content to be animated into a page fragment, 
+    and use that fragment in a standalone page 
+    (for when JavaScript is disabled), as well as in this page.
+  </p>
+  <p>When the trigger link is clicked, we:</p>
+  <ol>
+    <li>Trigger the reveal effect.</li>
+    <li>Add a state entry to RSH.</li>
+    <li>
+      Return false, to prevent the normal behavior of the browser 
+      following the link to the standalone page.
+    </li>
+    <li>If JavaScript is disabled, the browser will go to the standalone page.</li>
+  </ol>
+  <h4>So, a hash value on the URL represents a state change in the page.</h4>
+  <p>
+    We also check for a hash value on page load, 
+    triggering the appropriate behavior when appropriate.
+  </p>
+  <h3>Back &amp; Forward Buttons and Bookmarking</h3>
+  <p>
+    We are using 
+    <a class="normal" href="http://code.google.com/p/reallysimplehistory/">
+      Really Simple History (RSH)
+    </a> 
+    to manage page navigation (back, forward) and bookmarking 
+    in coordination with dynamic page states (Ajax, DHTML).
+  </p>
+  <p class="footnote">
+    Tested on Windows: Firefox 3, IE7, IE6, Safari 3, Opera 9, Chrome 1; 
+    and Mac OS X: Firefox 2.
+  </p>
+  <p class="footnote">
+    The older version of effects.js used in ABQ seems to have an issue 
+    with Effect.Grow in IE8. Similarly, IE5.5 has issues, as well.
+  </p>
+  <p class="footnote">
+    (Note that <code>MyNationwide.js</code> shows errors 
+    beginning at line 288 (<code>isRequired</code>).
+  </p>
+</div>
+<div id="overlay" style="display:none;">
+  <div id="included">
+    <h2>This is the Overlay</h2>
+    <p>This overlay tile should be a JSP fragment</p>
+    <p>
+      It should be reused in both the host (the one with DIV#container) page 
+      and the standalone page.
+    </p>
+    <p>It should be hidden by default within the host page, for progressive enhancement.</p>
+    <p>It should also be included in the standalone page, for graceful degredation.</p>
+  </div>
+</div>
+<div id="progBack">
+  <p><a href="javascript:history.go(-1);">Go Back [history.go(-1)]</a></p>
+  <p><a href="javascript:history.back();">Go Back [history.back()]</a></p>
+</div>
+<!--BEGIN SCRIPT INCLUDES FROM ST AQB PAGE THAT I USED HERE. (moved to bottom).-->
+<!--NOTE: I removed the 'language' attribute from these SCRIPT tags 
+          since I'm using XHTML 1.0 Strict.-->
+<!--NOTE: Do we have a paid license for these? http://www.dyn-web.com/business/terms.php ?-->
+<!--NOTE: Only these three JavaScript files from the ST page are actually used in this example.-->
+<script src="prototype.js" type="text/javascript"></script><noscript>JavaScript </noscript>
+<script src="scriptaculous.js" type="text/javascript"></script><noscript>is recommended </noscript>
+<script src="effects.js" type="text/javascript"></script><noscript>for this </noscript>
+<!--END SCRIPT INCLUDES FROM ST AQB PAGE THAT I USED HERE.-->
+<script type="text/javascript" src="RSH0.6FINAL/json2007.js">
+<!--json2007 is only used because AQB's version of Prototype.js is too old 
+    for parsing JSON, among other things.-->
+</script><noscript>page to </noscript>
+<script type="text/javascript" src="RSH0.6FINAL/rsh.js">
+<!--NOTE: RSH is an additional library to manage navigation cross-browser!-->
+</script><noscript>function as </noscript>
+<script type="text/javascript">
+  window.dhtmlHistory.create();
+  /* With a newer version of Prototype.js you could do this, 
+     and remove the need for json2007.js:
+  window.dhtmlHistory.create({
+    toJSON: function(o) {
+      return Object.toJSON(o);
+    }, 
+    fromJSON: function(s) {
+      return s.evalJSON();
+    }
+  });
+  */
+
+  /* 
+   * This is your hook to perform your custom actions 
+   * when the back and forward buttons are used.
+   */
+  var yourListener = function(newLocation, historyData) {
+    if (!historyData) {
+      removeOverlayedState();
+    } else if (historyData == 'init') {
+      removeOverlayedState();
+    } else if (historyData == 'overlayed') {
+      setOverlayedState();
+    } // else no-op
+    // remainder of this function is for debugging purposes only
+    var historyMsg = (typeof historyData == 'object' && historyData != null
+  		? historyStorage.toJSON(historyData)
+  		: historyData
+  	);
+    Effect.Appear('debug');
+  	$('debug').innerHTML = 'RSH-detected state change = ' + historyMsg;
+    Effect.Fade('debug', {duration: 2.0});
+  }
+
+  Event.observe(window, 'load', function() {
+    dhtmlHistory.initialize();
+    dhtmlHistory.addListener(yourListener);
+  });
+</script><noscript>intended. </noscript>
+<script type="text/javascript">
+  var documentTitle = document.title; // optional
+
+  // Attach to page load.
+  Event.observe(window, 'load', behaviorSetup, false);
+  
+  /* Set up the enhanced behavior. */
+  function behaviorSetup() {
+    addLinkListeners();
+    ensureLoadState(); // for bookmark support
+  };
+  
+  function addLinkListeners() {
+    // Attach a handler to the link that shows the overlay.
+    // NOTE: There are alternate ways to do this, 
+    //       when using Prototype.js, such as using bindAsEventListener.
+    $('trigger').onclick = function () {
+      setOverlayedState();
+      dhtmlHistory.add('overlayed', 'overlayed');
+      return false;
+    };
+    $('reset').onclick = function () {
+      removeOverlayedState();
+      dhtmlHistory.add('init', 'init');
+      return false;
+    };
+  }
+  
+  function setOverlayedState() {
+    Effect.Grow('overlay', {direction: 'top-right', duration: 2.0});
+    updatePageTitle('overlayed'); // optional
+  }
+  
+  function removeOverlayedState() {
+    Effect.Shrink('overlay', {direction: 'top-right', duration: 1.5});
+    updatePageTitle('init'); // optional
+  }
+
+  function ensureLoadState() {
+    if (window.location.hash == '#overlayed') {
+      setOverlayedState();
+    }
+  }
+  
+  /* 
+   * This is entirely optional behavior.
+   * It may be most useful for bookmarking scenarios.
+   */
+  function updatePageTitle(titleState) {
+    var toAppend =  ' [[' + titleState + ']]';
+    var titleDoesNotMatch = document.title.indexOf(toAppend) == -1;
+    var doubleBracketStartIndex = document.title.indexOf(' [[');
+    var titleAlreadyAppended = doubleBracketStartIndex != -1;
+    if (titleDoesNotMatch && titleAlreadyAppended) {
+      document.title = document.title.substring(0, doubleBracketStartIndex) + toAppend;
+    } else if (titleDoesNotMatch) { 
+      // title not already appended
+      document.title = document.title + toAppend;
+    } // else retain current title
+  }
+</script><noscript>(Though it will still function without JavaScript enabled.) </noscript>
+<!--NOTE: Other references:
+  http://code.google.com/p/reallysimplehistory/wiki/UsageInstructions
+  http://www.prototypextensions.com/history
+  http://www.pathf.com/blogs/2008/02/dshistory-a-nov/#more-92
+  http://weblogs.asp.net/bleroy/archive/2007/09/07/how-to-build-a-cross-browser-history-management-system.aspx
+  http://positionabsolute.net/blog/2007/07/javascript-history-service.php
+  http://interactivevolcano.com/browser-back-button-javascript
+  http://www.bigresource.com/JAVASCRIPTS-Notice-change-of-window-location-hash-without-polling-WZpG3SaA.html
+-->
+<!--TODO: Create equivalent example using jQuery - for the Web UI Reference Library.-->
+</body>
+</html>

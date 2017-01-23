@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>JavaScript Experiments with Walter Zorn's Libraries</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with with Walter Zorn's JavaScript Libraries" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with Walter Zorn's JavaScript Libraries." />
+  <meta name="keywords" content="JavaScript, DHTML, Walter Zorn" />
+  <meta name="robots" content="all" />
+  <!--Note: This script can be included here, in the head.-->
+  <script type="text/javascript" src="../js/wz_jsgraphics.js"></script>
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    var graph1;
+    function draw() {
+      graph1 = new jsGraphics("canvas1");
+      //slower drawing, but printable! But width is screwed up in non-print (screen) IE view...
+      //graph1.setPrintable(true);
+      graph1.setColor("orange");
+      graph1.fillRect(20, 200, 400, 200);
+      //TODO: break into separate methods to break apart the drawing
+      //graph1.paint();
+      //setTimeout("", 2000);
+      graph1.setColor("green");
+      graph1.setStroke(3);
+      var xPoints = new Array(20,  80,  160, 230, 270, 300, 335, 380, 417); //end-x and start-y adjusted for stroke width!
+      var yPoints = new Array(397, 365, 380, 320, 330, 300, 265, 285, 200);
+      graph1.drawPolyline(xPoints, yPoints);
+      graph1.setColor("#0000FF");
+      graph1.setStroke(1);
+      graph1.drawEllipse(60, 235, 50, 50);
+      graph1.setColor("red");
+      var xPts = new Array(140, 180, 220, 180);
+      var yPts = new Array(235, 210, 235, 260);
+      graph1.drawPolygon(xPts, yPts);
+      graph1.setColor("black");
+      graph1.drawString("Your Money with Our Company!", 40, 300);
+      graph1.paint();
+    }
+    function erase() {
+      if (graph1) {
+        graph1.clear();
+      }
+    }
+  // ]]> -->
+  </script>
+  <style type="text/css">
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      /*text-transform: uppercase;
+      position: relative;
+      left: 20%;
+      width: 80%;*/
+    }
+  </style>
+</head><body><!--onload="draw();"-->
+<noscript><h3 class="no-js">This links from this page require that JavaScript be enabled.</h3></noscript>
+<!--NOTE: This script MUST be AFTER the opening of the body tag.-->
+<script type="text/javascript" src="../js/wz_dragdrop.js"></script>
+<h1>Walter Zorn's JavaScript Libraries</h1>
+<p>See <a href="http://www.walterzorn.com/">Walter Zorn's site at http://www.walterzorn.com/</a> for more examples and details.</p>
+<h3>JavaScript Vector Graphics</h3>
+<div>
+  <p>Let's draw something without images! <a href="javascript:draw();" style="font-weight: bold;">Try it!</a> <a href="javascript:erase();">Remove it.</a></p>
+  <div id="canvas1" style="height: 6cm; min-height: 6cm;"></div>
+</div>
+<h3>Drag &amp; Drop</h3>
+<!--Note:  Must be position: relative! This can really screw IE up!-->
+<div id="dragqueen1" style="position:relative; width: 30%;"><p style="background-color: maroon; color: white; border-style: groove; border-color: grey;">Go ahead! Just try to drag me!</p></div>
+<p>Hold <span style="font-family: 'Courier New', Courier, monospaced;">Shift</span> and drag to stretch this: <img id="port80" src="../img/bvtelnet80.png" width="119" height="46" /></p>
+<h3>Tooltips</h3>
+<div>
+  <p>Here is a <a href="#" onmouseover="this.T_WIDTH=80; return escape('Got Tooltip?');">simple mouseover tooltip</a>.</p>
+  <p>Here is <a href="#" onmouseover="this.T_STICKY=true; this.T_TEMP=3000; this.T_BGCOLOR='#996633'; this.T_FONTCOLOR='#003399'; this.T_BORDERWIDTH=5; this.T_WIDTH=175; this.T_SHADOWWIDTH=10; this.T_TITLE='Link Info'; return escape('Here would be a short but informative explanation of what one might find or invoke by clicking.<br /><a href=\'#\'>More Background Info</a>');" title="Link with Tooltip">a link to something complicated and in need of more explanation</a>, perhaps.
+</div>
+<br />
+<!--NOTE: This script MUST be AFTER all draggables are defined.-->
+<script type="text/javascript">
+<!-- // <![CDATA[
+  SET_DHTML(CURSOR_MOVE, RESIZABLE, "dragqueen1", "port80");
+// ]]> -->
+</script>
+<!--NOTE: This script MUST be AFTER all desired tooltips.-->
+<script type="text/javascript" src="../js/wz_tooltip.js"></script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Mouse Coordinates Example</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <meta name="title" content="Experimentation with mouse movement" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with tracking mouse movements." />
+  <meta name="keywords" content="JavaScript, events, mouse, tracking, x, y, coordinates, onmouseover, onmouseout, onmousedown, onmouseup, onmousemove, mouseenter, mouseleave" />
+  <meta name="robots" content="all" />
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    var currentValues;
+    function doOnLoad() {
+      var defaultMsg = "X and Y Coordinates will go here!";
+      window.defaultStatus = defaultMsg;
+      currentValues = document.getElementById("current");
+      currentValues.innerHTML = defaultMsg;
+    }
+    //Based on script from http://www.quirksmode.org/js/events_properties.html
+    function updatePositionStatus(e) {
+      var posx = 0;
+      var posy = 0;
+      if (!e) { var e = window.event; }
+      if (e.pageX || e.pageY) {
+          posx = e.pageX;
+          posy = e.pageY;
+      } else if (e.clientX || e.clientY) {
+          posx = e.clientX + document.body.scrollLeft;
+          posy = e.clientY + document.body.scrollTop;
+      }
+      var vals = "X = " + posx + ", Y = " + posy;
+      window.status = vals; //easily disabled
+      currentValues.innerHTML = vals;
+    }
+    document.onmousemove = updatePositionStatus;
+  // ]]> -->
+  </script>
+
+<!--TODO:  from http://ajaxian.com/archives/javascript-tip-cross-browser-cursor-positioning
+function getPosition(e) {
+    e = e || window.event;
+    var cursor = {x:0, y:0};
+    if (e.pageX || e.pageY) {
+        cursor.x = e.pageX;
+        cursor.y = e.pageY;
+    }
+    else {
+        cursor.x = e.clientX +
+            (document.documentElement.scrollLeft ||
+            document.body.scrollLeft) -
+            document.documentElement.clientLeft;
+        cursor.y = e.clientY +
+            (document.documentElement.scrollTop ||
+            document.body.scrollTop) -
+            document.documentElement.clientTop;
+    }
+    return cursor;
+}
+-->
+
+</head><body onload="javascript:doOnLoad();">
+<noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+<div style="height: 100%; width: 100%;">
+  <h3>Move the mouse and watch coordinate values change</h3>
+  <h6>Note that tracking mouse movement constantly (as opposed to just onmousedown) can be processor intensive.</h6>
+  <div id="current" style="position: relative; left: 25%; width: 75%; font-weight: bold;"></div>
+</div>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>JavaScript Experiments</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with JavaScript" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with all-things JavaScript." />
+  <meta name="keywords" content="JavaScript, CSS, DHTML" />
+  <meta name="robots" content="all" />
+  <!--FCKeditor - http://www.fckeditor.net/-->
+  <script type="text/javascript" src="../fckeditor/fckeditor.js"></script>
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    /* Write given message to given element. */
+    function output(message, targetId) {
+      var target = $(targetId);
+      target.innerHTML += message + '<br />';
+    }
+  // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+      font-variant: small-caps;
+      color: red;
+    }
+    .alt-light {
+      background-color: yellow;
+    }
+    .alt-dark {
+      background-color: orange;
+    }
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 5%;
+      width: 75%;
+    }
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    div {
+      padding: 1mm 1mm 1mm 5mm;
+      margin: 1mm 1mm 1mm 1mm;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This links from this page require that JavaScript be enabled.</h3></noscript>
+<h1>FCKeditor</h1>
+<p><a href="http://www.fckeditor.net/">http://www.fckeditor.net/</a></p>
+
+<script type="text/javascript">
+  <!-- //
+  //var editor = new FCKeditor('FCKeditor1');
+  // -->
+</script>
+<form action="javascript:editor.Preview();" method="post"><!--javascript:alert(editor.GetHTML());-->
+<!--TODO: Figure out how to intercept what the form value(s) would be - can I get it off ofoFCKEditor?-->
+<script type="text/javascript">
+  <!--
+  var editor = new FCKeditor('FCKeditor1');
+  //var editor = FCKeditorAPI.GetInstance('FCKEditor1');
+  editor.BasePath = '../fckeditor/';
+  editor.Value = 'This is some <strong>sample text</strong>. You are using <a href="http://www.fckeditor.net/">FCKeditor</a>.';
+  editor.Create() ;
+  //-->
+</script>
+<br>
+<input type="submit" value="Submit">
+<br><br>
+(Click the "submit" button to see the HTML code produced by FCKeditor)
+</form>
+
+<p>It can be styled, skinned, customized - including adding plug-ins.</p>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

@@ -1,0 +1,44 @@
+/* From http://www.ploughdeep.com/onionskin/ */
+
+.wrap1, .wrap2, .wrap3 {
+  display:inline-table;
+  /* \*/display:block;/**/
+}
+.wrap1 {
+  float:left;
+  background:url(../img/shadow.gif) right bottom no-repeat;
+}
+.wrap2 {
+  background:url(../img/corner_bl.gif) left bottom no-repeat;
+}
+.wrap3 {
+  padding:0 14px 14px 0;
+  background:url(../img/corner_tr.gif) 100% -12px no-repeat; /*right top no-repeat;*/
+}
+.wrap3 img {
+  display:block;
+}
+/*
+#v4 .wrap1 {
+  background:url(images/shadows/v4/shadow.gif) right bottom no-repeat;
+}
+#v4 .wrap2 {
+  background:url(images/shadows/v4/corner_bl.gif) -12px 100% no-repeat;
+}
+#v4 .wrap3 {
+  padding:0 16px 16px 0;
+  background:url(images/shadows/v4/corner_tr.gif) 100% -12px no-repeat;
+}
+*/
+
+/*
+  <div>
+    <div class="wrap1">
+      <div class="wrap2">
+        <div class="wrap3">
+          <img src="../lynxpaw.gif" width="88" height="31" />
+        </div>
+      </div>
+    </div>
+  </div>
+*/

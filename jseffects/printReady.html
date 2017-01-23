@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Print Format</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with the CSS print media type" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with formatting a page for printing using CSS." />
+  <meta name="keywords" content="CSS, print" />
+  <meta name="robots" content="all" />
+  <link rel="stylesheet" href="../css/toggle.css" type="text/css" media="all" />
+  <script type="text/javascript" src="../js/toggle.js"></script>
+  <style type="text/css">
+    .no-js {
+      color: red;
+    }
+     .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    .topnav {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      font-size: 12pt;
+      position: absolute;
+      left: 2cm;
+    }
+    .topnav li {
+      list-style-type: none;
+      /* list-style-position: outside; */
+    }
+    .topnav li a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #000000;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+
+<div id="toc">
+  <span style="position: absolute; right: 5cm;">Navigation Menu</span>
+  <ul class="topnav">
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('section-one'); changeSectionClass('section-one','toggle');">Link One</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('section-two'); changeSectionClass('section-two','toggle');">Link Two</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('section-three'); changeSectionClass('section-three','toggle');">Link Three</a></li>
+    <li><a href="javascript:void(0);" onclick="hideOtherSectionsViaStyle('section-four'); changeSectionClass('section-four','toggle');">Link Four</a></li>
+  </ul>
+</div>
+
+<div id="section-one" class="section-show">
+  <h3>Section One</h3>
+  <h4>Choose <span class="code">File &gt; Print Preview</span></h4>
+  <h6 class="disclaimer">Note: This page is still a work-in-progress.</h6>
+  <p>Note, too, that support for <strong>some</strong> of the things attempted here are still lacking in modern browsers.</p>
+  <p>Try it - See how it looks!</p>
+  <p><img alt="Relative Image" title="Relative-pathed Image" src="../img/anybrowser3.gif" /></p>
+  <p><img alt="Absolute Image" title="Absolute-pathed Image" src="http://www.w3.org/Icons/valid-xhtml10" /></p>
+</div>
+
+<div id="section-two" class="section-hide">
+  <h3>Section Two</h3>
+  <h5>See how things which were hidden are all visible?</h5>
+  <p><a href="http://www.alistapart.com/stories/goingtoprint/">a link to somewhere else</a></p>
+  <p>Check out this link in the print preview, too (at least if you are using a Gecko-based browser).</p>
+</div>
+
+<div id="section-three" class="section-hide">
+  <h3>Section Three</h3>
+  <h5>See how all sections are on their own page?</h5>
+  <p>Also notice how the menu is not included in the print output.</p>
+  <p>Also, note how it doesn't matter what was visible on the screen when the print view is rendered.</p>
+</div>
+
+<div id="section-four" class="section-hide">
+  <h3>Section Four</h3>
+  <h5>Pretty cool, huh?</h5>
+  <p><a href="/index.html">a link relative to docroot</a></p>
+  <p>Check out this link in the preint preview, as well.</p>
+</div>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

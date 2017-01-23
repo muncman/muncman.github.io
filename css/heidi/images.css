@@ -1,0 +1,273 @@
+/*//////////
+// Copyright Heidi Munc (munc at mac dot com)
+// License:  http://creativecommons.org/licenses/by/2.5/
+//////////*/
+
+/*=== IMAGE STYLES ===*/
+
+img {
+  border: 0;
+}
+
+
+/*=== HEADER STYLES ===*/
+
+/* Apparently, 'position's lack of inheritance applies to combining class and id styles. This the repetition below. */
+/* Absolute positioning is being used so that the images don't wrap when the window is smaller than teir total widths. */
+/* The upside is that the whitespace, which shouldn't effect img spacing but does, is not an issue with absolute positioning. */
+#head-hm {
+  width: 250px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+#head-empty {
+  width: 400px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 250px;
+}
+#head-portfolio {
+  width: 81px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 650px;
+}
+#head-resume {
+  width: 73px;
+  height: 70px;
+  left: 731px;
+  position: absolute;
+  top: 0;
+}
+#head-contact {
+  width: 95px;
+  height: 70px;
+  position: absolute;
+  top: 0;
+  left: 804px;
+}
+#backlink {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+/*=== CONTENT BODY STYLES ===*/
+
+.line-img {
+  height: 54px;
+}
+#right-arrow {
+  width: 11px;
+  height: 54px;
+}
+#left-arrow {
+  width: 10px;
+  height: 54px;
+}
+.bg-ready {
+  background-image: url(../../img/heidi/home-bkgrnd.gif);
+  background-repeat: none;
+}
+
+
+/*=== BRANDING STYLES ===*/
+
+#b_aim, #b_bb1, #b_bb2, #b_isp, #b_icons {
+  width: 731px;
+  height: 424px;
+}
+#bh_aim {
+  width: 223px;
+  height: 54px;
+}
+#bh_aim_line {
+  width: 487px; /* = 731 - header image - arrows */
+}
+#bh_bb1 {
+  width: 326px;
+  height: 54px;
+}
+#bh_bb1_line {
+  width: 384px; /* = 731 - header image - arrows */
+}
+#bh_bb2, #bh_icons {
+  width: 332px;
+  height: 54px;
+}
+#bh_bb2_line, #bh_icons_line {
+  width: 378px; /* = 731 - header image - arrows */
+}
+#bh_isp {
+  width: 239px;
+  height: 54px;
+}
+#bh_isp_line {
+  width: 471px; /* = 731 - header image - arrows */
+}
+
+
+/*=== WEB DESIGN STYLES ===*/
+
+#w_nav, #w_bb1, #w_si, #w_apple, .w_aim, #w_bb2, .w_chan, #w_h03, #w_h05 {
+  width: 731px;
+  height: 424px;
+}
+#wh_nav {
+  width: 332px;
+  height: 54px;
+}
+#wh_nav_line {
+  width: 378px; /* = 731 - header image - arrows */
+}
+#wh_bb1 {
+  width: 507px;
+  height: 54px;
+}
+#wh_bb1_line {
+  width: 203px; /* = 731 - header image - arrows */
+}
+#wh_si {
+  width: 540px;
+  height: 54px;
+}
+#wh_si_line {
+  width: 170px; /* = 731 - header image - arrows */
+}
+#wh_apple {
+  width: 312px;
+  height: 54px;
+}
+#wh_apple_line {
+  width: 398px; /* = 731 - header image - arrows */
+}
+#wh_aim {
+  width: 334px;
+  height: 54px;
+}
+#wh_aim_line {
+  width: 261px;
+}
+#wh_8ads {
+  width: 304px;
+  height: 54px;
+}
+#wh_8ads_line {
+  width: 330px;
+}
+#w_8ads1, #w_8ads2, #w_8ads3, #w_8ads4, .w_8ads_static {
+  width: 300px;
+  height: 250px;
+}
+#wh_bb2 {
+  width: 404px;
+  height: 54px;
+}
+#wh_bb2_line {
+  width: 306px; /* = 731 - header image - arrows */
+}
+#wh_chan {
+  width: 540px;
+  height: 54px;
+}
+#wh_chan_line {
+  width: 95px;
+}
+#wh_h03 {
+  width: 540px;
+  height: 54px;
+}
+#wh_h03_line, #wh_h05_line {
+  width: 170px; /* = 731 - header image - arrows */
+}
+#wh_h05 {
+  width: 540px;
+  height: 54px;
+}
+
+
+/*=== PRINT STYLES ===*/
+
+#pr_ibm, #pr_yi, .pr_cma {
+  width: 731px;
+  height: 424px;
+}
+#prh_ibm {
+  width: 334px;
+  height: 54px;
+}
+#prh_ibm_line {
+  width: 376px; /* = 731 - header image - arrows */
+}
+#prh_yi {
+  width: 358px;
+  height: 54px;
+}
+#prh_yi_line {
+  width: 352px; /* = 731 - header image - arrows */
+}
+#prh_cma {
+  width: 326px;
+  height: 54px;
+}
+#prh_cma_line {
+  width: 349px;
+}
+
+
+/*=== PERSONAL STYLES ===*/
+
+#pe_dmScreen, #pe_dmCabinet, #pe_dmDoors, #pe_canvas, #pe_invite, .pe_photog {
+  width: 731px;
+  height: 424px;
+}
+#peh_dmScreen {
+  width: 468px;
+  height: 54px;
+}
+#peh_dmScreen_line {
+  width: 242px; /* = 731 - header image - arrows */
+}
+#peh_dmCabinet {
+  width: 700px;
+  height: 54px;
+}
+#peh_dmCabinet_line {
+  width: 10px; /* = 731 - header image - arrows */
+}
+#peh_dmDoors {
+  width: 700px;
+  height: 54px;
+}
+#peh_dmDoors_line {
+  width: 10px; /* = 731 - header image - arrows */
+}
+#peh_canvas {
+  width: 408px;
+  height: 54px;
+}
+#peh_canvas_line {
+  width: 302px; /* = 731 - header image - arrows */
+}
+#peh_invite {
+  width: 204px;
+  height: 54px;
+}
+#peh_invite_line {
+  width: 506px; /* = 731 - header image - arrows */
+}
+.peh_photog {
+  width: 234px;
+  height: 54px;
+}
+#peh_photog_line {
+  width: 361px;
+}
+

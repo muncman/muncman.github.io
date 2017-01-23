@@ -1,0 +1,11 @@
+TODO:
+      + Comprehensive cross-browser and cross-platform testing is out of date.
+      + Opera is reloading CSS *after* JavaScript execution, re-hiding everything.
+      + OmniWeb needs hidden/visible set to "hidden"/"visible"
+        instead of "hide"/"show" as document.layers is true for it.
+      + All the section widths could stand tweaking, according to browser agent.
+      + It might be nice to make the onkeypress for the spacebar not shift the page down...
+      + What about P3P-enabling the site??
+          See http://www.w3.org/P3P/#Enable and http://www.w3.org/P3P/validator.html
+      + Not everything is working (such as access keys) in Safari.
+          Look into this more.

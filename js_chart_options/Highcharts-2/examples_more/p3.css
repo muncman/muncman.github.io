@@ -1,0 +1,11 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    border-top: #a90000 3px solid;
+    /* background-color: #dcdcdb TODO: versus below? */;
+    background: #efdec4 url('../images/bkgrd_hash_grad.png') repeat-x 0 0;
+}
+

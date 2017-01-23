@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Messing around with moo.fx</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with moo.fx" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with moo.fx." />
+  <meta name="keywords" content="JavaScript, moo.fx, mad4milk" />
+  <meta name="robots" content="all" />
+  <!--moo.fx - http://moofx.mad4milk.net/-->
+  <script type="text/javascript" src="../js/prototype.lite.js"></script>
+  <script type="text/javascript" src="../js/moo.fx.js"></script>
+  <script type="text/javascript" src="../js/moo.fx.pack.js"></script>
+  <script type="text/javascript">
+    <!-- // <![CDATA[
+    /* Write given message to given element. */
+    function output(message, targetId) {
+      var target = $(targetId);
+      target.innerHTML += message + '<br />';
+    }
+    /* Set things up to execute after page has loaded. */
+    window.onload = function() {
+      /*var floater = new JKL.Floating("fvlogger","fvlogger_header");
+      floater.opacity(0.8, 0.5);
+      floater.start();
+      floater.moveTo(400, 200);*/
+      var elements = new Array('moofx-target');
+      var durValue = 400;
+      fadesize = new fx.FadeSize('moofx-target', {duration: durValue});
+      resize = new fx.Resize('moofx-target', {duration: durValue});
+      txt = new fx.Text('moofx-target', {duration: durValue});
+      opacity = new fx.Opacity('moofx-target', {duration: durValue});
+      opacitySlower = new fx.Opacity('moofx-target', {duration: 1200});
+      widther = new fx.Width('moofx-target', {duration: durValue});
+      heighter = new fx.Height('moofx-target', {duration: durValue});
+    }
+    // ]]> -->
+  </script>
+  <style type="text/css">
+    .no-js {
+      font-variant: small-caps;
+      color: red;
+    }
+    .alt-light {
+      border-style: solid;
+      border-color: #00FF33;
+    }
+    .alt-dark {
+      border-style: solid;
+      border-color: #00CC00;
+    }
+    /*.text-for-light {
+      color: black;
+    }
+    .text-for-dark {
+      color: white;
+    }*/
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    .added {
+      font-size: larger;
+    }
+    .spacer {
+      height: 2cm;
+    }
+    .focusSection {
+      background-color: #666600;
+      width: 80%;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 5%;
+      width: 75%;
+    }
+    a {
+      text-decoration: none;
+    }
+    div {
+      padding: 1mm 1mm 1mm 5mm;
+      margin: 1mm 1mm 1mm 1mm;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires that JavaScript be enabled to function properly.</h3></noscript>
+
+<div id="header" class="alternate">
+  <h1>moo.fx</h1>
+  <p><a href="http://moofx.mad4milk.net/">http://moofx.mad4milk.net/</a></p>
+  <p>Note: moo.fx uses it's own subset of prototype.js.</p>
+</div>
+
+<!--TODO: MUCH TO CLEAN UP! (incl. inline style).-->
+<div id="dragDropEffect" class="alternate" style="height: 12cm; min-height: 12cm;">
+  <h3>Drag &amp; Drop</h3>
+  <p>Note: This is a simple drag &amp; drop example. More sophisticated scenarios are possible. See the OpenRico demos for examples.</p>
+  <ul id="moofx.triggers" style="position: relative; float: left;">
+    <li>Simple
+      <ul>
+        <li><a href="javascript:void(0);" onclick="opacity.toggle();">toggle Opacity</a></li>
+        <li><a href="javascript:void(0);" onclick="opacitySlower.toggle();">toggle Opacity (slower)</a></li>
+        <li><a href="javascript:void(0);" onclick="heighter.toggle();">toggle Height</a></li>
+        <li><a href="javascript:void(0);" onclick="widther.toggle();">toggle Width</a></li>
+      </ul>
+    </li>
+    <li>Fade
+      <ul>
+        <li><a href="javascript:void(0);" onclick="fadesize.toggle('width');">FadeSize width</a></li>
+        <li><a href="javascript:void(0);" onclick="fadesize.toggle('height');">FadeSize height</a></li>
+        <li><a href="javascript:void(0);" onclick="fadesize.toggle('width', 'height');">FadeSize width+height</a></li>
+      </ul>
+    </li>
+<!--TODO: Fix the height!!-->
+    <li>Resize
+      <ul>
+        <li><a href="javascript:void(0);" onclick="resize.toggle();">toggle Resize</a></li>
+        <li><a href="javascript:void(0);" onclick="resize.modify(50, 250);">custom Resize</a></li>
+        <li><a href="javascript:void(0);" onclick="resize.modify(-50, -250);">custom Resize (reverse)</a></li>
+        <li>Text
+          <ul>
+            <li><a href="javascript:void(0);" onclick="txt.custom(1, 2);">Text from 1 to 2</a></li>
+            <li><a href="javascript:void(0);" onclick="txt.custom(2, 1);">Text from 2 to 1</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div id="moofx-target" style="position: relative; float: left;">
+    blah blah blah blah blah blah blah<br />
+    yada yada yada yada yada yada yada<br />
+    chit chat chit chat chit chat chit<br />
+    gabba gabba gabba gabba gabba gabba<br />
+    blabber blabber blabber blabber<br />
+    gossip gossip gossip gossip gossip<br />
+    babel babel babel babel babel babel<br />
+    on your side on your side on your side
+  </div>
+  <div id="moofx.junk">
+    This is just test<br />intended to illustrate<br />how surrounding content<br />flows around a dynamic region.
+  </div>
+</div>
+
+<br />
+<script type="text/javascript">
+  <!-- // <![CDATA[
+  /*  Add styles to DIVs alternately. */
+  var divs = document.getElementsByClassName('alternate');
+  for (i=0; i<divs.length; i++) {
+    if ((i % 2) == 0) {
+      Element.addClassName(divs[i], 'alt-light');
+      changeStyleOfContainedLinks(divs[i], 'light');
+    } else {
+      Element.addClassName(divs[i], 'alt-dark');
+      changeStyleOfContainedLinks(divs[i], 'dark');
+    }
+  }
+  function changeStyleOfContainedLinks(section, styling) {
+    var links = section.getElementsByTagName('a');
+    for (j=0; j<links.length; j++) {
+      if ('dark' == styling) {
+        Element.addClassName(links[j], 'text-for-dark');
+      } else {
+        Element.addClassName(links[j], 'text-for-light');
+      }
+    }
+  }
+  // ]]> -->
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

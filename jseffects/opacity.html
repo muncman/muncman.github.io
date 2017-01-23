@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Opacity Experimentation</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="author" content="Kevin Munc" />
+  <!--Note: This is an experiment based almost completely on
+      http://www.quirksmode.org/css/opacity.html and
+      http://www.quirksmode.org/js/opacity.html-->
+  <script type="text/javascript">
+  <!-- // <![CDATA[
+    function setOpacity(value) {
+        var elem = document.getElementById("someText");
+        elem.style.opacity = value/10; //non-IE
+        elem.style.filter = 'alpha(opacity=' + value*10 + ')'; //IE
+    }
+    //TODO: Why is the above shifting the links down in Firefox?!
+    /*TODO: fade from current value to given value... */
+    function graduateOpacity(value) {
+      for (var i=0; i<11; i++) {
+        setTimeout('setOpacity(' + i + ')', 100*i);
+      }
+    }
+  // ]]> -->
+  </script>
+  <style type="text/css">
+    .styled {
+        background-color: orange;
+        width: 50%;
+    }
+    .static {
+        background-color: purple;
+        width: 50%;
+    }
+    .fifty {
+        opacity: .5;
+        filter: alpha(opacity=50);
+    }
+  </style>
+</head><body>
+  <div id="someText" class="styled">
+    <p id="aPara">This is some text</p>
+    <p>This is some text</p>
+    <p>This is some text</p>
+  </div>
+  <div>
+    <p><a href="javascript:setOpacity(3);">Set with value 3</a></p>
+    <p><a href="javascript:setOpacity(100);">Set with value 100</a></p>
+  </div>
+  <div class="static">This is 100%</div>
+  <div class="static fifty">This is 50%</div>
+  <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    <!-- //
+    _uacct = "UA-352416-1";
+    urchinTracker();
+    // -->
+  </script>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>CSS Selectors</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with CSS Selectors" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with CSS Selectors." />
+  <meta name="keywords" content="CSS, Selectors" />
+  <meta name="robots" content="all" />
+  <style type="text/css">
+    * {
+      text-transform: lowercase;
+    }
+    .code {
+      font-family: "Courier New", Courier, monospaced;
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 10%;
+      width: 80%;
+    }
+    h3 {
+      width: 100%;
+      border: solid;
+      border-width: 0.5mm;
+      padding-left: 0.5cm;
+    }
+    div > p > span {
+      font-style: italic;
+    }
+    span + em {
+      text-decoration: underline;
+    }
+    p[myAttribute] {
+      background-color: orange;
+    }
+    p.spinal.tap.rules {
+      font-variant: small-caps;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+<h1>Using CSS Selectors</h1>
+<h4>
+  <span style="color: red;">Note that Internet Explorer does not really support CSS Selectors.</span>
+  Firefox, Safari and Opera have <em>much</em> better support for these.
+  They are CSS2 features. Internet Explorer version 7 is intended to have improved support, however.
+  Note also that this upcoming improved support <a href="http://www.quirksmode.org/blog/archives/2005/09/css_hacks_are_s_1.html">will break many CSS hack techniques for IE</a> which work for previous versions of IE.
+</h4>
+
+<h3>Universal Selector</h3>
+  <p>This uses an asterisk to select <strong>all</strong> elements in the page.</p>
+  <p><span class="code">* { text-transform: lowercase; }</span> is used in this page.</p>
+
+<h3>Normal Selection</h3>
+  <p>Normal CSS selection includes these types:
+    <ol>
+      <li>identifier</li>
+      <li>class</li>
+      <li>element</li>
+    </ol>
+  </p>
+  <p>
+    Identifier selection is done by specifying an id attribute value, prefixed with a # symbol,
+    such as <br /><span class="code">#zLevelOne { background-color: red; z-index: 1; }</span>
+  </p>
+  <p>
+    Class selection is done by specifying a class attribute value, prefixed with a dot,
+    such as <br /><span class="code">.stretch-words { word-spacing: 5mm; }</span>
+  </p>
+  <p>
+    Element selection is done by specifying an element, with no prefix,
+    such as <br /><span class="code">body { font-family: Arial, Helvetica, Verdana, sans-serif; }</span>
+  </p>
+  <p>These technique work properly in Internet Explorer.</p>
+
+<h3>Child Selector</h3>
+  <p>You can target CSS styling by specifying elements which are direct children of other element types.</p>
+  <div><p><span>This is text inside a span, inside a paragraph, inside a div.</p></div>
+  <p>The style rule <span class="code">div > p > span { font-style: italic; }</span> is applied here.</p>
+
+<h3>Adjacent Sibling Selector</h3>
+  <p>You can also target styling to elements which are direct siblings of other elements.</p>
+  <p><span>For example, </span><em>this is text inside an em, which is right next to a span in the source.</em></p>
+  <p>The style rule <span class="code">span + em { text-decoration: underline; }</span> is applied here.</p>
+  <p>
+    Notice that this rule also caught the emphasized &quot;much&quot; in the text at the top of the page,
+    where the span and em are separated by other unmarked-up text.
+  </p>
+
+<h3>Attribute Selector</h3>
+  <p>You can target styling by limiting it to elements with certain attributes defined.</p>
+  <p myAttribute="myValue">
+    Here's a paragraph with a custom attribute called <span class="code">myAttribute</span>.
+    There is an in-page CSS style definition for it, as follows: <span class="code">p[myAttribute] { background-color: orange; }</span>
+  </p>
+  <p>
+    Note that, at least in Firefox, you can even select based on the value of the attribute.
+    For example, <span class="code">p[myAttribute=&quot;myValue&quot;]</span> works as expected.
+    Further, using ~=, you can specify the existence of at least the given value,
+    such as if you have a paragraph with mutliple classes declared, one of which is &quot;targeted&quot;,
+    you can use a selector like this <span class="code">p[class~=targeted]</span>
+  </p>
+
+<h3>Multiple Class Selection</h3>
+  <p>Finally, you can also target styling to elements with a specific combination of classes.</p>
+  <p>This technique seems to work properly, at least for the most part, in Internet Explorer.</p>
+  <p class="spinal tap rules">This paragraph has these three classes declared: &quot;spinal tap rules&quot;</p>
+  <p>The style rule <span class="code">p.spinal.tap.rules { text-tranform: uppercase; }</span> is applied here.</p>
+  <p>Note that the order of the values is not important, and the target element can have more classes than are specified in the selector, as well.</p>
+
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+<br /></body></html>

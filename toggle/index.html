@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Example DHTML Tabs</title>
+<meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+<meta name="title" content="DHTML Tabs" />
+<meta name="author" content="Kevin Munc" />
+<meta name="description" content="Example of one way to implement DHTML tabs." />
+<meta name="keywords" content="modal, tab, tabbed, show, hide, visible, hidden, div, HTML, DHTML, CSS, JavaScript" />
+<meta name="robots" content="all" />
+<script type="text/javascript"><!--JavaScript which should be in a separate js file.-->
+<!--// <![CDATA[
+/* Hides all sections using class name, except the given one. */
+function hideOtherSections(exception) {
+  var sections = document.getElementsByTagName('div');
+  for (var i=0; i<sections.length; ++i) {
+    if ((sections[i].className == 'section-show')
+     && (sections[i].id != exception)) {
+      sections[i].className = 'section-hide';
+    }
+  }
+}
+
+/* Changes whether a section has visible or hidden style class. */
+function changeSectionClass() {
+  if (document.layers || document.all || document.getElementById) {
+    var inc, endInc = arguments.length;
+    // run through the args (objects) and set the visibility of each
+    for (inc=0; inc<endInc; inc+=2) {
+      // get a good object reference
+      var elem = document.getElementById(arguments[inc]);
+      var action = arguments[inc+1];
+      if (action == 'hidden') {
+        // hide the object
+        elem.className = 'section-hide';
+      } else if (action == 'visible') {
+        // show the object
+        elem.className = 'section-show';
+      } else if (action == 'toggle') {
+        // toggle the object's visibility
+        if (elem.className == 'section-show') {
+          elem.className = 'section-hide';
+        } else if (elem.className == 'section-hide') {
+          elem.className = 'section-show';
+        } else {
+          //assume hidden as default (IE bug?)
+          elem.className = 'section-show';
+        }
+      }
+    }
+  }
+}
+
+/* Get random background color. */
+function getColor() {
+   var numColors = 6;
+   var colors = new Array(numColors);
+   colors[0] = "996633";   // Brown / Khaki
+   colors[1] = "CC9933";   // Mustard
+   colors[2] = "CC6633";   // Light Orange
+   colors[3] = "999933";   // Light Olive
+   colors[4] = "336699";   // Blue
+   colors[5] = "993333";   // Other Red
+   var rand = Math.floor((Math.random() * numColors));
+   return colors[rand];
+}
+// ]]>-->
+</script>
+<!--"nicetitle" modified from http://www.kryogenix.org/code/browser/nicetitle/-->
+<script type="text/javascript" src="../js/nicetitle.js"></script>
+<link rel="stylesheet" href="../css/nicetitle.css" type="text/css" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+<style type="text/css">/* Put this into a separate css file. */
+@media screen {
+  .section-hide {
+      visibility: hidden;
+  }
+  .section-show {
+      visibility: visible;
+  }
+  .section-hide, .section-show {
+      position: absolute;
+      left: 250px;
+      top: 180px;
+  }
+  body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      background-color: #CC9966;
+  }
+  #first {
+      position: absolute;
+      top: 2%;
+      left: 40%;
+  }
+
+  #second {
+      position: absolute;
+      top: 11%;
+      left: 45%;
+  }
+} /* end - @media screen */
+
+@media print {
+  /* float: none !important; */
+  .no-print, .menu, .footnote a, .footnote p, .closer, .big-spacer {
+      display: none;
+  }
+  .section-hide, .section-show {
+      visibility: visible;
+      display: block;
+      position: relative;
+      left: 12%;
+      top: auto;
+      page-break-after: always;
+  }
+  body {
+      font-family: Times, Courier, Serif;
+      background-color: #FFFFFF;
+  }
+  a:link:after, a:visited:after {
+      content: " (" attr(href) ") ";
+      font-size: 90%;
+  }
+} /* end - @media print */
+
+@media screen,print {
+
+  .section-hide, .section-show {
+      width: 66%;
+      font-size: 12pt;
+  }
+
+  /* Includes default background color. */
+  body {
+      background-image: none;
+      font-size: 12pt;
+      color: #000000;
+  }
+
+  #abstract {
+      visibility: hidden;
+      position: absolute;
+      top: 100%;
+      left: 100%;
+  }
+
+  #noscript {
+      font-size: 8pt;
+      font-weight: 500;
+  }
+
+  .hidden {
+      visibility: hidden;
+  }
+
+  .title {
+      font-size: 42pt;
+      font-weight: 900;
+  }
+
+  .menu {
+      font-size: 12pt;
+      font-weight: 700;
+  }
+
+  .left-of-colon {
+    font-style: italic;
+    font-variant: small-caps;
+  }
+
+  .footnote {
+      font-size: 8pt;
+  }
+
+  .closer {
+      text-align: center;
+      font-size: 10pt;
+      font-weight: lighter;
+  }
+
+  .big-spacer {
+      font-size: 22pt;
+  }
+
+  .tiny {
+      font-size: 8pt;
+  }
+
+  /* No background color specified for anchor tags due to dynamic bgcolor-setting. */
+  a:link, a:visited {
+      color: #000000;
+  }
+
+  a:active {
+      color: #000000;
+      /* Not using any of the below since Firefox considers a link active only as long as the mousekey is down. */
+      /* text-transform: uppercase; */
+      /* letter-spacing: 0.1cm; */
+      /* text-decoration: overline; */
+  }
+
+  a:hover {
+      color: #cccccc;
+      background-color: #333333;
+      /* text-transform: uppercase; */
+  }
+
+  a.nav {
+      text-decoration: none;
+  }
+
+  a.increase:hover {
+    text-transform: uppercase;
+  }
+
+  h1 {
+      font-size: 14pt;
+      font-style: italic;
+      font-weight: bold;
+  }
+
+  strong {
+      font-weight: 700;
+  }
+
+  img {
+      border: none;
+  }
+
+} /* end - @media screen,print */
+</style>
+<script type="text/javascript"><!--JavaScript which must be declared in-page.-->
+<!--// <![CDATA[
+  /* Ensure this page is not framed. */
+  function changePage() {
+    if (self.parent.frames.length != 0) {
+      self.parent.location="http://www.munc.com/";
+    }
+  }
+  setTimeout ("changePage()", 3000);
+
+  /* Stop the space bar from shifting the page down. */
+  function wasNonShifterPressed(e) {
+    var keyCode = document.all? window.event.keyCode:e.which;
+    var spaceBarCode = 32;
+    return (keyCode != spaceBarCode);
+  }
+  document.onkeypress = wasNonShifterPressed;
+  //For old Netscape.
+  if (document.layers) {
+    document.captureEvents(Event.KEYPRESS);
+  }
+
+  /* Dynamically set the background color. */
+  document.writeln('<style type="text/css">');
+  var backColor = getColor();
+  document.writeln("body { background-color: #" + backColor + "; }");
+  document.writeln("a:hover { color: #" + backColor + "; }");
+  document.write("<");
+  //Separated above from below to avoid script-markup warnings.
+  document.writeln("/style>");
+// ]]>-->
+</script>
+</head><body onload="changePage();"><div class="big-spacer"><br /><br /><br /></div>
+
+<div class="title"><span id="first">Modal</span> <span id="second">Tabs</span></div>
+
+<div id="abstract">One way to implement DHTML modal tabbed content.</div><!--Note: This is for the benefit of search engines.-->
+
+<div class="menu">
+  <br /><br />
+  <span class="hidden">[ </span><a href="#" onclick="hideOtherSections('blah-id'); changeSectionClass('blah-id','toggle');" onkeypress="hideOtherSections('blah-id'); changeSectionClass('blah-id','toggle');" accesskey="0"  title="Blah content (Alt-0)" class="nav">Blah Blah</a><span class="hidden"> ] <a href="#blah-idAnchor" title="Blah blah section in-page link" class="tiny">Go: Blah Blah</a></span>
+
+  <span class="hidden">[ </span><a href="#" onclick="hideOtherSections('yada-id'); changeSectionClass('yada-id','toggle');" onkeypress="hideOtherSections('yada-id'); changeSectionClass('yada-id','toggle');" accesskey="1" title="Yada content (Alt-1)" class="nav">Yada Yada</a><span class="hidden"> ] <a href="#yada-idAnchor" title="Yada yada section in-page link" class="tiny">Go: Yada Yada</a></span>
+
+  <span class="hidden">[ </span><a href="#" onclick="hideOtherSections('blabber-id'); changeSectionClass('blabber-id','toggle');" onkeypress="hideOtherSections('blabber-id'); changeSectionClass('blabber-id','toggle');" accesskey="2" title="Blabber content (Alt-2)" class="nav">Blabber</a><span class="hidden"> ] <a href="#blabber-idAnchor" title="Blabber section in-page link" class="tiny">Go: Blabber</a></span>
+
+  <span class="hidden">[ </span><a href="#" onclick="hideOtherSections('gossip-id'); changeSectionClass('gossip-id','toggle');" onkeypress="hideOtherSections('gossip-id'); changeSectionClass('gossip-id','toggle');" accesskey="3" title="Gossip content (Alt-3)" class="nav">Gossip</a><span class="hidden"> ] <a href="#gossip-idAnchor" title="Gossip section in-page link" class="tiny">Go: Gossip</a></span>
+
+  <span class="hidden">[ </span><a href="#" onclick="hideOtherSections('chat-id'); changeSectionClass('chat-id','toggle');" onkeypress="hideOtherSections('chat-id'); changeSectionClass('chat-id','toggle');" accesskey="4" title="Chit chat content (Alt-4)" class="nav">Chit Chat</a><span class="hidden"> ] <a href="#chat-idAnchor" title="Chit chat section in-page link" class="tiny">Go: Chit Chat</a></span>
+
+  <span class="hidden">[ </span><a href="#" onclick="hideOtherSections('babel-id'); changeSectionClass('babel-id','toggle');" onkeypress="hideOtherSections('babel-id'); changeSectionClass('babel-id','toggle');" accesskey="5" title="Babel content (Alt-5)" class="nav">Babel</a><span class="hidden"> ] <a href="#babel-idAnchor" title="Babel section in-page link" class="tiny">Go: Babel</a></span>
+</div>
+
+<div class="footnote">
+  <br /><br />
+  <p><span class="hidden">[ </span><a href="http://validator.w3.org/check/referer" title="Valid XHTML 1.0"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="This site has Valid XHTML 1.0!" longdesc="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.munc.com%2F" height="31" width="88" style="border:0;width:88px;height:31px;" /></a><span class="hidden"> ] <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fwww.munc.com%2F" title="interim D link">D</a></span></p>
+
+  <p><span class="hidden">[ </span><a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.munc.com/" title="Valid CSS"><img src="http://jigsaw.w3.org/css-validator/images/vcss" alt="This site has Valid CSS!" longdesc="http://jigsaw.w3.org/css-validator/validator?uri=http://www.munc.com/" height="31" width="88" style="border:0;width:88px;height:31px;" /></a><span class="hidden"> ] <a href="http://jigsaw.w3.org/css-validator/validator?uri=http://www.munc.com/" title="interim D link">D</a></span></p>
+
+  <p><span class="hidden">[ </span><a href="http://www.w3.org/WAI/WCAG1AAA-Conformance" title="Level Triple-A (Priority 3) W3C-WAI Web Content Accessibility Guidelines (WCAG) 1.0"><img src="http://www.w3.org/WAI/wcag1AAA" alt="This site is WCAG Triple-A Conformant!" longdesc="http://www.w3.org/WAI/WCAG1AAA-Conformance" height="31" width="88" style="border:0;width:88px;height:31px;" /></a><span class="hidden"> ] <a href="http://www.w3.org/WAI/WCAG1AAA-Conformance" title="interim D link">D</a></span></p>
+
+  <p><span class="hidden">[ </span><a rel="license" href="http://creativecommons.org/licenses/by/2.5/" title="attribution license"><img alt="Creative Commons License" src="http://creativecommons.org/images/public/somerights20.gif" longdesc="http://creativecommons.org/license/meet-the-licenses" height="31" width="88" style="border:0;width:88px;height:31px;" /></a><span class="hidden"> ] <a href="http://creativecommons.org/license/meet-the-licenses" title="interim D link">D</a></span></p>
+
+  <p>
+    <script type="text/javascript">
+    <!--// <![CDATA[
+      if (Date.parse(document.lastModified) != 0) { document.writeln("Last Updated:<br />" + document.lastModified); }
+    // ]]>-->
+    </script>
+  </p>
+  <noscript id="noscript"><div><strong>Either your browser does not support JavaScript, or you have it disabled.<br />This page will not display as intended without JavaScript support enabled.</strong></div></noscript>
+</div>
+
+<div class="spacer"><br /></div>
+
+<div id="blah-id" class="section-hide"><a name="blah-idAnchor"></a>
+  <h1>Blah Blah Blah:</h1>&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;<br />blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;<br />blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;<br />blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah<br />&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;<br />blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;&nbsp;&nbsp;blah&nbsp;&nbsp;<br /><a href="#" title="Back to top" class="hidden">top</a><br />
+</div>
+
+<div id="yada-id" class="section-hide"><a name="yada-idAnchor"></a>
+  <h1>Yada Yada Yada:</h1>&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;<br />yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;<br />yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;<br />yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;<br />yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada<br />&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;<br />yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;&nbsp;&nbsp;yada&nbsp;&nbsp;<br /><a href="#" title="Back to top" class="hidden">top</a><br />
+</div>
+
+<div id="blabber-id" class="section-hide"><a name="blabber-idAnchor"></a>
+  <h1>Blabber Blabber:</h1>&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;<br />blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;&nbsp;&nbsp;blabber&nbsp;&nbsp;<br /><a href="#" title="Back to top" class="hidden">top</a><br />
+</div>
+
+<div id="gossip-id" class="section-hide"><a name="gossip-idAnchor"></a>
+  <h1>Gossip:</h1>&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;<br />gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;<br />&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;<br />&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;<br />&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;<br />&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;<br />gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;<br />&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;<br />&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;<br />&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;<br />&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;<br />gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;<br />gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;<br />&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;<br />&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip<br />&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;&nbsp;&nbsp;gossip&nbsp;&nbsp;<br /><a href="#" title="Back to top" class="hidden">top</a><br />
+</div>
+
+<div id="chat-id" class="section-hide"><a name="chat-idAnchor"></a>
+  <h1>Chit Chat:</h1>&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chat&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chat&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chat&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chat&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chat&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;<br />chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;&nbsp;&nbsp;chit&nbsp;&nbsp;v<br /><a href="#" title="Back to top" class="hidden">top</a><br />
+</div>
+
+<div id="babel-id" class="section-hide"><a name="babel-idAnchor"></a>
+  <h1>Babel:</h1>&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;<br />&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;<br />&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;<br />&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;<br />&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel<br />&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;<br />&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;<br />&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;<br />babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;<br />&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;<br />&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;<br />&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;<br />&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;<br />babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;<br />&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel<br />&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;<br />babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;<br />&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;<br />&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;<br />&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;<br />&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;<br />&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel<br />&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;<br />&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;<br />babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;&nbsp;&nbsp;babel&nbsp;&nbsp;<br /><a href="#" title="Back to top" class="hidden">top</a><br />
+</div>
+
+<!--Notes:
+      + The (hidden) square brackets around adjacent links are there for W3C Web Content Accessibility Guidelines Priority 3 compliance.
+      + The nearly duplicated but hidden links are there for direct linking in non-modern browsers and other devices.
+      + Switched from <a href="javascript:void(0);"> to <a href="#"> to avoid various verifier warnings, despite my preference to avoid having "#" appear on the end of the URL.
+      + The height and width attributes for IMG tags are specified twice since some validators require explicit attributes and don't recognize them in the style value.
+      + Anchor tags with name attributes are broken into separate open and close elements instead of being single and self-closing since Safari seems to have some issue with the latter.
+-->
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml">
+<!--
+  Thank you for signing up for a Google Maps API key. Your key is:
+  ABQIAAAAb3LhODb9AoPP-VCA0hxmUBTL8rurwz5__f87ONaePN9JFEnLLxRF3SrTBmLWXTWSPJQT7xnSWn5y7A
+  This key is good for all URLs in this directory:
+  http://www.munc.com/maps/
+ -->
+   <head>
+     <script src="http://maps.google.com/maps?file=api&v=1&key=ABQIAAAAb3LhODb9AoPP-VCA0hxmUBTL8rurwz5__f87ONaePN9JFEnLLxRF3SrTBmLWXTWSPJQT7xnSWn5y7A" type="text/javascript"></script>
+     <script type="text/javascript">
+     //<![CDATA[
+       function showMap() {
+         var map = new GMap(document.getElementById("map"));
+
+         map.addControl(new GSmallMapControl());
+         map.addControl(new GMapTypeControl());
+
+         GEvent.addListener(map, "moveend", function() {
+           var center = map.getCenterLatLng();
+           var latLngStr = '(' + center.y + ', ' + center.x + ')';
+           document.getElementById("centerMessage").innerHTML = latLngStr;
+         });
+
+         map.centerAndZoom(new GPoint(-83.001805, 39.969164), 6);
+
+         map.openInfoWindow(map.getCenterLatLng(),
+               document.createTextNode("Hello Nationwide!"));
+
+         /*var icon = new GIcon();
+         icon.image = "http://labs.google.com/ridefinder/images/mm_20_red.png";
+         icon.shadow = "http://labs.google.com/ridefinder/images/mm_20_shadow.png";
+         icon.iconSize = new GSize(12, 20);
+         icon.shadowSize = new GSize(22, 20);
+         icon.iconAnchor = new GPoint(6, 20);
+         icon.infoWindowAnchor = new GPoint(5, 1);*/
+
+         GEvent.addListener(map, 'click', function(overlay, point) {
+           if (overlay) {
+             map.removeOverlay(overlay);
+           } else if (point) {
+             map.addOverlay(new GMarker(point)); //, icon
+           }
+         });
+
+       }
+     //]]>
+    </script>
+  </head>
+  <body onload="showMap();">
+    <div id="map" style="width: 700px; height: 500px"></div>
+    <div id="centerMessage"></div>
+  </body>
+</html>

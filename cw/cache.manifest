@@ -1,0 +1,12 @@
+CACHE MANIFEST
+# Version: 1.00
+
+zepto.js
+json2.js
+icon.png
+splash.png
+
+NETWORK:
+http://www.munc.com/cw/sscehfmg.json
+
+FALLBACK:

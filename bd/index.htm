@@ -1,0 +1,482 @@
+<html><head><title>JavaScript Experiment</title>
+<script language="JavaScript"><!-- //
+/*var size = document.images.length;
+flags = new Array(size);*/
+flags = new Array(document.images.length);
+// Initialize array to hold flags for src settings.
+/* NOT WORKING... 'size' is 0 at this point.
+function init() {
+   alert(size);
+   for (i=0; i<size; i++) {
+      alert(i);
+      flags[i] = "yellow";
+   }
+}*/
+// Toggle image sources value.
+function change(index) {
+   if (flags[index] == "red") {
+      document.images[index].src = "green-ball.gif";
+      flags[index] = "green";
+   } else if (flags[index] == "green") {
+      document.images[index].src = "blue-ball.gif";
+      flags[index] = "blue";
+   } else if (flags[index] == "blue") {
+      document.images[index].src = "cyan-ball.gif";
+      flags[index] = "cyan";
+   } else if (flags[index] == "cyan") {
+      document.images[index].src = "yellow-ball.gif";
+      flags[index] = "yellow";
+   } else {
+      // 'yellow' case...
+      // Make the default, initial source be the 'else' default case
+      // since we are not initializing the flags array to the dfault source.
+      document.images[index].src = "red-ball.gif";
+      flags[index] = "red";
+   }
+}
+// Randomize the action.
+function runIt() {
+   rand = Math.round(Math.random() * 91); 
+   // 107 images minus 16 characters.
+   setTimeout("runIt();", 50);
+   change(rand);
+   //alert(rand);
+}
+// --></script></head><body onload="setTimeout('runIt();', 2000);"><br /><br /><br /><center>
+<table border="0">
+   <tr>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(0);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(1);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(2);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(3);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(4);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(5);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(6);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(7);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(8);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(9);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(10);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(11);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #1 -->
+   <tr><!-- #2 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(12);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(13);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(14);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(15);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(16);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(17);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(18);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(19);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(20);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(21);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(22);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(23);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #2 -->
+   <tr><!-- #3 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(24);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(25);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(26);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td align="center" valign="center">
+         <b>H</b>
+      </td>
+      <td align="center" valign="center">
+         <b>A</b>
+      </td>
+      <td align="center" valign="center">
+         <b>P</b>
+      </td>
+      <td align="center" valign="center">
+         <b>P</b>
+      </td>
+      <td align="center" valign="center">
+         <b>Y</b>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(27);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(28);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(29);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(30);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #3 -->
+   <tr><!-- #4 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(31);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(32);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(33);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(34);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(35);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(36);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(37);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(38);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(39);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(40);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(41);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(42);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #4 -->
+   <tr><!-- #5 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(43);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(44);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td align="center" valign="center">
+         <b>B</b>
+      </td>
+      <td align="center" valign="center">
+         <b>I</b>
+      </td>
+      <td align="center" valign="center">
+         <b>R</b>
+      </td>
+      <td align="center" valign="center">
+         <b>T</b>
+      </td>
+      <td align="center" valign="center">
+         <b>H</b>
+      </td>
+      <td align="center" valign="center">
+         <b>D</b>
+      </td>
+      <td align="center" valign="center">
+         <b>A</b>
+      </td>
+      <td align="center" valign="center">
+         <b>Y</b>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(45);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(46);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #5 -->
+   <tr><!-- #6 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(47);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(48);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(49);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(50);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(51);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(52);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(53);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(54);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(55);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(56);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(57);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(58);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #6 -->
+   <tr><!-- #7 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(59);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(60);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(61);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td align="center" valign="center">
+         <b>!</b>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(62);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td align="center" valign="center">
+         <b>!</b>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(63);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td align="center" valign="center">
+         <b>!</b>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(64);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(65);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(66);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(67);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #7 -->
+   <tr><!-- #8 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(68);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(69);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(70);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(71);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(72);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(73);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(74);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(75);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(76);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(77);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(78);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(79);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #8 -->
+   <tr><!-- #9 -->
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(80);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(81);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(82);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(83);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(84);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(85);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(86);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(87);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(88);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(89);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(90);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+      <td>
+         <a href="javascript:void(0);" onmouseover="change(91);">
+         <img height="18" width="18" border="0" src="yellow-ball.gif"></a>
+      </td>
+   </tr><!-- #9 -->
+</table>
+</center></body></html>

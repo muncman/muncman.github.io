@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+		
+		
+		<!-- 1. Add these JavaScript inclusions in the head of your page -->
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="../js/highcharts.js"></script>
+		
+		<!-- 1a) Optional: add a theme file -->
+		<!--
+			<script type="text/javascript" src="../js/themes/gray.js"></script>
+		-->
+		
+		<!-- 1b) Optional: the exporting module -->
+		<script type="text/javascript" src="../js/modules/exporting.js"></script>
+		
+		
+		<!-- 2. Add the JavaScript to initialize the chart on document ready -->
+		<script type="text/javascript">
+			var chart;
+			var chartPrev;
+			$(document).ready(function() {
+				chart = new Highcharts.Chart({
+					chart: {
+						renderTo: 'container',
+						defaultSeriesType: 'line', /* TODO: try with separate pointStart values (year on year) 'column', */
+            spacingBottom: 50,
+            spacingLeft: 50, 
+            backgroundColor: 'transparent'
+					},
+					title: {
+						text: 'Decisions & Opportunity',
+						x: -20 //center
+					},
+					subtitle: {
+						text: 'Line Chart',
+						x: -20
+					},
+					xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { 
+              month: '%b'
+            }
+					},
+					yAxis: {
+            tickInterval: 2500,
+						title: {
+							text: ''
+						},
+            labels: {
+              align: 'left',
+              x: -50,
+              y: 4,
+              formatter: function() {
+                return '$' + Highcharts.numberFormat(this.value, 0, ',');
+              }
+            },
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					tooltip: {
+            style: {
+                      padding: 10
+                   },
+            formatter: function() {
+                         return '<em>'+ this.series.name +'</em><br/><b>'+
+                           Highcharts.dateFormat('%b %Y', this.x) +'</b>: <b>$'+ 
+                           Highcharts.numberFormat(this.y, 0, ',')+'</b><br/>';
+                       }
+					},
+					legend: {
+						align: 'right',
+						x: -30,
+						verticalAlign: 'bottom',
+						y: 30,
+						floating: true,
+						backgroundColor: '#FFF',
+						borderColor: '#CCC',
+						borderWidth: 0,
+						shadow: false
+					},
+					series: [{
+						name: 'Your Trend',
+            color: '#738598',
+            pointInterval: 1000*60*60*24*30,
+            pointStart: Date.UTC(2009, 10, 1, 0, 0, 0),
+            data: [2500,4050,7550,4000,4500,3455,2532,4122,3765,5534,3552,5995]
+					}]
+				});
+				
+				chartPrev = new Highcharts.Chart({
+					chart: {
+						renderTo: 'containerPrev',
+						defaultSeriesType: 'line', /* TODO: try with separate pointStart values (year on year) 'column', */
+            spacingBottom: 50,
+            spacingLeft: 50,
+            backgroundColor: 'transparent'
+					},
+					title: {
+						text: 'Decisions & Opportunity',
+						x: -20 //center
+					},
+					subtitle: {
+						text: 'Line Chart',
+						x: -20
+					},
+					xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: { 
+              month: '%b'
+            }
+					},
+					yAxis: {
+            tickInterval: 2500,
+						title: {
+							text: ''
+						},
+            labels: {
+              align: 'left',
+              x: -50,
+              y: 4,
+              formatter: function() {
+                return '$' + Highcharts.numberFormat(this.value, 0, ',');
+              }
+            },
+						plotLines: [{
+							value: 0,
+							width: 1,
+							color: '#808080'
+						}]
+					},
+					tooltip: {
+            style: {
+                      padding: 10
+                   },
+            formatter: function() {
+                         return '<em>'+ this.series.name +'</em><br/><b>'+
+                           Highcharts.dateFormat('%b %Y', this.x) +'</b>: <b>$'+ 
+                           Highcharts.numberFormat(this.y, 0, ',')+'</b><br/>';
+                       }
+					},
+					legend: {
+						align: 'right',
+						x: -30,
+						verticalAlign: 'bottom',
+						y: 30,
+						floating: true,
+						backgroundColor: '#FFF',
+						borderColor: '#CCC',
+						borderWidth: 0,
+						shadow: false
+					},
+					series: [{
+						name: 'Previous Year',
+            color: '#cacaca',
+            marker: {
+              symbol: 'circle' /* TODO: specificity? */
+            },
+            pointInterval: 1000*60*60*24*30,
+            pointStart: Date.UTC(2009, 10, 1, 0, 0, 0) /* FIXME: needs to be previous year! */,
+            data: [5010,3300,2200,1700,3500,2400,2323,2211,4678,1234,750,2999]
+          }]
+				});
+				
+			});
+				
+		</script>
+		
+	</head>
+	<body>
+		
+		<!-- 3. Add the container -->
+    <div id="containerPrev" style="width: 900px; height: 250px; margin: 50px auto;"></div>
+    <div id="container" style="width: 900px; height: 250px; margin: 50px auto; position: relative; top: -250px;"></div>
+		
+				
+	</body>
+</html>

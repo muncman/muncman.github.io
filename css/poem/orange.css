@@ -1,0 +1,35 @@
+h1 {
+  position: absolute;
+  bottom: 1cm;
+  right: 2cm;
+}
+
+body {
+  width: 90%;
+  height: 90%;
+  background-color: #FFCC00;
+  font-family: Garamond, Times, Courier, Serif;
+}
+
+ul {
+  list-style-type: square;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+#poetry {
+  background-color: orange;
+  position: absolute;
+  top: 15%;
+  left: 18%;
+  width: 50%;
+  padding-left: 1cm;
+  padding-top: 2mm;
+  padding-bottom: 2mm;
+  border-style: solid;
+  border-width: 0.1mm;
+  font-size: larger;
+}

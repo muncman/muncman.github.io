@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Keypress Events</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with keypress events and JavaScript" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with key press events" />
+  <meta name="keywords" content="JavaScript, keypress" />
+  <meta name="robots" content="all" />
+  <script type="text/javascript" src="../js/keypress.js"></script>
+</head><body>
+  <h3>Playing with keyboard input and access keys</h3>
+  <div id="keyboard">
+    <p>
+      <a href="javascript:registerKeyCatcher();">Enable key interception</a>
+      &nbsp;&nbsp;&nbsp;
+      <a href="javascript:deregisterKeyCatcher();">Disable key interception</a>
+      &nbsp;&nbsp;&nbsp;
+      Key interception is <span id="keyCatchEnabled" style="font-weight: bold;">OFF</span>
+    </p>
+    <p>
+      <!--Note: With onkeypress defined, you can get duplicate triggers. Without, key presses are not enough to trigger a select link.-->
+      <a href="javascript:void(0);" onclick="javascript:alert('_This_ was triggered (onclick)');" accesskey="1" title="This (Alt-1)">This</a><!--onkeypress="javascript:alert('_This_ was triggered (onkeypress)');"-->
+      <!--WOW! Try with this: onfocus="javascript:alert('focus');" onblur="javascript:alert('blur');"-->
+      <a href="javascript:void(0);" onclick="javascript:alert('_is_ was triggered (onclick)');" accesskey="2" title="is (Alt-2)">is</a><!--onkeypress="javascript:alert('_is_ was triggered (onkeypress)');" -->
+      <a href="javascript:void(0);" onclick="javascript:alert('_Spinal Tap_ was triggered (onclick)');" onkeypress="javascript:alert('_Spinal Tap_ was triggered (onkeypress)');" accesskey="3" title="Spinal Tap (Alt-3)">Spinal Tap</a>
+    </p>
+    <ul>
+      <li>Hit Alt-1 for the &quot;This&quot; link.</li>
+      <li>Hit Alt-2 for the &quot;is&quot; link.</li>
+      <li>Hit Alt-3 for the &quot;Spinal Tap&quot; link.</li>
+    </ul>
+    <p>Note that the access key combination is specified in the title attribute (mouse over).</p>
+  </div>
+  <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    <!-- //
+    _uacct = "UA-352416-1";
+    urchinTracker();
+    // -->
+  </script>
+</body></html>

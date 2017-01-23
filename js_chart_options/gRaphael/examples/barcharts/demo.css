@@ -1,0 +1,17 @@
+body {
+    background: #efdec4;
+    font: 100.01% Helvetica, 'Fontin Sans', Fontin-Sans, 'Myriad Pro', 'Lucida Grande', 'Lucida Sans Unicode', Lucida, Verdana, Arial, sans-serif;
+    color: #000;
+    margin: 50px 0 0;
+    padding: 0;
+    text-align: center;
+}
+#holder {
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -webkit-box-shadow: 0 1px 3px #666;
+    background: #fff;
+    margin: 0 auto;
+    width: 1000px;
+    height: 190px;
+}

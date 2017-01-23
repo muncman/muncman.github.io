@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><title>Cursor Control with CSS</title>
+  <meta http-equiv="Content-Type" content="text/xhtml; charset=utf-8" />
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="copyright" href="http://creativecommons.org/licenses/by/2.5/" />
+  <meta name="title" content="Experimentation with CSS and mouse cursors" />
+  <meta name="author" content="Kevin Munc" />
+  <meta name="description" content="Playing around with CSS cursor values." />
+  <meta name="keywords" content="CSS, DHTML, cursor" />
+  <meta name="robots" content="all" />
+  <link type="text/css" rel="stylesheet" href="../css/cursors.css" />
+  <style type="text/css">
+    /* Background colors - using separate class. */
+    /* TODO; http://www.alistapart.com/articles/zebratables/ instead !? */
+    .bg1 {
+      background-color: #95AFCB
+    }
+    .bg2 {
+      background-color: #CCC495
+    }
+    body {
+      font-family: Arial, Helvetica, Verdana, sans-serif;
+      position: relative;
+      left: 10%;
+      width: 90%;
+    }
+    p {
+      /* Percentages of reduced body size. */
+      width: 80%;
+      padding: 2mm 2mm 2mm 2mm;
+    }
+    em {
+      font-weight: bold;
+    }
+  </style>
+</head><body>
+<noscript><h3 class="no-js">This page requires JavaScript to be enabled.</h3></noscript>
+<h3>Mouse over these paragraphs to see different mouse cursors.</h3>
+<p class="cur-pointer">Mouse over this paragraph and see the cursor change to a <em>pointer/hand</em>.</p>
+<p class="cur-text">Mouse over this paragraph and see the cursor change to a <em>text</em> selector (even when not over text).</p>
+<p class="cur-crosshair">Mouse over this paragraph and see the cursor change to a <em>crosshair</em>.</p>
+<p class="cur-wait">Mouse over this paragraph and see the cursor change to a <em>wait</em> cursor.</p>
+<p class="cur-help">Mouse over this paragraph and see the cursor change to a <em>help</em> cursor.</p>
+<p class="cur-move">Mouse over this paragraph and see the cursor change to a <em>move</em> cursor.</p>
+<p class="cur-n-resize">Mouse over this paragraph and see the cursor change to a <em>north resize</em> cursor.</p>
+<p class="cur-e-resize">Mouse over this paragraph and see the cursor change to a <em>east resize</em> cursor.</p>
+<p class="cur-s-resize">Mouse over this paragraph and see the cursor change to a <em>south resize</em> cursor.</p>
+<p class="cur-w-resize">Mouse over this paragraph and see the cursor change to a <em>west resize</em> cursor.</p>
+<p class="cur-ne-resize">Mouse over this paragraph and see the cursor change to a <em>north-east resize</em> cursor.</p>
+<p class="cur-nw-resize">Mouse over this paragraph and see the cursor change to a <em>north-west resize</em> cursor.</p>
+<p class="cur-se-resize">Mouse over this paragraph and see the cursor change to a <em>south-east resize</em> cursor.</p>
+<p class="cur-sw-resize">Mouse over this paragraph and see the cursor change to a <em>south-west resize</em> cursor.</p>
+<p class="cur-custom">Mouse over this paragraph and see the cursor change to a <em>custom</em> cursor (works better in IE). Defaults to &quot;pointer&quot;.</p>
+<p class="cur-default">Mouse over this paragraph and see the cursor change to the <em>default</em> cursor (even when over text, links, etc).</p>
+<p class="cur-auto">Mouse over this paragraph and see the cursor change to the normal, variable, browser-selected (&quot;<em>auto</em>&quot;) cursor - appropriate for the location of the cursor.</p>
+<p class="cur-progress">Mouse over this paragraph and see the cursor change to a <em>progress</em> cursor (requires CSS 2.1 compliant browser).</p>
+<br />
+<p>See <a href="http://www.w3schools.com/css/pr_class_cursor.asp">W3Schools for cursor values.</a></p>
+<!--All JavaScript is here only to get the striping in a non-brute force manner.-->
+<script type="text/javascript" src="../js/prototype.js"></script>
+<script type="text/javascript">
+  <!-- // <![CDATA[
+  /*
+   * This saves me from having to manually add alternating style classes
+   * to the paragraphs above, and keep them in order (though that's how I started).
+   */
+  paras = document.getElementsByTagName('p');
+  for (i=0; i<paras.length; i++) {
+    if (i%2 == 0) {
+      Element.addClassName(paras[i], 'bg1');
+    } else {
+      Element.addClassName(paras[i], 'bg2');
+    }
+    //Note that this works nicely even when a class is already present!
+  }
+  // ]]> -->
+</script>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+  <!-- //
+  _uacct = "UA-352416-1";
+  urchinTracker();
+  // -->
+</script>
+</body></html>
