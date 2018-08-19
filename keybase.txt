@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/muncman
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://munc.com
+  * I am muncman (https://keybase.io/muncman) on keybase.
+  * I have a public key ASCPBE4GgohZ2wPDNZCgbLQ0dOZOx9AdSv3v6-MsuoAo6go
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120592d939405069565d7a8df52e89c411ffd058b60c4bde6e61f33e425537dfde80a",
+      "host": "keybase.io",
+      "kid": "01208f044e06828859db03c33590a06cb43474e64ec7d01d4afdefebe32cba8028ea0a",
+      "uid": "6358391a522d4425e2806c8c5429b800",
+      "username": "muncman"
+    },
+    "merkle_root": {
+      "ctime": 1534693241,
+      "hash": "1847db65f25dc6b5ae32f126a3b81a5666d0c8cbdddce2668d0701585d1dba0267d1f9d908c6b1df35378a018f00ebd789e93dde889794d434d19cfab7ab3fb7",
+      "hash_meta": "7bc478259454f158ccaf451f9080490eff35293d89727e63d625585122488c1b",
+      "seqno": 3477761
+    },
+    "service": {
+      "entropy": "c0bQ4zHQdgMjMlrdzarrnVGf",
+      "hostname": "munc.com",
+      "protocol": "http:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "2.5.0"
+  },
+  "ctime": 1534693252,
+  "expire_in": 504576000,
+  "prev": "c808f931cc57940dd92dd9d3576a18900e9e6ca9093ee43d930ed4057c8bae6d",
+  "seqno": 13,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgjwROBoKIWdsDwzWQoGy0NHTmTsfQHUr97+vjLLqAKOoKp3BheWxvYWTESpcCDcQgyAj5McxXlA3ZLdnTV2oYkA6ebKkJPuQ9kw7UBXyLrm3EIHSQ2ICB5iowRd+p8jc5aW65DXRAbTPEGagZkuoEOxIpAgHCo3NpZ8RAYpUWn4vBn1czJjlt66atzG3XJ5mJ0MuAxu2wx+loVOWZXuA0qQjgemaL1H8Id0UnYmLr8+xFDasg1C46DXdZB6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIK4INIx14Q8W+CAei7Y1Y6xdQmmFssph08Er+SHJatcmo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/muncman
+
+==================================================================
